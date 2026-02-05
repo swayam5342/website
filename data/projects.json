@@ -1,0 +1,43 @@
+[
+  {
+    "id": 1,
+    "slug": "promptto-web",
+    "title": "Prompt to Web",
+    "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
+    "tags": ["Backend", "AI", "Automation"],
+    "github": "https://github.com/swayam5342/TDS1",
+    "featured": true,
+    "resume_points": [
+      "Built an AI-driven system that converts natural-language prompts into fully functional web applications.",
+      "Automated GitHub repository creation, commits, and deployment to GitHub Pages.",
+      "Implemented retry and resilience workflows for AI and GitHub API failures."
+    ],
+    "details": {
+      "architecture": "FastAPI backend integrated with Google GenAI and GitHub APIs for automated repo creation and deployment pipelines.",
+      "challenges": "Handling unreliable LLM outputs and GitHub API failures with retry and validation workflows.",
+      "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
+      "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
+    }
+  },
+  {
+    "id": 2,
+    "slug": "kargo-backend",
+    "title": "Kargo Backend",
+    "description": "Backend platform enabling containerized app deployments with AI-powered setup and Kubernetes-native scaling.",
+    "tags": ["Backend", "Cloud", "Kubernetes","DevOps"],
+    "github": "https://github.com/GDGVIT/kargo-backend",
+    "featured": true,
+    "resume_points": [
+      "Implemented multi-provider authentication (Google OAuth, GitHub OAuth, local login).",
+      "Integrated GitHub APIs for repository linking and deployment automation.",
+      "Built modules for multi-tenant resource allocation and deployment orchestration.",
+      "Developed monitoring endpoints and Docker-based build workflows."
+    ],
+    "details": {
+      "architecture": "Containerized microservice-style backend using Docker, Kubernetes, MongoDB, and OAuth2 authentication.",
+      "challenges": "Designing multi-tenant deployment orchestration and secure session management.",
+      "security": "Implemented OAuth2 authentication flows and secure session handling.",
+      "improvements": "Future work includes autoscaling, usage analytics, and advanced monitoring dashboards."
+    }
+  }
+]

@@ -1,0 +1,8 @@
+{
+    "main_text" : "Engineering robust systems with zero-trust protocols and hardened architectures. Focus: High-concurrency Go and Cybersecurity Research.",
+    "mid_part":[
+  { "label": "PRIMARY DOMAIN", "value": "BACKEND + SECURITY", "icon": "Shield" },
+  { "label": "STACK FOCUS", "value": "GO • FASTAPI • POSTGRES", "icon": "Cpu" },
+  { "label": "CURRENT OBJECTIVE", "value": "BUILDING SECURE SYSTEMS", "icon": "Github" }
+]
+}

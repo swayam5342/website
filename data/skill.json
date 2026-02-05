@@ -1,0 +1,37 @@
+{
+  "cyber": [
+    "Threat Detection",
+    "Log Analysis",
+    "Reverse Engineering",
+    "Defensive Security",
+    "Security Principles"
+  ],
+  "backend": [
+    "FastAPI",
+    "Flask",
+    "Express.js",
+    "Gin (Go)",
+    "REST APIs",
+    "OAuth2",
+    "Webhooks",
+    "Redis",
+    "PostgreSQL",
+    "MongoDB",
+    "MySQL",
+    "SQLite",
+    "Docker",
+    "Kubernetes",
+    "GitHub Actions",
+    "Nginx",
+    "Linux"
+  ],
+  "core": [
+    "Python",
+    "Go",
+    "JavaScript",
+    "C",
+    "C++",
+    "SQL",
+    "NoSQL"
+  ]
+}

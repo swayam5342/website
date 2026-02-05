@@ -1,0 +1,10 @@
+{
+   "main_text": "Backend and cybersecurity enthusiast focused on building secure, scalable, and high-performance systems. I am passionate about designing resilient architectures, automating infrastructure, and applying defensive security practices to real-world applications.",
+
+  "sub_text": "My work sits at the intersection of backend engineering, distributed systems, and security research. I enjoy building APIs, deployment platforms, and automation tools while continuously learning reverse engineering, threat detection, and system internals. I aim to engineer systems that are not only fast and scalable but also observable, reliable, and secure by design.",
+    "security_principles":  [
+    "SECURITY IS AN INVARIANT, NOT A FEATURE.",
+    "OBSERVABILITY IS PREREQUISITE FOR SECURITY.",
+    "SIMPLICITY IS THE ULTIMATE HARDENING TOOL."
+  ]
+}

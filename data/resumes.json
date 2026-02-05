@@ -1,0 +1,6 @@
+
+{
+  "default": "./pdf/resume.pdf",
+  "security": "./pdf/resume.pdf",
+  "backend": "./pdf/resume.pdf"
+}
