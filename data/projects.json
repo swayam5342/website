@@ -39,5 +39,25 @@
       "security": "Implemented OAuth2 authentication flows and secure session handling.",
       "improvements": "Future work includes autoscaling, usage analytics, and advanced monitoring dashboards."
     }
+  },
+  {
+  "id": 3,
+  "slug": "windows-soc-lab",
+  "title": "Windows SIEM",
+  "description": "End-to-end SIEM pipeline that collects Windows telemetry, detects suspicious activity using custom rules, and sends real-time alerts to Telegram and automation workflows.",
+  "tags": ["Cybersecurity", "SIEM", "Automation"],
+  "github": "https://github.com/swayam5342/win_siem",
+  "featured": true,
+  "resume_points": [
+    "Built a complete SOC pipeline using Sysmon, Winlogbeat, Elasticsearch, Kibana, and ElastAlert2.",
+    "Developed detection rules for PowerShell abuse, persistence, process injection, service creation, and suspicious network activity.",
+    "Automated deployment using Docker, batch scripts, and environment-based secret management."
+    ],
+  "details": {
+    "architecture": "Windows host runs Sysmon and Winlogbeat to ship logs into a Dockerized Elastic Stack. ElastAlert2 performs rule-based detections and sends alerts to Telegram and n8n workflows.",
+    "challenges": "Integrating Windows telemetry with containerized ELK stack and handling Telegram API formatting and environment-variable secret management.",
+    "security": "Used environment variables for tokens, separated detection logic from secrets, and implemented automated setup scripts for reproducibility.",
+    "improvements": "Planned additions include threat-intelligence enrichment, Grafana dashboards, multi-host monitoring, and TLS-enabled secure deployment."
+    }
   }
 ]
