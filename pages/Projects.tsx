@@ -29,12 +29,14 @@ export const Projects: React.FC = () => {
           </p>
         </div>
 
-        <div className="mt-8 md:mt-0 flex border border-brand-border p-1 bg-brand-surface">
+        <div className="mt-8 md:mt-0 flex flex-wrap gap-2 border border-brand-border p-1 bg-brand-surface overflow-x-auto">
+
           {categories.map((cat) => (
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-              className={`px-4 py-1.5 font-mono text-[9px] uppercase transition-all ${
+             className={`px-3 py-1 md:px-4 md:py-1.5 font-mono text-[9px] uppercase whitespace-nowrap transition-all ${
+
                 filter === cat
                   ? "bg-brand-accent text-brand-bg font-bold"
                   : "text-brand-muted hover:text-brand-text"
@@ -52,6 +54,9 @@ export const Projects: React.FC = () => {
             key={p.id}
             className="group bg-brand-bg border border-brand-border p-12 relative flex flex-col hover:bg-brand-surface transition-colors"
           >
+            <span className="absolute top-4 left-4 text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5 bg-brand-bg">
+  UID: {String(p.id).padStart(2, "0")}
+</span>
             <div className="absolute top-4 right-4 font-mono text-[7px] opacity-10 uppercase tracking-[0.2em]">
               Hash::SHA256
             </div>
@@ -66,9 +71,9 @@ export const Projects: React.FC = () => {
                     href={p.github}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-2xl font-bold font-mono hover:underline"
+                    className="text-2xl font-semibold font-mono hover:underline"
                   >
-                    {p.title}
+                    {p.title.toUpperCase()}
                   </a>
                 ) : (
                   <h3 className="text-2xl font-bold font-mono">{p.title}</h3>

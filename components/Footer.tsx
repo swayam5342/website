@@ -10,7 +10,7 @@ export const Footer: React.FC = () => {
 
         {/* Left: Name / Copyright */}
         <p className="text-xs font-mono text-brand-muted uppercase tracking-widest">
-          © {currentYear} SWAYAM PRAKASH
+          © {currentYear} SWAYAM
         </p>
 
         {/* Right: Contacts */}
