@@ -9,7 +9,7 @@ export const Certificates: React.FC = () => {
     <div className="max-w-7xl mx-auto px-4 py-16">
       <header className="mb-16 border-b border-brand-border pb-8">
         <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
-          Vault // Credentials
+          CERTIFICATES // VERIFIED ACHIEVEMENTS
         </h1>
         <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
           Validated certification data and identity proofs.

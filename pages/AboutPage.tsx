@@ -16,9 +16,9 @@ export const AboutPage: React.FC = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
       <header className="border-b border-brand-border pb-8">
-        <h1 className="text-4xl font-mono font-bold tracking-tighter">About</h1>
+        <h1 className="text-4xl font-mono font-bold tracking-tighter">ABOUT</h1>
         <p className="text-brand-muted mt-2 font-mono text-[10px] tracking-widest uppercase">
-          ID_IDENTIFIER: SWAYAM
+          {aboutjson.heading}
         </p>
       </header>
 
@@ -27,8 +27,8 @@ export const AboutPage: React.FC = () => {
         <div className="md:col-span-8 space-y-8 text-brand-muted leading-relaxed font-sans">
           
           <div className="bg-brand-surface border border-brand-border p-10 relative">
-            <div className="absolute top-0 right-0 p-3 font-mono text-[8px] text-brand-muted/20 uppercase">
-              Core_Data_Stream
+            <div className="absolute top-0 right-0 p-3 font-mono text-[8px] text-brand-muted/20 uppercase text-white">
+              CORE VALUES
             </div>
 
             <p className="text-brand-text mb-6 text-lg font-medium leading-snug">
@@ -41,7 +41,7 @@ export const AboutPage: React.FC = () => {
           {/* OPERATING PRINCIPLES */}
           <div className="border border-brand-border p-8 bg-brand-bg">
             <h3 className="font-mono text-[10px] font-bold text-brand-muted uppercase border-b border-brand-border pb-2 mb-6">
-              OPERATING_PRINCIPLES
+              PRINCIPLES
             </h3>
 
             <ul className="space-y-6 text-xs font-mono">
@@ -59,11 +59,27 @@ export const AboutPage: React.FC = () => {
 
         {/* RIGHT SKILLS */}
         <div className="md:col-span-4 space-y-12">
+          <div className="space-y-4">
+            <h4 className="font-mono text-[9px] text-brand-accent uppercase tracking-widest mb-4">
+              MAIN
+            </h4>
+
+            <div className="flex flex-wrap gap-2">
+              {skills.core.map((s) => (
+                <span
+                  key={s}
+                  className="bg-brand-accent text-brand-bg px-3 py-1.5 text-xs font-mono font-bold"
+                >
+                  {s}
+                </span>
+              ))}
+            </div>
+          </div>
 
           {/* Cyber Security */}
           <div className="space-y-4">
             <h4 className="font-mono text-[9px] text-brand-accent uppercase tracking-widest mb-4">
-              Cyber_Security
+              CYBER
             </h4>
 
             <div className="flex flex-wrap gap-2">
@@ -81,7 +97,7 @@ export const AboutPage: React.FC = () => {
           {/* Backend */}
           <div className="space-y-4">
             <h4 className="font-mono text-[9px] text-brand-accent uppercase tracking-widest mb-4">
-              Backend_Infra
+              BACKEND
             </h4>
 
             <div className="flex flex-wrap gap-2">
@@ -96,23 +112,7 @@ export const AboutPage: React.FC = () => {
             </div>
           </div>
 
-          {/* Runtime */}
-          <div className="space-y-4">
-            <h4 className="font-mono text-[9px] text-brand-accent uppercase tracking-widest mb-4">
-              Runtime_Env
-            </h4>
 
-            <div className="flex flex-wrap gap-2">
-              {skills.core.map((s) => (
-                <span
-                  key={s}
-                  className="bg-brand-accent text-brand-bg px-3 py-1.5 text-xs font-mono font-bold"
-                >
-                  {s}
-                </span>
-              ))}
-            </div>
-          </div>
 
         </div>
       </div>

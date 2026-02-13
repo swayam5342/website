@@ -23,7 +23,7 @@ export const Home: React.FC = () => {
         <div className="space-y-8">
           <div className="font-mono text-[10px] text-brand-muted flex items-center space-x-2 tracking-widest uppercase">
             <span className="inline-block w-1.5 h-1.5 bg-brand-accent"></span>
-            <span>SYSTEM_READY // SOURCE_VERIFIED</span>
+            <span>{homeData.main_heading}</span>
           </div>
           
           <h1 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85]">
@@ -38,11 +38,11 @@ export const Home: React.FC = () => {
 
           <div className="flex flex-wrap gap-4 pt-6">
             <Link to="/projects" className="bg-brand-accent text-brand-bg px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 hover:bg-brand-muted transition-all">
-              <span>INIT_SYSTEM_PROBE</span>
+              <span>{homeData.project}</span>
               <ArrowRight size={14} />
             </Link>
-            <Link to="/contact" className="border border-brand-border px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 hover:bg-white/5 transition-all">
-              <span>SECURE_CONTACT</span>
+            <Link to="/certificates" className="border border-brand-border px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 hover:bg-white/5 transition-all">
+              <span>CERTIFICATES</span>
             </Link>
           </div>
         </div>

@@ -1,4 +1,4 @@
-[
+{"project" :[
   {
     "id": 1,
     "slug": "promptto-web",
@@ -60,4 +60,7 @@
     "improvements": "Planned additions include threat-intelligence enrichment, Grafana dashboards, multi-host monitoring, and TLS-enabled secure deployment."
     }
   }
-]
+],
+"main_heading": "PROJECTS",
+"sub_heading": "RESPOSITORIES AND TECHNICAL LOGS"
+}

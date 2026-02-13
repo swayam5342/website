@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Github, ExternalLink, ChevronRight } from "lucide-react";
 import projectsData from "../data/projects";
+import project from "../data/projects.json"
 import categorie from "../data/project_cat.json";
 import { Project } from "../types";
 
@@ -21,10 +22,10 @@ export const Projects: React.FC = () => {
       <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between border-b border-brand-border pb-8">
         <div>
           <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
-            Arsenal // Repositories
+            {project.main_heading}
           </h1>
           <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
-            Internal technical logs and source releases.
+            {project.sub_heading}
           </p>
         </div>
 
