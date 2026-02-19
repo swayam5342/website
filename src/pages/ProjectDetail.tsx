@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Github, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from 'lucide-react';
 import projectsData from '../data/projects';
-import { Project } from '../types';
+import { Project } from '../../types';
 
 export const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();

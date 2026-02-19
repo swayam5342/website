@@ -1,3 +1,4 @@
+export type ResumeVariant = "security" | "backend" | "development";
 
 export interface Project {
   id: number;
@@ -15,6 +16,13 @@ export interface Project {
     security: string;
     improvements: string;
   };
+  date: string;
+}
+
+export interface ResumeData {
+  default: string;
+  security: string;
+  backend: string;
 }
 
 export interface Certificate {
@@ -26,15 +34,37 @@ export interface Certificate {
   verify?: string;
 }
 
-export interface ResumeData {
-  default: string;
-  security: string;
-  backend: string;
+export interface Education {
+  id: number;
+  period: string;
+  degree: string;
+  institution: string;
+  description: string;
+  skills: string[];
+  date: string;
 }
+
+export interface Experience {
+  id: number;
+  period: string;
+  title: string;
+  company: string;
+  description: string;
+  skills: string[];
+  date: string;
+}
+
+export type TimelineCategory =
+  | "security"
+  | "backend"
+  | "development"
+  | "education"
+  | "project"
+  | "certificate";
 
 export interface TimelineItem {
   id: number;
-  type: 'education' | 'project' | 'achievement' | 'certification';
+  category: TimelineCategory;
   title: string;
   subtitle: string;
   date: string;

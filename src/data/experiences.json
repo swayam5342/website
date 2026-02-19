@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1,
+    "period": "2023 — Present",
+    "title": "Senior Security Engineer",
+    "company": "CloudVault Inc.",
+    "description": "Leading security architecture for cloud-native applications. Implementing zero-trust networking, automated threat detection, and incident response pipelines serving 2M+ users.",
+    "skills": ["AWS", "Terraform", "Go", "SIEM", "Zero Trust"]
+  },
+  {
+    "id": 2,
+    "period": "2021 — 2023",
+    "title": "Backend Engineer",
+    "company": "DataStream",
+    "description": "Built high-throughput data processing pipelines handling 50K events/second. Designed RESTful and gRPC APIs with comprehensive security auditing and rate limiting.",
+    "skills": ["Python", "PostgreSQL", "Redis", "Docker", "gRPC"]
+  },
+  {
+    "id": 3,
+    "period": "2019 — 2021",
+    "title": "Security Analyst",
+    "company": "CyberShield Labs",
+    "description": "Conducted penetration testing and vulnerability assessments for enterprise clients. Developed automated scanning tools and security compliance frameworks.",
+    "skills": ["Pentesting", "OWASP", "Burp Suite", "Linux", "Nmap"]
+  },
+  {
+    "id": 4,
+    "period": "2018 — 2019",
+    "title": "Junior Developer",
+    "company": "TechForge",
+    "description": "Full-stack development with focus on backend services. Built authentication systems, REST APIs, and database schemas for SaaS products.",
+    "skills": ["Node.js", "Express", "MongoDB", "JWT", "CI/CD"]
+  }
+]

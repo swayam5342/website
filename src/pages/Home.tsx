@@ -4,6 +4,8 @@ import { Shield, Cpu, ArrowRight, Github } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import projectsData from '../data/projects';
 import homeData from '../data/home.json';
+import experiencesData from '../data/experiences.json';
+import { Experience } from '../../types';
 
 export const Home: React.FC = () => {
   const featuredProjects = projectsData.filter(p => p.featured).slice(0, 2);
@@ -13,7 +15,7 @@ export const Home: React.FC = () => {
   Github: Github
 };
   const main_text = homeData.main_text;
-  const mid_part = homeData.mid_part
+  const recentExperiences = (experiencesData as Experience[]).slice(0, 2);
   return (
     <div className="max-w-7xl mx-auto px-4 py-12 space-y-24">
       {/* Hero */}
@@ -48,21 +50,28 @@ export const Home: React.FC = () => {
         </div>
       </section>
 
-      {/* Quick Stats */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-1">
-        {mid_part.map((stat, i) => (
-          <div key={i} className="p-8 border border-brand-border bg-brand-surface hover:bg-brand-accent hover:text-brand-bg transition-all duration-300 group">
-            <div className="flex items-center justify-between mb-8">
-              {(() => {
-  const Icon = iconMap[stat.icon];
-  return Icon ? (
-    <Icon size={18} className="text-brand-accent group-hover:text-brand-bg" />
-  ) : null;
-})()}
-
+      {/* Recent Experience */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {recentExperiences.map((exp) => (
+          <div key={exp.id} className="p-8 border border-brand-border bg-brand-surface hover:bg-brand-accent hover:text-brand-bg transition-all duration-300 group">
+            <div className="flex items-center justify-between mb-6">
+              <span className="text-brand-accent font-mono text-sm group-hover:text-brand-bg">{exp.period}</span>
             </div>
-            <p className="text-[10px] font-mono text-brand-muted group-hover:text-brand-bg/70 mb-1">{stat.label}</p>
-            <p className="text-lg font-bold font-mono">{stat.value}</p>
+            <h3 className="text-xl font-mono font-bold text-brand-text group-hover:text-brand-bg mb-2">{exp.title}</h3>
+            <p className="text-brand-accent font-mono text-sm mb-4 group-hover:text-brand-bg/90">{exp.company}</p>
+            <p className="text-brand-muted text-sm leading-relaxed mb-6 font-sans group-hover:text-brand-bg/80 line-clamp-3">
+              {exp.description}
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {exp.skills.slice(0, 3).map((skill) => (
+                <span
+                  key={skill}
+                  className="bg-brand-accent/10 text-brand-accent px-2 py-1 text-xs font-mono group-hover:bg-brand-bg group-hover:text-brand-accent"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
           </div>
         ))}
       </section>

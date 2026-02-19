@@ -1,6 +1,10 @@
 import React from "react";
 import skillsjson from "../data/skill.json";
 import aboutjson from "../data/about.json";
+import experiencesData from "../data/experiences.json";
+import { Experience } from "../../types";
+import { TimelineIcon } from "../components/TimelineIcon";
+import { mapExperiencesToTimeline } from "../utils/timelineMapper";
 
 export const AboutPage: React.FC = () => {
   const skills = skillsjson as {
@@ -12,7 +16,8 @@ export const AboutPage: React.FC = () => {
   const main_text = aboutjson.main_text;
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles as string[];
-
+  const experiences = experiencesData as Experience[];
+  const timelineData = mapExperiencesToTimeline(experiences);
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
       <header className="border-b border-brand-border pb-8">
@@ -116,6 +121,63 @@ export const AboutPage: React.FC = () => {
 
         </div>
       </div>
+
+      {/* Experience Timeline */}
+<section className="space-y-12">
+  <div className="flex items-center space-x-4">
+    <h2 className="text-2xl font-mono font-bold tracking-tighter uppercase text-brand-accent">
+      EXPERIENCE_JOURNAL
+    </h2>
+    <div className="flex-grow border-b border-brand-border opacity-20"></div>
+    <span className="text-[10px] font-mono text-brand-muted uppercase">
+      HISTORY_DUMP
+    </span>
+  </div>
+
+  <div className="relative space-y-8 before:absolute before:left-[19px] md:before:left-[24px] before:top-0 before:h-full before:w-[2px] before:bg-brand-border">
+
+    {timelineData.length === 0 && (
+      <p className="text-xs font-mono text-brand-muted">
+        NO_RECORDS_FOUND
+      </p>
+    )}
+
+    {timelineData.map((item) => (
+      <div key={item.id} className="relative pl-12 md:pl-16 group">
+        <div className="absolute left-0 top-1 w-10 md:w-12 h-10 md:h-12 bg-brand-bg border-2 border-brand-border flex items-center justify-center text-brand-muted group-hover:border-brand-accent group-hover:text-brand-accent transition-all duration-300 z-10">
+          <TimelineIcon category={item.category} />
+        </div>
+
+        <div className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 hover:border-brand-accent/30 transition-all">
+          <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+            <div>
+              <h3 className="text-lg font-bold font-mono uppercase text-brand-text tracking-tight">
+                {item.title}
+              </h3>
+              <p className="text-[11px] font-mono text-brand-accent uppercase tracking-widest mt-1 opacity-80">
+                {item.subtitle}
+              </p>
+            </div>
+
+            <div className="mt-2 md:mt-0 flex flex-col items-end space-y-2">
+              <div className="font-mono text-[10px] text-brand-muted border border-brand-border px-3 py-1 bg-brand-bg">
+                {item.date}
+              </div>
+              <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10">
+                {item.category.toUpperCase()}
+              </div>
+            </div>
+          </div>
+
+          <p className="text-xs text-brand-muted leading-relaxed font-mono opacity-80">
+            {`> ${item.description}`}
+          </p>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
+
     </div>
   );
 };

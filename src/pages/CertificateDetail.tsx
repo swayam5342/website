@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Download, Maximize2 } from 'lucide-react';
 import certificatesData from '../data/certificates';
-import { Certificate } from '../types';
+import { Certificate } from '../../types';
 
 export const CertificateDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();

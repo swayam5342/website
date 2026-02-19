@@ -4,7 +4,7 @@ import { Github, ExternalLink, ChevronRight } from "lucide-react";
 import projectsData from "../data/projects";
 import project from "../data/projects.json"
 import categorie from "../data/project_cat.json";
-import { Project } from "../types";
+import { Project } from "../../types";
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState("All");
