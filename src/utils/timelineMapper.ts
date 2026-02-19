@@ -3,27 +3,15 @@ import {
   Project,
   Education,
   Certificate,
-  TimelineItem
+  TimelineItem,
 } from "../../types";
 
-
-function detectExperienceCategory(title: string): TimelineItem["category"] {
-  const t = title.toLowerCase();
-
-  if (t.includes("security") || t.includes("analyst"))
-    return "security";
-
-  if (t.includes("backend") || t.includes("api"))
-    return "backend";
-
-  return "development";
-}
 
 
 export function mapExperiencesToTimeline(exps: Experience[]): TimelineItem[] {
   return exps.map(exp => ({
     id: exp.id,
-    category: detectExperienceCategory(exp.title),
+    type: exp.type.toLowerCase() as TimelineItem["type"],
     title: exp.title,
     subtitle: exp.company,
     date: exp.period,
@@ -34,7 +22,7 @@ export function mapExperiencesToTimeline(exps: Experience[]): TimelineItem[] {
 export function mapProjectsToTimeline(projects: Project[]): TimelineItem[] {
   return projects.map(p => ({
     id: p.id,
-    category: "project",
+    type: "project",
     title: p.title,
     subtitle: "Personal Project",
     date: new Date(p.date).getFullYear().toString(),
@@ -45,7 +33,7 @@ export function mapProjectsToTimeline(projects: Project[]): TimelineItem[] {
 export function mapEducationToTimeline(edu: Education[]): TimelineItem[] {
   return edu.map(e => ({
     id: e.id,
-    category: "education",
+    type: "education",
     title: e.degree,
     subtitle: e.institution,
     date: e.period,
@@ -56,7 +44,7 @@ export function mapEducationToTimeline(edu: Education[]): TimelineItem[] {
 export function mapCertificatesToTimeline(certs: Certificate[]): TimelineItem[] {
   return certs.map(c => ({
     id: c.id,
-    category: "certificate",
+    type: "certificate",
     title: c.name,
     subtitle: c.issuer,
     date: c.year,

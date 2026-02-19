@@ -2,10 +2,5 @@
 
   "main_heading":"SYSTEM_READY // SOURCE_VERIFIED",
   "project" : "PROJECT",
-    "main_text" : "Focus on building secure and efficient backend systems, I am passionate about securing applications and ensuring data integrity",
-    "mid_part":[
-  { "label": "PRIMARY DOMAIN", "value": "BACKEND + SECURITY", "icon": "Shield" },
-  { "label": "STACK FOCUS", "value": "GO • FASTAPI • POSTGRES", "icon": "Cpu" },
-  { "label": "CURRENT OBJECTIVE", "value": "BUILDING SECURE SYSTEMS", "icon": "Github" }
-]
+    "main_text" : "Focus on building secure and efficient backend systems, I am passionate about securing applications and ensuring data integrity"
 }

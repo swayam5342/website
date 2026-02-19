@@ -59,7 +59,32 @@
     "security": "Used environment variables for tokens, separated detection logic from secrets, and implemented automated setup scripts for reproducibility.",
     "improvements": "Planned additions include threat-intelligence enrichment, Grafana dashboards, multi-host monitoring, and TLS-enabled secure deployment."
     }
-  }
+  },
+{
+  "id": 4 ,
+  "slug": "scamzap",
+  "title": "Scamzap Backend",
+  "description": "Backend system for a crowdsourced scam reporting platform enabling phone number verification, rating aggregation, and trend analytics via REST APIs.",
+  "tags": ["Backend","Cybersecurity"
+  ],
+  "github": "https://github.com/upayanmazumder/scamzap",
+  "featured": true,
+  "resume_points": [
+    "Designed REST APIs for scam reporting and number verification",
+    "Implemented MongoDB data modeling and indexing for fast lookups",
+    "Containerized backend service using Docker",
+    "Integrated MongoDB Atlas for scalable cloud storage"
+  ],
+  "details": {
+    "architecture": "Node.js + Express backend with MongoDB Atlas, containerized using Docker and exposed via REST endpoints.",
+    "challenges": "Handling duplicate submissions and optimizing database indexing for high-frequency number searches.",
+    "security": "Implemented input validation, rate limiting, and environment-based secret management.",
+    "improvements": "Future enhancements include caching with Redis and role-based moderation controls."
+  },
+  "date": "May 2025"
+}
+
+
 ],
 "main_heading": "PROJECTS",
 "sub_heading": "RESPOSITORIES AND TECHNICAL LOGS"

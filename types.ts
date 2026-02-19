@@ -16,8 +16,19 @@ export interface Project {
     security: string;
     improvements: string;
   };
-  date: string;
+  date?: string;
 }
+
+
+export type HomeCardItem = {
+  id: number;
+  title: string;
+  subtitle: string;
+  date: string;
+  type: string;
+  description: string;
+  skills?: string[];
+};
 
 export interface ResumeData {
   default: string;
@@ -47,11 +58,12 @@ export interface Education {
 export interface Experience {
   id: number;
   period: string;
+  type: string;
   title: string;
   company: string;
   description: string;
   skills: string[];
-  date: string;
+  date?: string;
 }
 
 export type TimelineCategory =
@@ -64,7 +76,7 @@ export type TimelineCategory =
 
 export interface TimelineItem {
   id: number;
-  category: TimelineCategory;
+  type: TimelineCategory;
   title: string;
   subtitle: string;
   date: string;

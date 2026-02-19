@@ -1,10 +1,9 @@
 import React from "react";
 import skillsjson from "../data/skill.json";
 import aboutjson from "../data/about.json";
-import experiencesData from "../data/experiences.json";
-import { Experience } from "../../types";
+import timelineRaw from "../data/timeline.json";
+import { TimelineItem } from "../../types";
 import { TimelineIcon } from "../components/TimelineIcon";
-import { mapExperiencesToTimeline } from "../utils/timelineMapper";
 
 export const AboutPage: React.FC = () => {
   const skills = skillsjson as {
@@ -12,12 +11,10 @@ export const AboutPage: React.FC = () => {
     backend: string[];
     core: string[];
   };
-
   const main_text = aboutjson.main_text;
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles as string[];
-  const experiences = experiencesData as Experience[];
-  const timelineData = mapExperiencesToTimeline(experiences);
+  const timelineData = timelineRaw as TimelineItem[];
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
       <header className="border-b border-brand-border pb-8">
@@ -145,7 +142,7 @@ export const AboutPage: React.FC = () => {
     {timelineData.map((item) => (
       <div key={item.id} className="relative pl-12 md:pl-16 group">
         <div className="absolute left-0 top-1 w-10 md:w-12 h-10 md:h-12 bg-brand-bg border-2 border-brand-border flex items-center justify-center text-brand-muted group-hover:border-brand-accent group-hover:text-brand-accent transition-all duration-300 z-10">
-          <TimelineIcon category={item.category} />
+          <TimelineIcon category={item.type} />
         </div>
 
         <div className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 hover:border-brand-accent/30 transition-all">
@@ -164,7 +161,7 @@ export const AboutPage: React.FC = () => {
                 {item.date}
               </div>
               <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10">
-                {item.category.toUpperCase()}
+                {item.type.toUpperCase()}
               </div>
             </div>
           </div>
