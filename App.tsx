@@ -9,7 +9,7 @@ import { ProjectDetail } from './src/pages/ProjectDetail';
 import { Certificates } from './src/pages/Certificates';
 import { CertificateDetail } from './src/pages/CertificateDetail';
 import { Resume } from './src/pages/Resume';
-
+import './index.css';
 
 
 

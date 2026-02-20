@@ -1,0 +1,107 @@
+:root {
+  --font-mono: "JetBrains Mono", monospace;
+  --font-sans: "Inter", sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --transition-fast: 0.2s ease;
+  --transition-slow: 0.35s ease;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+/* Default (fallback if no theme set) */
+:root,
+[data-theme="default"] {
+  --brand-bg: #0a0a0a;
+  --brand-surface: #111111;
+  --brand-border: #232323;
+  --brand-text: #f5f5f5;
+  --brand-muted: #9ca3af;
+  --brand-accent: #00ff9c;
+  --brand-accent-soft: rgba(0, 255, 156, 0.1);
+  --brand-accent-border: rgba(0, 255, 156, 0.4);
+}
+
+/* Matrix */
+[data-theme="matrix"] {
+  --brand-bg: #0a0a0a;
+  --brand-surface: #111111;
+  --brand-border: #232323;
+  --brand-text: #f5f5f5;
+  --brand-muted: #9ca3af;
+  --brand-accent: #00ff9c;
+  --brand-accent-soft: rgba(0, 255, 156, 0.1);
+  --brand-accent-border: rgba(0, 255, 156, 0.4);
+}
+
+/* Neon */
+[data-theme="neon"] {
+  --brand-bg: #0b0712;
+  --brand-surface: #140f1f;
+  --brand-border: #2a1f44;
+  --brand-text: #f1eaff;
+  --brand-muted: #a898c7;
+  --brand-accent: #c77dff;
+  --brand-accent-soft: rgba(199, 125, 255, 0.1);
+  --brand-accent-border: rgba(199, 125, 255, 0.4);
+}
+
+/* Light */
+[data-theme="light"] {
+  --brand-bg: #ffffff;
+  --brand-surface: #f5f5f5;
+  --brand-border: #e5e7eb;
+  --brand-text: #111827;
+  --brand-muted: #6b7280;
+  --brand-accent: #2563eb;
+  --brand-accent-soft: rgba(37, 99, 235, 0.1);
+  --brand-accent-border: rgba(37, 99, 235, 0.4);
+}
+
+/* Solarized */
+[data-theme="solarized"] {
+  --brand-bg: #002b36;
+  --brand-surface: #073642;
+  --brand-border: #586e75;
+  --brand-text: #839496;
+  --brand-muted: #657b83;
+  --brand-accent: #b58900;
+  --brand-accent-soft: rgba(181, 137, 0, 0.1);
+  --brand-accent-border: rgba(181, 137, 0, 0.4);
+}
+
+/* Nord */
+[data-theme="nord"] {
+  --brand-bg: #2e3440;
+  --brand-surface: #3b4252;
+  --brand-border: #4c566a;
+  --brand-text: #eceff4;
+  --brand-muted: #d8dee9;
+  --brand-accent: #88c0d0;
+  --brand-accent-soft: rgba(136, 192, 208, 0.1);
+  --brand-accent-border: rgba(136, 192, 208, 0.4);
+}
+
+/* Dracula */
+[data-theme="dracula"] {
+  --brand-bg: #282a36;
+  --brand-surface: #44475a;
+  --brand-border: #6272a4;
+  --brand-text: #f8f8f2;
+  --brand-muted: #6272a4;
+  --brand-accent: #ff79c6;
+  --brand-accent-soft: rgba(255, 121, 198, 0.1);
+  --brand-accent-border: rgba(255, 121, 198, 0.4);
+}
+
+/* No Theme (raw Tailwind mode) */
+[data-theme="notheme"] {
+  --brand-bg: initial;
+  --brand-surface: initial;
+  --brand-border: initial;
+  --brand-text: initial;
+  --brand-muted: initial;
+  --brand-accent: initial;
+}

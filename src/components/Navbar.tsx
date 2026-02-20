@@ -1,31 +1,35 @@
-
-import React, { useState } from 'react';
-import { NavLink, Link } from 'react-router-dom';
-import { Menu, X, Shield } from 'lucide-react';
+import React, { useState } from "react";
+import { NavLink, Link } from "react-router-dom";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "../hooks/useTheme";
 
 export const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { cycleTheme, isLight } = useTheme();
 
   const navLinks = [
-    { name: 'HOME', path: '/' },
-    { name: 'ABOUT', path: '/about' },
-    { name: 'PROJECTS', path: '/projects' },
-    { name: 'CERTIFICATES', path: '/certificates' },
-    { name: 'RESUME', path: '/resume' },
+    { name: "HOME", path: "/" },
+    { name: "ABOUT", path: "/about" },
+    { name: "PROJECTS", path: "/projects" },
+    { name: "CERTIFICATES", path: "/certificates" },
+    { name: "RESUME", path: "/resume" },
   ];
 
-  const activeClass = "text-brand-accent border-b border-brand-accent";
-  const inactiveClass = "text-brand-muted hover:text-brand-accent border-b border-transparent";
+  const activeClass =
+    "text-brand-accent border-b border-brand-accent";
+
+  const inactiveClass =
+    "text-brand-muted hover:text-brand-accent border-b border-transparent";
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-brand-bg/90 backdrop-blur-sm border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-          <Link to="/" className="flex items-center space-x-3 group">
-            <div className="bg-brand-accent p-1 text-brand-bg">
-            </div>
-            <span className="font-mono font-bold tracking-tight text-sm flex flex-col leading-none">
-              <span>SWAYAM</span>
+
+          {/* Logo */}
+          <Link to="/" className="flex items-center space-x-3">
+            <span className="font-mono font-bold tracking-tight text-sm">
+              SWAYAM
             </span>
           </Link>
 
@@ -35,8 +39,10 @@ export const Navbar: React.FC = () => {
               <NavLink
                 key={link.name}
                 to={link.path}
-                className={({ isActive }) => 
-                  `font-mono text-sm font-medium transition-all py-1 ${isActive ? activeClass : inactiveClass}`
+                className={({ isActive }) =>
+                  `font-mono text-sm font-medium transition-all py-1 ${
+                    isActive ? activeClass : inactiveClass
+                  }`
                 }
               >
                 {link.name}
@@ -44,13 +50,28 @@ export const Navbar: React.FC = () => {
             ))}
           </div>
 
-          <div className="md:hidden">
+          {/* Right Section */}
+          <div className="flex items-center space-x-4">
+
+            {/* Theme Toggle */}
             <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="text-brand-muted hover:text-brand-accent p-1"
+              onClick={cycleTheme}
+              className="text-brand-muted hover:text-brand-accent transition-all p-1"
+              aria-label="Toggle Theme"
             >
-              {isOpen ? <X size={20} /> : <Menu size={20} />}
+              {isLight ? <Sun size={18} /> : <Moon size={18} />}
             </button>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="text-brand-muted hover:text-brand-accent p-1"
+              >
+                {isOpen ? <X size={20} /> : <Menu size={20} />}
+              </button>
+            </div>
+
           </div>
         </div>
       </div>

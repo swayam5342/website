@@ -81,16 +81,7 @@ export const Certificates: React.FC = () => {
                     <ShieldCheck size={12} />
                     <span>VERIFY</span>
                   </a>
-                ) : (
-                  <a
-                    href={cert.file}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:text-brand-accent transition-all uppercase tracking-widest"
-                  >
-                    <ShieldCheck size={12} />
-                    <span>OPEN</span>
-                  </a>
+                ) : (<div></div>
                 )}
               </div>
             </div>
