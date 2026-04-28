@@ -131,7 +131,7 @@ export const AboutPage: React.FC = () => {
     </span>
   </div>
 
-  <div className="relative space-y-8 before:absolute before:left-[19px] md:before:left-[24px] before:top-0 before:h-full before:w-[2px] before:bg-brand-border">
+  <div className="relative space-y-8 before:absolute before:left-[19px] md:before:left-[24px] before:top-11 before:h-[89%] before:w-[2px] before:bg-brand-border">
 
     {timelineData.length === 0 && (
       <p className="text-xs font-mono text-brand-muted">

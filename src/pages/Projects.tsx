@@ -35,7 +35,7 @@ export const Projects: React.FC = () => {
             <button
               key={cat}
               onClick={() => setFilter(cat)}
-             className={`px-3 py-1 md:px-4 md:py-1.5 font-mono text-[9px] uppercase whitespace-nowrap transition-all ${
+               className={`px-3 py-1 md:px-4 md:py-1.5 font-mono text-[9px] uppercase whitespace-nowrap transition-all ${
 
                 filter === cat
                   ? "bg-brand-accent text-brand-bg font-bold"

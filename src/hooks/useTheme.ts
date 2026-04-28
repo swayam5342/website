@@ -2,24 +2,16 @@ import { useEffect, useState } from "react";
 
 export type Theme =
   | "default"
-  | "matrix"
-  | "neon"
-  | "light"
   | "solarized"
   | "nord"
-  | "dracula"
   | "notheme";
 
 const STORAGE_KEY = "theme";
 
 const THEME_ORDER: Theme[] = [
   "default",
-  "matrix",
-  "neon",
-  "light",
   "solarized",
   "nord",
-  "dracula",
   "notheme",
 ];
 
@@ -27,8 +19,7 @@ export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
     const saved = localStorage.getItem(STORAGE_KEY) as Theme | null;
     return saved && THEME_ORDER.includes(saved)
-      ? saved
-      : "solarized";
+      ? saved:"default";
   });
 
   useEffect(() => {
@@ -50,7 +41,7 @@ export function useTheme() {
     setTheme(next);
   };
 
-  const isLight = theme === "light";
+  const isLight = theme === "default";
 
   return {
     theme,

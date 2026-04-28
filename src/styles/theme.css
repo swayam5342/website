@@ -9,47 +9,6 @@
     background-color var(--transition-fast),
     color var(--transition-fast),
     border-color var(--transition-fast);
-}
-
-/* Default (fallback if no theme set) */
-:root,
-[data-theme="default"] {
-  --brand-bg: #0a0a0a;
-  --brand-surface: #111111;
-  --brand-border: #232323;
-  --brand-text: #f5f5f5;
-  --brand-muted: #9ca3af;
-  --brand-accent: #00ff9c;
-  --brand-accent-soft: rgba(0, 255, 156, 0.1);
-  --brand-accent-border: rgba(0, 255, 156, 0.4);
-}
-
-/* Matrix */
-[data-theme="matrix"] {
-  --brand-bg: #0a0a0a;
-  --brand-surface: #111111;
-  --brand-border: #232323;
-  --brand-text: #f5f5f5;
-  --brand-muted: #9ca3af;
-  --brand-accent: #00ff9c;
-  --brand-accent-soft: rgba(0, 255, 156, 0.1);
-  --brand-accent-border: rgba(0, 255, 156, 0.4);
-}
-
-/* Neon */
-[data-theme="neon"] {
-  --brand-bg: #0b0712;
-  --brand-surface: #140f1f;
-  --brand-border: #2a1f44;
-  --brand-text: #f1eaff;
-  --brand-muted: #a898c7;
-  --brand-accent: #c77dff;
-  --brand-accent-soft: rgba(199, 125, 255, 0.1);
-  --brand-accent-border: rgba(199, 125, 255, 0.4);
-}
-
-/* Light */
-[data-theme="light"] {
   --brand-bg: #ffffff;
   --brand-surface: #f5f5f5;
   --brand-border: #e5e7eb;
@@ -60,6 +19,19 @@
   --brand-accent-border: rgba(37, 99, 235, 0.4);
 }
 
+
+
+[data-theme="neon"] {
+  --brand-bg: #0b0712;
+  --brand-surface: #140f1f;
+  --brand-border: #2a1f44;
+  --brand-text: #f1eaff;
+  --brand-muted: #a898c7;
+  --brand-accent: #c77dff;
+  --brand-accent-soft: rgba(199, 125, 255, 0.1);
+  --brand-accent-border: rgba(199, 125, 255, 0.4);
+}
+ 
 /* Solarized */
 [data-theme="solarized"] {
   --brand-bg: #002b36;
@@ -96,12 +68,14 @@
   --brand-accent-border: rgba(255, 121, 198, 0.4);
 }
 
-/* No Theme (raw Tailwind mode) */
+
 [data-theme="notheme"] {
-  --brand-bg: initial;
-  --brand-surface: initial;
-  --brand-border: initial;
-  --brand-text: initial;
-  --brand-muted: initial;
-  --brand-accent: initial;
+  --brand-bg: #ffffff;
+  --brand-surface: #f8f8f8;
+  --brand-border: #b0b0b0;
+  --brand-text: #111111;
+  --brand-muted: #666666;
+  --brand-accent: #201e1e;
+  --brand-accent-soft: rgba(75, 75, 75, 0.155);
+  --brand-accent-border: rgba(0, 0, 0, 0.25);
 }
