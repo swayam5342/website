@@ -54,18 +54,16 @@ export const Certificates: React.FC = () => {
                     {cert.name}
                   </Link>
                 )}
-
-<p className="w-fit mt-2 text-[10px] font-mono bg-white text-black uppercase border border-white px-2 py-0.5 tracking-widest">
-  {cert.issuer}
-</p>
-
+                <p className="w-fit mt-2 text-[10px] font-mono bg-white text-black uppercase border border-white px-2 py-0.5 tracking-widest">
+                  {cert.issuer}
+                </p>
               </div>
 
               {/* Actions */}
               <div className="grid grid-cols-2 gap-2 mt-12">
                 <Link
                   to={`/certificates/${cert.id}`}
-                  className="flex items-center justify-center space-x-2 text-[10px] font-mono font-bold py-4 border border-brand-border text-brand-accent hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
+                  className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                 >
                   <Eye size={12} />
                   <span>INSPECT</span>
@@ -76,12 +74,13 @@ export const Certificates: React.FC = () => {
                     href={cert.verify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:text-brand-accent transition-all uppercase tracking-widest"
+                    className="flex items-center justify-center space-x-2 text-[10px] font-mono font-bold py-4 border border-brand-border text-brand-accent hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                   >
                     <ShieldCheck size={12} />
                     <span>VERIFY</span>
                   </a>
-                ) : (<div></div>
+                ) : (
+                  <div></div>
                 )}
               </div>
             </div>
