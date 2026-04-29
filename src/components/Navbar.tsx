@@ -25,13 +25,19 @@ export const Navbar: React.FC = () => {
     <nav className="fixed top-0 w-full z-50 bg-brand-bg/90 backdrop-blur-sm border-b border-brand-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
-
-          {/* Logo */}
-          <Link to="/" className="flex items-center space-x-3">
-            <span className="font-mono font-bold tracking-tight text-sm">
-              SWAYAM
-            </span>
-          </Link>
+{/* Logo */}
+<Link to="/" className="flex items-center space-x-3">
+  <img
+    src="/Namelogo.png"
+    alt="Swayam Logo"
+    className="w-10 h-10 object-contain"
+    width="2000"
+    height="2000"
+  />
+  <span className="font-mono font-bold tracking-tight text-sm">
+    SWAYAM
+  </span>
+</Link>
 
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-8">
