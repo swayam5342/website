@@ -1,5 +1,5 @@
 
-import { Certificate } from '../../types';
+import type {Certificate} from '../../types';
 import  certificatesJson  from './certificates.json';
 
 const certificatesData: Certificate[] = certificatesJson

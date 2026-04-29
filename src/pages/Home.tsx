@@ -5,7 +5,7 @@ import projectsData from "../data/projects";
 import homeData from "../data/home.json";
 import experiencesData from "../data/experiences.json";
 import timelineData from "../data/timeline";
-import { Experience } from "../../types";
+import type { Experience } from "../../types";
 
 export const Home: React.FC = () => {
   const featuredProjects = projectsData

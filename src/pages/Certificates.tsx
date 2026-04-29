@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Eye, ShieldCheck } from "lucide-react";
 import certificatesData from "../data/certificates";
-import { Certificate } from "../../types";
+import  type { Certificate } from "../../types";
 
 export const Certificates: React.FC = () => {
   return (
