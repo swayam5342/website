@@ -41,7 +41,7 @@ export function useTheme() {
     setTheme(next);
   };
 
-  const isLight = theme === "default";
+  const isLight =  theme === "default" || theme === "notheme";
 
   return {
     theme,
