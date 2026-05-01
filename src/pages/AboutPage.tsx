@@ -2,7 +2,7 @@ import React from "react";
 import skillsjson from "../data/skill.json";
 import aboutjson from "../data/about.json";
 import timelineRaw from "../data/timeline.json";
-import { TimelineItem } from "../../types";
+import type { TimelineItem } from "../../types";
 import { TimelineIcon } from "../components/TimelineIcon";
 
 export const AboutPage: React.FC = () => {
@@ -33,7 +33,7 @@ export const AboutPage: React.FC = () => {
               CORE VALUES
             </div>
 
-            <p className="text-brand-text mb-6 text-lg font-medium leading-snug">
+            <p className="text-brand-text mb-6 text-md font-(family-name:--font-space) leading-snug">
               {main_text}
             </p>
 

@@ -28,5 +28,18 @@
     "tailwindcss": "^4.2.0",
     "typescript": "~5.8.2",
     "vite": "^6.2.0"
-  }
+  },
+  "description": "A high-performance, professional portfolio focused on technical depth and security.",
+  "main": "eslint.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swayam5342/website.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/swayam5342/website/issues"
+  },
+  "homepage": "https://github.com/swayam5342/website#readme"
 }
