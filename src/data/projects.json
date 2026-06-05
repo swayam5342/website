@@ -104,6 +104,22 @@
         "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
         "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
       }
+    },
+    {
+      "id": 6,
+      "slug": "boids-sim",
+      "title": "Boids Simulation",
+      "description": "A flocking simulation built in Go using Ebiten, compiled to WebAssembly and runs in the browser.",
+      "tags": ["Recreational"],
+      "Language": ["GO"],
+      "github": "https://github.com/swayam5342/boid",
+      "featured": false,
+      "demo": "http://boids.swayam.li",
+      "resume_points": [
+        "Implemented Craig Reynolds' boids algorithm with alignment, cohesion, and separation behaviors.",
+        "Compiled Go to WebAssembly for browser-based real-time rendering using Ebiten.",
+        "Resolved WebGL texture size limits across browsers for stable cross-platform execution."
+      ]
     }
   ],
   "main_heading": "PROJECTS",

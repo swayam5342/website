@@ -4,7 +4,7 @@ import { Github, ExternalLink, ChevronRight } from "lucide-react";
 import projectsData from "../data/projects";
 import project from "../data/projects.json"
 import categorie from "../data/project_cat.json";
-import { Project } from "../../types";
+import type { Project } from "../../types";
 
 export const Projects: React.FC = () => {
   const [filter, setFilter] = useState("All");
@@ -13,7 +13,8 @@ export const Projects: React.FC = () => {
   const filteredProjects = (projectsData as Project[])
     .filter((p) => {
       if (filter === "All") return true;
-      return p.tags.includes(filter);
+      return p.tags.map(tag => tag.toLowerCase())
+  .includes(filter.toLowerCase());
     })
     .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 

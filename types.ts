@@ -5,6 +5,7 @@ export interface Project {
   slug: string;
   title: string;
   description: string;
+  lang?: string[],
   tags: string[];
   github?: string;
   demo?: string;

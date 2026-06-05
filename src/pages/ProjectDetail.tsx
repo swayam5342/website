@@ -3,7 +3,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Github, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from 'lucide-react';
 import projectsData from '../data/projects';
-import { Project } from '../../types';
+import type { Project } from '../../types';
 
 export const ProjectDetail: React.FC = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -44,7 +44,8 @@ export const ProjectDetail: React.FC = () => {
       </div>
 
       <div className="space-y-12">
-        <section>
+        {project.details && (<>
+          <section>
           <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
             <Layers className="text-brand-accent" />
             <span>Architecture Overview</span>
@@ -65,9 +66,6 @@ export const ProjectDetail: React.FC = () => {
         </section>
 
         <section className="relative overflow-hidden">
-          <div className="absolute top-0 right-0 opacity-5 -mr-10 -mt-10">
-            <ShieldCheck size={200} />
-          </div>
           <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
             <ShieldCheck className="text-brand-accent" />
             <span>Security Considerations</span>
@@ -86,6 +84,8 @@ export const ProjectDetail: React.FC = () => {
             {project.details?.improvements}
           </div>
         </section>
+        </>)
+        }
 
         <section>
           <h2 className="text-2xl font-bold mb-6">Technical Impact</h2>
