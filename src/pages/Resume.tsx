@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Download, Maximize2, ChevronDown } from "lucide-react";
 import resumesData from "../data/resumes";
-import { ResumeData } from "../../types";
+import type { ResumeData } from "../../types";
 
 export const Resume: React.FC = () => {
   const versions = [

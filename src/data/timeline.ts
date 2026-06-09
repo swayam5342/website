@@ -1,5 +1,5 @@
 
-import { TimelineItem } from '../../types';
+import type { TimelineItem } from '../../types';
 import timelineJson from './timeline.json';
 const timelineData: TimelineItem[] =timelineJson as TimelineItem[];
 

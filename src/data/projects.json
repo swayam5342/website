@@ -114,7 +114,7 @@
       "Language": ["GO"],
       "github": "https://github.com/swayam5342/boid",
       "featured": false,
-      "demo": "http://boids.swayam.li",
+      "demo": "https://swayamcyber.in/boid",
       "resume_points": [
         "Implemented Craig Reynolds' boids algorithm with alignment, cohesion, and separation behaviors.",
         "Compiled Go to WebAssembly for browser-based real-time rendering using Ebiten.",

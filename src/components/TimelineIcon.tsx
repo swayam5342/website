@@ -1,6 +1,6 @@
 import React from "react";
 import { Shield, Server, Code, GraduationCap, FolderGit2, Award } from "lucide-react";
-import { TimelineCategory } from "../../types";
+import type { TimelineCategory } from "../../types";
 
 interface Props {
   category: TimelineCategory;

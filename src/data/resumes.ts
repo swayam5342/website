@@ -1,5 +1,5 @@
 
-import { ResumeData } from '../../types';
+import type { ResumeData } from '../../types';
 import resumesJson from './resumes.json';
 const resumesData: ResumeData = resumesJson
 
