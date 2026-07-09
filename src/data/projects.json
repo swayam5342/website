@@ -23,6 +23,28 @@
     },
     {
       "id": 2,
+      "slug": "plugfit",
+      "title": "PlugFit",
+      "description": "Multi-tenant SaaS platform acting as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints as live MCP endpoints. (Active Development)",
+      "tags": ["Backend", "AI", "SaaS", "Infrastructure"],
+      "github": "https://github.com/swayam5342/plugfit_backend",
+      "featured": true,
+      "resume_points": [
+        "Built a multi-tenant SaaS platform that acts as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints.",
+        "Architected a custom executor registry and MCP transport layer to serve cleaned specs as live, tenant-isolated MCP endpoints.",
+        "Designed an LLM-based cleaning pipeline (Gemini 2.0 Flash) with dynamic resource-vocabulary extraction and async job processing via Celery and Redis.",
+        "Implemented a secure auth system with JWT access tokens, httpOnly refresh-token rotation, Google OAuth2, and magic-link verification."
+      ],
+      "details": {
+        "architecture": "Multi-tenant FastAPI platform with async SQLAlchemy, Celery/Redis job queue, and a custom MCP transport layer serving live tenant-isolated endpoints.",
+        "challenges": "Designing a fully generic cleaning pipeline with dynamic resource vocabulary instead of hardcoded domain terms, and building a reliable async job system for LLM-based processing.",
+        "security": "Implemented JWT access tokens, httpOnly refresh-token cookies with rotation and family-scoped revocation, Google OAuth2 with CSRF state, and magic-link email verification.",
+        "improvements": "Next planned component is F-04, an agent-based eval harness for scoring usability before and after cleaning."
+      },
+      "date": "2026 (Active Development)"
+    },
+    {
+      "id": 3,
       "slug": "windows-soc-lab",
       "title": "Windows SIEM",
       "description": "End-to-end SIEM pipeline that collects Windows telemetry, detects suspicious activity using custom rules, and sends real-time alerts to Telegram and automation workflows.",
@@ -42,7 +64,7 @@
       }
     },
     {
-      "id": 3,
+      "id": 4,
       "slug": "sandboxd",
       "title": "Sandboxd",
       "description": "Secure Linux sandboxing engine for safely executing untrusted code using isolated environments and resource-controlled execution.",
@@ -64,7 +86,7 @@
       "date": "May 2026"
     },
     {
-      "id": 4,
+      "id": 5,
       "slug": "scamzap",
       "title": "Scamzap Backend",
       "description": "Backend system for a crowdsourced scam reporting platform enabling phone number verification, rating aggregation, and trend analytics via REST APIs.",
@@ -86,7 +108,7 @@
       "date": "May 2025"
     },
     {
-      "id": 5,
+      "id": 6,
       "slug": "promptto-web",
       "title": "Prompt to Web",
       "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
@@ -104,22 +126,6 @@
         "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
         "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
       }
-    },
-    {
-      "id": 6,
-      "slug": "boids-sim",
-      "title": "Boids Simulation",
-      "description": "A flocking simulation built in Go using Ebiten, compiled to WebAssembly and runs in the browser.",
-      "tags": ["Recreational"],
-      "Language": ["GO"],
-      "github": "https://github.com/swayam5342/boid",
-      "featured": false,
-      "demo": "https://swayamcyber.in/boid",
-      "resume_points": [
-        "Implemented Craig Reynolds' boids algorithm with alignment, cohesion, and separation behaviors.",
-        "Compiled Go to WebAssembly for browser-based real-time rendering using Ebiten.",
-        "Resolved WebGL texture size limits across browsers for stable cross-platform execution."
-      ]
     }
   ],
   "main_heading": "PROJECTS",

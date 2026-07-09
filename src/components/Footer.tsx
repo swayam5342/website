@@ -1,5 +1,5 @@
 import React from "react";
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail, Github, Linkedin,PenSquare} from "lucide-react";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
@@ -42,6 +42,15 @@ export const Footer: React.FC = () => {
           >
             <Linkedin size={16} />
             <span className="text-xs font-mono">LINKEDIN</span>
+          </a>
+
+          <a
+            href="https://blog.swayam.li"
+            target="_blank"
+            className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
+          >
+            <PenSquare size={16}/>
+            <span className="text-xs font-mono">BLOG</span>
           </a>
 
         </div>
