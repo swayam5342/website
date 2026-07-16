@@ -7,7 +7,14 @@ import experiencesData from "../data/experiences.json";
 import timelineData from "../data/timeline";
 import { HeroTerminal } from "../components/home/HeroTerminal";
 import { Reveal } from "../components/Reveal";
+import skillsData from "../data/skill.json";
 import type { Experience } from "../../types";
+
+const SKILL_GROUPS: { label: string; skills: string[] }[] = [
+  { label: "CORE_LANGUAGES", skills: skillsData.core },
+  { label: "BACKEND_&_INFRA", skills: skillsData.backend },
+  { label: "SECURITY", skills: skillsData.cyber },
+];
 
 export const Home: React.FC = () => {
   const featuredProjects = projectsData
@@ -91,130 +98,187 @@ export const Home: React.FC = () => {
         </section>
 
       {/* Recent Experience / Timeline */}
-      <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
-        {recentExperiences.length > 0
-          ? recentExperiences.map((exp) => (
-              <div
-                key={exp.id}
-                className="p-8 border border-brand-border bg-brand-surface hover:bg-brand-accent hover:text-brand-bg transition-all duration-300 group"
-              >
-                <div className="flex flex-col md:flex-row md:items-start justify-between mb-6">
-                  <div className="flex-1">
-                    <h3 className="text-xl font-mono font-bold text-brand-text group-hover:text-brand-bg mb-2">
-                      {exp.title}
-                    </h3>
-                    <p className="text-brand-accent font-mono text-sm mb-4 group-hover:text-brand-bg/90">
-                      {exp.company}
+      <section className="space-y-12">
+        <Reveal>
+          <div className="flex items-center justify-between border-b border-brand-border pb-4">
+            <h2 className="font-mono text-[10px] font-bold tracking-widest text-brand-muted">
+              RECENT_ACTIVITY.LOG
+            </h2>
+            <Link
+              to="/about"
+              className="text-brand-accent text-[9px] font-mono hover:underline"
+            >
+              FULL_HISTORY
+            </Link>
+          </div>
+        </Reveal>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          {recentExperiences.length > 0
+            ? recentExperiences.map((exp, i) => (
+                <Reveal key={exp.id} delay={i * 0.12}>
+                  <div className="h-full p-8 border border-brand-border bg-brand-surface transition-all duration-300 group hover:border-brand-accent/50 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_var(--brand-accent)]">
+                    <div className="flex flex-col md:flex-row md:items-start justify-between mb-6">
+                      <div className="flex-1">
+                        <h3 className="text-xl font-mono font-bold text-brand-text mb-2 group-hover:text-brand-accent transition-colors duration-300">
+                          {exp.title}
+                        </h3>
+                        <p className="text-brand-accent font-mono text-sm mb-4">
+                          {exp.company}
+                        </p>
+                      </div>
+
+                      <div className="mt-4 md:mt-0 flex flex-col items-end space-y-2">
+                        <div className="font-mono text-[10px] text-brand-muted border border-brand-border px-3 py-1 bg-brand-bg">
+                          {exp.period}
+                        </div>
+
+                        <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10">
+                          {exp.type.toUpperCase()}
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-brand-muted text-sm leading-relaxed mb-6 font-sans line-clamp-3">
+                      {exp.description}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.slice(0, 3).map((skill) => (
+                        <span
+                          key={skill}
+                          className="bg-brand-accent/10 text-brand-accent px-2 py-1 text-xs font-mono"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </Reveal>
+              ))
+            : recentTimeline.map((item, i) => (
+                <Reveal key={`${item.title}-${item.date}`} delay={i * 0.12}>
+                  <div className="h-full bg-brand-surface/50 border border-brand-border p-6 md:p-8 transition-all duration-300 hover:border-brand-accent/50 hover:-translate-y-1">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                      <div>
+                        <h3 className="text-lg font-bold font-mono uppercase text-brand-text tracking-tight">
+                          {item.title}
+                        </h3>
+                        <p className="text-[11px] font-mono text-brand-accent uppercase tracking-widest mt-1 opacity-80">
+                          {item.subtitle}
+                        </p>
+                      </div>
+
+                      <div className="mt-2 md:mt-0 flex flex-col items-end space-y-2">
+                        <div className="font-mono text-[10px] text-brand-muted border border-brand-border px-3 py-1 bg-brand-bg">
+                          {item.date}
+                        </div>
+
+                        <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10">
+                          {item.type.toUpperCase()}
+                        </div>
+                      </div>
+                    </div>
+
+                    <p className="text-xs text-brand-muted leading-relaxed font-mono opacity-80">
+                      {`> ${item.description}`}
                     </p>
                   </div>
+                </Reveal>
+              ))}
+        </div>
+      </section>
 
-                  <div className="mt-4 md:mt-0 flex flex-col items-end space-y-2">
-                    <div className="font-mono text-[10px] text-brand-muted border border-brand-border px-3 py-1 bg-brand-bg group-hover:bg-brand-accent/20 group-hover:border-brand-bg">
-                      {exp.period}
-                    </div>
+      {/* Tech Stack */}
+      <section className="space-y-12">
+        <Reveal>
+          <div className="flex items-center justify-between border-b border-brand-border pb-4">
+            <h2 className="font-mono text-[10px] font-bold tracking-widest text-brand-muted">
+              CAPABILITY_MATRIX
+            </h2>
+            <span className="text-brand-muted text-[9px] font-mono">
+              {SKILL_GROUPS.reduce((n, g) => n + g.skills.length, 0)}_MODULES_LOADED
+            </span>
+          </div>
+        </Reveal>
 
-                    <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10 group-hover:bg-brand-bg group-hover:border-brand-bg">
-                      {exp.type.toUpperCase()}
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-brand-muted text-sm leading-relaxed mb-6 font-sans group-hover:text-brand-bg/80 line-clamp-3">
-                  {exp.description}
-                </p>
-
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {SKILL_GROUPS.map((group, i) => (
+            <Reveal key={group.label} delay={i * 0.12}>
+              <div className="h-full border border-brand-border bg-brand-surface/50 p-8 transition-colors duration-300 hover:border-brand-accent/40">
+                <h3 className="font-mono text-[10px] text-brand-accent tracking-widest mb-6 flex items-center space-x-2">
+                  <span className="inline-block w-1.5 h-1.5 bg-brand-accent"></span>
+                  <span>{group.label}</span>
+                </h3>
                 <div className="flex flex-wrap gap-2">
-                  {exp.skills.slice(0, 3).map((skill) => (
+                  {group.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="bg-brand-accent/10 text-brand-accent px-2 py-1 text-xs font-mono group-hover:bg-brand-bg group-hover:text-brand-accent"
+                      className="border border-brand-border px-3 py-1.5 text-xs font-mono text-brand-muted transition-all duration-200 cursor-default hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10 hover:-translate-y-0.5"
                     >
                       {skill}
                     </span>
                   ))}
                 </div>
               </div>
-            ))
-          : recentTimeline.map((item) => (
-              <div
-                key={`${item.title}-${item.date}`}
-                className="bg-brand-surface/50 border border-brand-border p-6 md:p-8 hover:border-brand-accent/30 transition-all"
-              >
-                <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-                  <div>
-                    <h3 className="text-lg font-bold font-mono uppercase text-brand-text tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-[11px] font-mono text-brand-accent uppercase tracking-widest mt-1 opacity-80">
-                      {item.subtitle}
-                    </p>
-                  </div>
-
-                  <div className="mt-2 md:mt-0 flex flex-col items-end space-y-2">
-                    <div className="font-mono text-[10px] text-brand-muted border border-brand-border px-3 py-1 bg-brand-bg">
-                      {item.date}
-                    </div>
-
-                    <div className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border border-brand-accent/50 px-2 py-0.5 bg-brand-accent/10">
-                      {item.type.toUpperCase()}
-                    </div>
-                  </div>
-                </div>
-
-                <p className="text-xs text-brand-muted leading-relaxed font-mono opacity-80">
-                  {`> ${item.description}`}
-                </p>
-              </div>
-            ))}
+            </Reveal>
+          ))}
+        </div>
       </section>
 
       {/* Featured Projects */}
       <section className="space-y-12">
-        <div className="flex items-center justify-between border-b border-brand-border pb-4">
-          <h2 className="font-mono text-[10px] font-bold tracking-widest text-brand-muted">
-            LATEST_DEPLOYS.LOG
-          </h2>
+        <Reveal>
+          <div className="flex items-center justify-between border-b border-brand-border pb-4">
+            <h2 className="font-mono text-[10px] font-bold tracking-widest text-brand-muted">
+              LATEST_DEPLOYS.LOG
+            </h2>
 
-          <Link
-            to="/projects"
-            className="text-brand-accent text-[9px] font-mono hover:underline"
-          >
-            EXTRACT_ALL_DATA
-          </Link>
-        </div>
+            <Link
+              to="/projects"
+              className="text-brand-accent text-[9px] font-mono hover:underline"
+            >
+              EXTRACT_ALL_DATA
+            </Link>
+          </div>
+        </Reveal>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {featuredProjects.map((p) => (
-            <Link
-              key={p.id}
-              to={`/projects/${p.slug}`}
-              className="group border border-brand-border p-12 bg-brand-surface hover:bg-brand-accent/5 transition-all"
-            >
-              <div className="flex justify-between items-start mb-8">
-                <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
-                  UID: {p.id}
-                </span>
-                <span className="text-[9px] font-mono text-brand-muted uppercase tracking-widest">
-                  {p.tags[0]}
-                </span>
-              </div>
+          {featuredProjects.map((p, i) => (
+            <Reveal key={p.id} delay={i * 0.12}>
+              <Link
+                to={`/projects/${p.slug}`}
+                className="group relative block h-full border border-brand-border p-10 md:p-12 bg-brand-surface overflow-hidden transition-all duration-300 hover:border-brand-accent/50 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_var(--brand-accent)]"
+              >
+                {/* Accent line that grows across the top on hover */}
+                <span className="absolute top-0 left-0 h-0.5 w-0 bg-brand-accent transition-all duration-500 group-hover:w-full" />
 
-              <h3 className="text-3xl font-bold mb-4 font-mono group-hover:underline">
-                {p.title}
-              </h3>
+                <div className="flex justify-between items-start mb-8">
+                  <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
+                    UID: {String(p.id).padStart(2, "0")}
+                  </span>
+                  <span className="text-[9px] font-mono text-brand-accent uppercase tracking-widest border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5">
+                    {p.tags[0]}
+                  </span>
+                </div>
 
-              <p className="text-brand-muted text-sm leading-relaxed mb-10 line-clamp-2 font-sans">
-                {p.description}
-              </p>
+                <h3 className="text-3xl font-bold mb-4 font-mono tracking-tight transition-colors duration-300 group-hover:text-brand-accent">
+                  {p.title}
+                </h3>
 
-              <div className="flex items-center text-[10px] font-mono text-brand-accent">
-                <span>VIEW_TECHNICAL_DEBT</span>
-                <ArrowRight
-                  size={12}
-                  className="ml-2 group-hover:translate-x-1 transition-transform"
-                />
-              </div>
-            </Link>
+                <p className="text-brand-muted text-sm leading-relaxed mb-10 line-clamp-2 font-sans">
+                  {p.description}
+                </p>
+
+                <div className="flex items-center text-[10px] font-mono text-brand-accent">
+                  <span>VIEW_TECHNICAL_DEBT</span>
+                  <ArrowRight
+                    size={12}
+                    className="ml-2 group-hover:translate-x-1.5 transition-transform duration-300"
+                  />
+                </div>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </section>
