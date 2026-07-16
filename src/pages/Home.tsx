@@ -6,6 +6,7 @@ import homeData from "../data/home.json";
 import experiencesData from "../data/experiences.json";
 import timelineData from "../data/timeline";
 import { HeroTerminal } from "../components/home/HeroTerminal";
+import { IconBadge } from "../components/IconBadge";
 import { Reveal } from "../components/Reveal";
 import type { Experience } from "../../types";
 
@@ -211,9 +212,12 @@ export const Home: React.FC = () => {
                 <span className="absolute top-0 left-0 h-0.5 w-0 bg-brand-accent transition-all duration-500 group-hover:w-full" />
 
                 <div className="flex justify-between items-start mb-8">
-                  <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
-                    UID: {String(p.id).padStart(2, "0")}
-                  </span>
+                  <div className="flex items-center space-x-3">
+                    <IconBadge icon={p.icon} />
+                    <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
+                      UID: {String(p.id).padStart(2, "0")}
+                    </span>
+                  </div>
                   <button
                     onClick={(e) => {
                       e.preventDefault();

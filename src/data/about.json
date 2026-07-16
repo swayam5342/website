@@ -2,7 +2,7 @@
   "heading": "ID_IDENTIFIER: SWAYAM",
   "name": "SWAYAM",
   "roles": ["Backend Engineering", "Cybersecurity", "AI Systems"],
-  "photo": "/profile.png",
+  "photo": "/profile.jpeg",
   "main_text": "I build the invisible parts of software — APIs, deployment platforms, sandboxes, and detection pipelines — and I treat security as a design constraint, not a feature bolted on at the end.",
   "sub_text": "I'm pursuing two degrees in parallel: a B.Tech in Cybersecurity at VIT Vellore and a BS in Data Science at IIT Madras. That mix shapes how I engineer — every system should be observable, measurable, and hard to break. Recent work includes a Kubernetes-native deployment platform (Kargo), a multi-tenant quality layer for MCP servers (PlugFit), a Linux sandboxing engine built on NsJail (Sandboxd), and a Windows SIEM pipeline with custom detection rules. Off the keyboard-shipping path, I reverse engineer binaries, dig into system internals, and tune detection logic for fun.",
   "security_principles": [

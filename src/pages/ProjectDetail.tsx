@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Github, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from 'lucide-react';
 import projectsData from '../data/projects';
+import { IconBadge } from '../components/IconBadge';
 import type { Project } from '../../types';
 
 export const ProjectDetail: React.FC = () => {
@@ -41,7 +42,10 @@ export const ProjectDetail: React.FC = () => {
             </Link>
           ))}
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
+        <div className="flex items-center gap-4 mb-4">
+          <IconBadge icon={project.icon} size={22} />
+          <h1 className="text-4xl md:text-5xl font-bold">{project.title}</h1>
+        </div>
         <p className="text-xl text-brand-muted leading-relaxed">{project.description}</p>
         
         <div className="flex items-center space-x-4 mt-8">

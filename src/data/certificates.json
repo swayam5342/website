@@ -1,4 +1,3 @@
-
 [
   {
     "id": 1,
@@ -6,14 +5,16 @@
     "issuer": "CISCO",
     "year": "2026",
     "file": "./pdf/cisco_intro_to_cyber.pdf",
-    "verify":""
+    "verify": "",
+    "icon": "shield"
   },
   {
-    "id":2,
+    "id": 2,
     "name": "Foundations of Log Analysis for Cyber Defense",
     "issuer": "RED TEAM LEADERS",
     "year": "2026",
     "file": "./pdf/red_team_leaders_log_analysis.pdf",
-    "verify":"https://courses.redteamleaders.com/completion/739bbd1a425e3b56"
+    "verify": "https://courses.redteamleaders.com/completion/739bbd1a425e3b56",
+    "icon": "file-search"
   }
 ]

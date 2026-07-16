@@ -31,7 +31,8 @@
         "MongoDB",
         "Docker",
         "Kubernetes"
-      ]
+      ],
+      "icon": "container"
     },
     {
       "id": 2,
@@ -65,7 +66,8 @@
         "SQLAlchemy",
         "Celery",
         "Redis"
-      ]
+      ],
+      "icon": "plug"
     },
     {
       "id": 3,
@@ -96,7 +98,8 @@
         "Sysmon",
         "ElastAlert2",
         "Docker"
-      ]
+      ],
+      "icon": "radar"
     },
     {
       "id": 4,
@@ -128,7 +131,8 @@
         "Go",
         "NsJail",
         "Docker"
-      ]
+      ],
+      "icon": "box"
     },
     {
       "id": 5,
@@ -159,7 +163,8 @@
         "Node.js",
         "Express.js",
         "MongoDB"
-      ]
+      ],
+      "icon": "phone-off"
     },
     {
       "id": 6,
@@ -188,7 +193,8 @@
         "Python",
         "FastAPI",
         "Google GenAI"
-      ]
+      ],
+      "icon": "bot"
     }
   ],
   "main_heading": "PROJECTS",

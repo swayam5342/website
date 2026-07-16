@@ -4,6 +4,7 @@ import { Github, ExternalLink, ChevronRight, X } from "lucide-react";
 import projectsData from "../data/projects";
 import project from "../data/projects.json"
 import categorie from "../data/project_cat.json";
+import { IconBadge } from "../components/IconBadge";
 import type { Project } from "../../types";
 
 export const Projects: React.FC = () => {
@@ -91,7 +92,7 @@ export const Projects: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4 mb-8">
-              <span className="w-0.5 h-10 bg-brand-accent"></span>
+              <IconBadge icon={p.icon} />
 
               <div>
                 {/* Title clickable to GitHub */}
