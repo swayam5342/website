@@ -7,14 +7,7 @@ import experiencesData from "../data/experiences.json";
 import timelineData from "../data/timeline";
 import { HeroTerminal } from "../components/home/HeroTerminal";
 import { Reveal } from "../components/Reveal";
-import skillsData from "../data/skill.json";
 import type { Experience } from "../../types";
-
-const SKILL_GROUPS: { label: string; skills: string[] }[] = [
-  { label: "CORE_LANGUAGES", skills: skillsData.core },
-  { label: "BACKEND_&_INFRA", skills: skillsData.backend },
-  { label: "SECURITY", skills: skillsData.cyber },
-];
 
 export const Home: React.FC = () => {
   const featuredProjects = projectsData
@@ -186,43 +179,6 @@ export const Home: React.FC = () => {
                   </div>
                 </Reveal>
               ))}
-        </div>
-      </section>
-
-      {/* Tech Stack */}
-      <section className="space-y-12">
-        <Reveal>
-          <div className="flex items-center justify-between border-b border-brand-border pb-4">
-            <h2 className="font-mono text-[10px] font-bold tracking-widest text-brand-muted">
-              CAPABILITY_MATRIX
-            </h2>
-            <span className="text-brand-muted text-[9px] font-mono">
-              {SKILL_GROUPS.reduce((n, g) => n + g.skills.length, 0)}_MODULES_LOADED
-            </span>
-          </div>
-        </Reveal>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {SKILL_GROUPS.map((group, i) => (
-            <Reveal key={group.label} delay={i * 0.12}>
-              <div className="h-full border border-brand-border bg-brand-surface/50 p-8 transition-colors duration-300 hover:border-brand-accent/40">
-                <h3 className="font-mono text-[10px] text-brand-accent tracking-widest mb-6 flex items-center space-x-2">
-                  <span className="inline-block w-1.5 h-1.5 bg-brand-accent"></span>
-                  <span>{group.label}</span>
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {group.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="border border-brand-border px-3 py-1.5 text-xs font-mono text-brand-muted transition-all duration-200 cursor-default hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10 hover:-translate-y-0.5"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </Reveal>
-          ))}
         </div>
       </section>
 
