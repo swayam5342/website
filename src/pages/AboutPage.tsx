@@ -9,8 +9,15 @@ export const AboutPage: React.FC = () => {
   const skills = skillsjson as {
     cyber: string[];
     backend: string[];
+    database: string[];
+    devops: string[];
     core: string[];
   };
+  const backendSkills = [
+    ...skills.backend,
+    ...skills.database,
+    ...skills.devops,
+  ];
   const main_text = aboutjson.main_text;
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles as string[];
@@ -136,7 +143,7 @@ export const AboutPage: React.FC = () => {
             </h4>
 
             <div className="flex flex-wrap gap-2">
-              {skills.backend.map((s) => (
+              {backendSkills.map((s) => (
                 <span
                   key={s}
                   className="bg-brand-surface border border-brand-border px-3 py-1.5 text-xs font-mono text-brand-text"
