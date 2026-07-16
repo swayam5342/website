@@ -19,7 +19,9 @@
         "challenges": "Designing multi-tenant deployment orchestration and secure session management.",
         "security": "Implemented OAuth2 authentication flows and secure session handling.",
         "improvements": "Future work includes autoscaling, usage analytics, and advanced monitoring dashboards."
-      }
+      },
+      "lang": ["TypeScript", "Python", "MongoDB", "Docker", "Kubernetes"],
+      "icon": "container"
     },
     {
       "id": 2,
@@ -41,7 +43,9 @@
         "security": "Implemented JWT access tokens, httpOnly refresh-token cookies with rotation and family-scoped revocation, Google OAuth2 with CSRF state, and magic-link email verification.",
         "improvements": "Next planned component is F-04, an agent-based eval harness for scoring usability before and after cleaning."
       },
-      "date": "2026 (Active Development)"
+      "date": "2026 (Active Development)",
+      "lang": ["Python", "FastAPI", "SQLAlchemy", "Celery", "Redis"],
+      "icon": "plug"
     },
     {
       "id": 3,
@@ -61,7 +65,9 @@
         "challenges": "Integrating Windows telemetry with containerized ELK stack and handling Telegram API formatting and environment-variable secret management.",
         "security": "Used environment variables for tokens, separated detection logic from secrets, and implemented automated setup scripts for reproducibility.",
         "improvements": "Planned additions include threat-intelligence enrichment, Grafana dashboards, multi-host monitoring, and TLS-enabled secure deployment."
-      }
+      },
+      "lang": ["Elasticsearch", "Kibana", "Sysmon", "ElastAlert2", "Docker"],
+      "icon": "radar"
     },
     {
       "id": 4,
@@ -83,7 +89,9 @@
         "security": "Implemented namespace isolation, request validation, resource limits, restricted execution environments, and controlled runtime behavior.",
         "improvements": "Future improvements include seccomp filtering, microVM integration, and advanced runtime monitoring."
       },
-      "date": "May 2026"
+      "date": "May 2026",
+      "lang": ["Go", "NsJail", "Docker"],
+      "icon": "box"
     },
     {
       "id": 5,
@@ -105,7 +113,9 @@
         "security": "Implemented input validation, rate limiting, and environment-based secret management.",
         "improvements": "Future enhancements include caching with Redis and role-based moderation controls."
       },
-      "date": "May 2025"
+      "date": "May 2025",
+      "lang": ["JavaScript", "Node.js", "Express.js", "MongoDB"],
+      "icon": "phone-off"
     },
     {
       "id": 6,
@@ -125,7 +135,9 @@
         "challenges": "Handling unreliable LLM outputs and GitHub API failures with retry and validation workflows.",
         "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
         "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
-      }
+      },
+      "lang": ["Python", "FastAPI", "Google GenAI"],
+      "icon": "bot"
     }
   ],
   "main_heading": "PROJECTS",

@@ -15,73 +15,50 @@
     background-color var(--transition-fast),
     color var(--transition-fast),
     border-color var(--transition-fast);
-  --brand-bg: #ffffff;
-  --brand-surface: #f5f5f5;
-  --brand-border: #e5e7eb;
-  --brand-text: #111827;
-  --brand-muted: #6b7280;
+
+  /* CARBON — dark-first default */
+  --brand-bg: #0a0a0b;
+  --brand-surface: #121214;
+  --brand-border: #26262a;
+  --brand-text: #ededef;
+  --brand-muted: #8f8f98;
+  --brand-accent: #4d94ff;
+  --brand-accent-soft: rgba(77, 148, 255, 0.1);
+  --brand-accent-border: rgba(77, 148, 255, 0.4);
+}
+
+/* PAPER — refined light */
+[data-theme="light"] {
+  --brand-bg: #fafaf9;
+  --brand-surface: #f1f1ef;
+  --brand-border: #e0e0dc;
+  --brand-text: #18181b;
+  --brand-muted: #6f6f78;
   --brand-accent: #2563eb;
-  --brand-accent-soft: rgba(37, 99, 235, 0.1);
-  --brand-accent-border: rgba(37, 99, 235, 0.4);
+  --brand-accent-soft: rgba(37, 99, 235, 0.08);
+  --brand-accent-border: rgba(37, 99, 235, 0.35);
 }
 
-
-
-[data-theme="neon"] {
-  --brand-bg: #0b0712;
-  --brand-surface: #140f1f;
-  --brand-border: #2a1f44;
-  --brand-text: #f1eaff;
-  --brand-muted: #a898c7;
-  --brand-accent: #c77dff;
-  --brand-accent-soft: rgba(199, 125, 255, 0.1);
-  --brand-accent-border: rgba(199, 125, 255, 0.4);
-}
- 
-/* Solarized */
-[data-theme="solarized"] {
-  --brand-bg: #002b36;
-  --brand-surface: #073642;
-  --brand-border: #586e75;
-  --brand-text: #839496;
-  --brand-muted: #657b83;
-  --brand-accent: #b58900;
-  --brand-accent-soft: rgba(181, 137, 0, 0.1);
-  --brand-accent-border: rgba(181, 137, 0, 0.4);
-}
-
-/* Nord */
+/* NORD — cool arctic dark */
 [data-theme="nord"] {
   --brand-bg: #2e3440;
   --brand-surface: #3b4252;
   --brand-border: #4c566a;
   --brand-text: #eceff4;
-  --brand-muted: #d8dee9;
+  --brand-muted: #a8b5cc;
   --brand-accent: #88c0d0;
   --brand-accent-soft: rgba(136, 192, 208, 0.1);
   --brand-accent-border: rgba(136, 192, 208, 0.4);
 }
 
-/* Dracula */
-[data-theme="dracula"] {
-  --brand-bg: #282a36;
-  --brand-surface: #44475a;
-  --brand-border: #6272a4;
-  --brand-text: #f8f8f2;
-  --brand-muted: #6272a4;
-  --brand-accent: #ff79c6;
-  --brand-accent-soft: rgba(255, 121, 198, 0.1);
-  --brand-accent-border: rgba(255, 121, 198, 0.4);
-}
-
-
-[data-theme="notheme"] {
-  --brand-bg: #ffffff;
-  --brand-surface: #f8f8f8;
-  --brand-border: #b0b0b0;
-  --brand-text: #111111;
-  --brand-muted: #666666;
-  --brand-accent: #252525;
-  --brand-accent-soft: rgba(75, 75, 75, 0.155);
-  --brand-accent-border: rgba(0, 0, 0, 0.25);
+/* SOLARIZED — warm amber on deep teal */
+[data-theme="solarized"] {
+  --brand-bg: #002b36;
+  --brand-surface: #073642;
+  --brand-border: #35555e;
+  --brand-text: #d4ccb2;
+  --brand-muted: #8ba0a4;
+  --brand-accent: #d4a017;
+  --brand-accent-soft: rgba(212, 160, 23, 0.1);
+  --brand-accent-border: rgba(212, 160, 23, 0.4);
 }

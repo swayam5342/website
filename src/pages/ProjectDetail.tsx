@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { ArrowLeft, Github, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from 'lucide-react';
 import projectsData from '../data/projects';
+import { IconBadge } from '../components/IconBadge';
 import type { Project } from '../../types';
 
 export const ProjectDetail: React.FC = () => {
@@ -21,10 +22,30 @@ export const ProjectDetail: React.FC = () => {
       <div className="mb-12">
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map(t => (
-            <span key={t} className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent">{t}</span>
+            <Link
+              key={t}
+              to={`/projects?tag=${encodeURIComponent(t)}`}
+              title={`Show ${t} projects`}
+              className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent transition-all hover:bg-brand-accent hover:text-brand-bg"
+            >
+              {t}
+            </Link>
+          ))}
+          {project.lang?.map(l => (
+            <Link
+              key={l}
+              to={`/projects?tag=${encodeURIComponent(l)}`}
+              title={`Show ${l} projects`}
+              className="text-xs font-mono px-3 py-1 rounded border border-brand-border text-brand-muted transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10"
+            >
+              {l}
+            </Link>
           ))}
         </div>
-        <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>
+        <div className="flex items-center gap-4 mb-4">
+          <IconBadge icon={project.icon} size={22} />
+          <h1 className="text-4xl md:text-5xl font-bold">{project.title}</h1>
+        </div>
         <p className="text-xl text-brand-muted leading-relaxed">{project.description}</p>
         
         <div className="flex items-center space-x-4 mt-8">
