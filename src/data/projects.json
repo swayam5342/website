@@ -5,7 +5,12 @@
       "slug": "kargo-backend",
       "title": "Kargo Backend",
       "description": "Backend platform enabling containerized app deployments with AI-powered setup and Kubernetes-native scaling.",
-      "tags": ["Backend", "Cloud", "Kubernetes", "DevOps"],
+      "tags": [
+        "Backend",
+        "Cloud",
+        "Kubernetes",
+        "DevOps"
+      ],
       "github": "https://github.com/GDGVIT/kargo-backend",
       "featured": true,
       "resume_points": [
@@ -19,14 +24,26 @@
         "challenges": "Designing multi-tenant deployment orchestration and secure session management.",
         "security": "Implemented OAuth2 authentication flows and secure session handling.",
         "improvements": "Future work includes autoscaling, usage analytics, and advanced monitoring dashboards."
-      }
+      },
+      "lang": [
+        "TypeScript",
+        "Python",
+        "MongoDB",
+        "Docker",
+        "Kubernetes"
+      ]
     },
     {
       "id": 2,
       "slug": "plugfit",
       "title": "PlugFit",
       "description": "Multi-tenant SaaS platform acting as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints as live MCP endpoints. (Active Development)",
-      "tags": ["Backend", "AI", "SaaS", "Infrastructure"],
+      "tags": [
+        "Backend",
+        "AI",
+        "SaaS",
+        "Infrastructure"
+      ],
       "github": "https://github.com/swayam5342/plugfit_backend",
       "featured": true,
       "resume_points": [
@@ -41,14 +58,25 @@
         "security": "Implemented JWT access tokens, httpOnly refresh-token cookies with rotation and family-scoped revocation, Google OAuth2 with CSRF state, and magic-link email verification.",
         "improvements": "Next planned component is F-04, an agent-based eval harness for scoring usability before and after cleaning."
       },
-      "date": "2026 (Active Development)"
+      "date": "2026 (Active Development)",
+      "lang": [
+        "Python",
+        "FastAPI",
+        "SQLAlchemy",
+        "Celery",
+        "Redis"
+      ]
     },
     {
       "id": 3,
       "slug": "windows-soc-lab",
       "title": "Windows SIEM",
       "description": "End-to-end SIEM pipeline that collects Windows telemetry, detects suspicious activity using custom rules, and sends real-time alerts to Telegram and automation workflows.",
-      "tags": ["Cybersecurity", "SIEM", "Automation"],
+      "tags": [
+        "Cybersecurity",
+        "SIEM",
+        "Automation"
+      ],
       "github": "https://github.com/swayam5342/win_siem",
       "featured": true,
       "resume_points": [
@@ -61,14 +89,26 @@
         "challenges": "Integrating Windows telemetry with containerized ELK stack and handling Telegram API formatting and environment-variable secret management.",
         "security": "Used environment variables for tokens, separated detection logic from secrets, and implemented automated setup scripts for reproducibility.",
         "improvements": "Planned additions include threat-intelligence enrichment, Grafana dashboards, multi-host monitoring, and TLS-enabled secure deployment."
-      }
+      },
+      "lang": [
+        "Elasticsearch",
+        "Kibana",
+        "Sysmon",
+        "ElastAlert2",
+        "Docker"
+      ]
     },
     {
       "id": 4,
       "slug": "sandboxd",
       "title": "Sandboxd",
       "description": "Secure Linux sandboxing engine for safely executing untrusted code using isolated environments and resource-controlled execution.",
-      "tags": ["Cybersecurity", "Backend", "Linux", "Systems"],
+      "tags": [
+        "Cybersecurity",
+        "Backend",
+        "Linux",
+        "Systems"
+      ],
       "github": "https://github.com/swayam5342/sandboxd",
       "featured": true,
       "resume_points": [
@@ -83,14 +123,22 @@
         "security": "Implemented namespace isolation, request validation, resource limits, restricted execution environments, and controlled runtime behavior.",
         "improvements": "Future improvements include seccomp filtering, microVM integration, and advanced runtime monitoring."
       },
-      "date": "May 2026"
+      "date": "May 2026",
+      "lang": [
+        "Go",
+        "NsJail",
+        "Docker"
+      ]
     },
     {
       "id": 5,
       "slug": "scamzap",
       "title": "Scamzap Backend",
       "description": "Backend system for a crowdsourced scam reporting platform enabling phone number verification, rating aggregation, and trend analytics via REST APIs.",
-      "tags": ["Backend", "Cybersecurity"],
+      "tags": [
+        "Backend",
+        "Cybersecurity"
+      ],
       "github": "https://github.com/upayanmazumder/scamzap",
       "featured": true,
       "resume_points": [
@@ -105,14 +153,24 @@
         "security": "Implemented input validation, rate limiting, and environment-based secret management.",
         "improvements": "Future enhancements include caching with Redis and role-based moderation controls."
       },
-      "date": "May 2025"
+      "date": "May 2025",
+      "lang": [
+        "JavaScript",
+        "Node.js",
+        "Express.js",
+        "MongoDB"
+      ]
     },
     {
       "id": 6,
       "slug": "promptto-web",
       "title": "Prompt to Web",
       "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
-      "tags": ["Backend", "AI", "Automation"],
+      "tags": [
+        "Backend",
+        "AI",
+        "Automation"
+      ],
       "github": "https://github.com/swayam5342/TDS1",
       "featured": true,
       "resume_points": [
@@ -125,7 +183,12 @@
         "challenges": "Handling unreliable LLM outputs and GitHub API failures with retry and validation workflows.",
         "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
         "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
-      }
+      },
+      "lang": [
+        "Python",
+        "FastAPI",
+        "Google GenAI"
+      ]
     }
   ],
   "main_heading": "PROJECTS",

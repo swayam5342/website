@@ -21,7 +21,24 @@ export const ProjectDetail: React.FC = () => {
       <div className="mb-12">
         <div className="flex flex-wrap gap-2 mb-4">
           {project.tags.map(t => (
-            <span key={t} className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent">{t}</span>
+            <Link
+              key={t}
+              to={`/projects?tag=${encodeURIComponent(t)}`}
+              title={`Show ${t} projects`}
+              className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent transition-all hover:bg-brand-accent hover:text-brand-bg"
+            >
+              {t}
+            </Link>
+          ))}
+          {project.lang?.map(l => (
+            <Link
+              key={l}
+              to={`/projects?tag=${encodeURIComponent(l)}`}
+              title={`Show ${l} projects`}
+              className="text-xs font-mono px-3 py-1 rounded border border-brand-border text-brand-muted transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10"
+            >
+              {l}
+            </Link>
           ))}
         </div>
         <h1 className="text-4xl md:text-5xl font-bold mb-4">{project.title}</h1>

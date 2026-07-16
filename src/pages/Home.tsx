@@ -1,6 +1,6 @@
 import React from "react";
 import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import projectsData from "../data/projects";
 import homeData from "../data/home.json";
 import experiencesData from "../data/experiences.json";
@@ -10,6 +10,7 @@ import { Reveal } from "../components/Reveal";
 import type { Experience } from "../../types";
 
 export const Home: React.FC = () => {
+  const navigate = useNavigate();
   const featuredProjects = projectsData
     .filter((p) => p.featured)
     .slice(0, 2);
@@ -213,9 +214,17 @@ export const Home: React.FC = () => {
                   <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
                     UID: {String(p.id).padStart(2, "0")}
                   </span>
-                  <span className="text-[9px] font-mono text-brand-accent uppercase tracking-widest border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5">
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      navigate(`/projects?tag=${encodeURIComponent(p.tags[0])}`);
+                    }}
+                    title={`Show ${p.tags[0]} projects`}
+                    className="text-[9px] font-mono text-brand-accent uppercase tracking-widest border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5 transition-all hover:bg-brand-accent hover:text-brand-bg cursor-pointer"
+                  >
                     {p.tags[0]}
-                  </span>
+                  </button>
                 </div>
 
                 <h3 className="text-3xl font-bold mb-4 font-mono tracking-tight transition-colors duration-300 group-hover:text-brand-accent">
