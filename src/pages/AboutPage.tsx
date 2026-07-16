@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import skillsjson from "../data/skill.json";
 import aboutjson from "../data/about.json";
 import timelineRaw from "../data/timeline.json";
@@ -15,13 +15,46 @@ export const AboutPage: React.FC = () => {
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles as string[];
   const timelineData = timelineRaw as TimelineItem[];
+  const [photoMissing, setPhotoMissing] = useState(false);
+
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
-      <header className="border-b border-brand-border pb-8">
-        <h1 className="text-4xl font-mono font-bold tracking-tighter">ABOUT</h1>
-        <p className="text-brand-muted mt-2 font-mono text-[10px] tracking-widest uppercase">
-          {aboutjson.heading}
-        </p>
+      <header className="border-b border-brand-border pb-10 flex flex-col md:flex-row md:items-end justify-between gap-8">
+        <div>
+          <h1 className="text-4xl font-mono font-bold tracking-tighter">ABOUT</h1>
+          <p className="text-brand-muted mt-2 font-mono text-[10px] tracking-widest uppercase">
+            {aboutjson.heading}
+          </p>
+          <div className="flex flex-wrap gap-2 mt-6">
+            {aboutjson.roles.map((role) => (
+              <span
+                key={role}
+                className="font-mono text-[9px] uppercase tracking-widest text-brand-accent border border-brand-accent/40 bg-brand-accent/10 px-2.5 py-1"
+              >
+                {role}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        {/* Profile photo */}
+        <div className="relative shrink-0 self-start md:self-end">
+          <div className="absolute -top-1.5 -left-1.5 w-3 h-3 border-t-2 border-l-2 border-brand-accent" />
+          <div className="absolute -bottom-1.5 -right-1.5 w-3 h-3 border-b-2 border-r-2 border-brand-accent" />
+          {photoMissing ? (
+            <div className="w-36 h-36 md:w-44 md:h-44 border border-brand-border bg-brand-surface flex flex-col items-center justify-center gap-2 font-mono text-[8px] text-brand-muted uppercase tracking-widest text-center p-4">
+              <span className="text-brand-accent">[NO_SIGNAL]</span>
+              <span>profile.png not found</span>
+            </div>
+          ) : (
+            <img
+              src={aboutjson.photo}
+              alt={`Portrait of ${aboutjson.name}`}
+              onError={() => setPhotoMissing(true)}
+              className="w-36 h-36 md:w-44 md:h-44 object-cover border border-brand-border bg-brand-surface grayscale hover:grayscale-0 transition-all duration-500"
+            />
+          )}
+        </div>
       </header>
 
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">

@@ -1,9 +1,11 @@
 {
-
-  "heading" : "ID_IDENTIFIER: SWAYAM",
-  "main_text": "Backend and cybersecurity enthusiast focused on building secure, scalable, and high-performance systems. I am passionate about designing resilient architectures, automating infrastructure, and applying defensive security practices to real-world applications.",
-  "sub_text": "My work sits at the intersection of backend engineering, distributed systems, and security research. I enjoy building APIs, deployment platforms, and automation tools while continuously learning reverse engineering, threat detection, and system internals. I aim to engineer systems that are not only fast and scalable but also observable, reliable, and secure by design.",
-    "security_principles":  [
+  "heading": "ID_IDENTIFIER: SWAYAM",
+  "name": "SWAYAM",
+  "roles": ["Backend Engineering", "Cybersecurity", "AI Systems"],
+  "photo": "/profile.png",
+  "main_text": "I build the invisible parts of software — APIs, deployment platforms, sandboxes, and detection pipelines — and I treat security as a design constraint, not a feature bolted on at the end.",
+  "sub_text": "I'm pursuing two degrees in parallel: a B.Tech in Cybersecurity at VIT Vellore and a BS in Data Science at IIT Madras. That mix shapes how I engineer — every system should be observable, measurable, and hard to break. Recent work includes a Kubernetes-native deployment platform (Kargo), a multi-tenant quality layer for MCP servers (PlugFit), a Linux sandboxing engine built on NsJail (Sandboxd), and a Windows SIEM pipeline with custom detection rules. Off the keyboard-shipping path, I reverse engineer binaries, dig into system internals, and tune detection logic for fun.",
+  "security_principles": [
     "SECURITY IS AN INVARIANT, NOT A FEATURE.",
     "OBSERVABILITY IS PREREQUISITE FOR SECURITY.",
     "SIMPLICITY IS THE ULTIMATE HARDENING TOOL."
