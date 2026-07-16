@@ -5,6 +5,8 @@ import projectsData from "../data/projects";
 import homeData from "../data/home.json";
 import experiencesData from "../data/experiences.json";
 import timelineData from "../data/timeline";
+import { HeroTerminal } from "../components/home/HeroTerminal";
+import { Reveal } from "../components/Reveal";
 import type { Experience } from "../../types";
 
 export const Home: React.FC = () => {
@@ -18,48 +20,75 @@ export const Home: React.FC = () => {
   const recentTimeline = timelineData.slice(0, 2);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12 space-y-24">
+    <div className="relative">
+      {/* Background: blueprint grid fading from the top, one soft accent glow */}
+      <div className="absolute inset-x-0 top-0 h-[90vh] -z-10 overflow-hidden pointer-events-none">
+        <div className="absolute inset-0 bg-blueprint opacity-40" />
+        <div className="absolute top-[-10%] right-[-5%] w-[45vw] h-[45vw] max-w-2xl max-h-2xl bg-brand-accent/10 blur-[120px] rounded-full" />
+      </div>
 
-      {/* Hero */}
-      <section className="min-h-[60vh] flex flex-col justify-center border-l border-brand-border pl-8 relative">
-        <div className="absolute top-0 left-[-3px] w-1.5 h-1.5 bg-brand-accent"></div>
+      <div className="max-w-7xl mx-auto px-4 py-12 space-y-28">
 
-        <div className="space-y-8">
-          <div className="font-mono text-[10px] text-brand-muted flex items-center space-x-2 tracking-widest uppercase">
-            <span className="inline-block w-1.5 h-1.5 bg-brand-accent"></span>
-            <span>{homeData.main_heading}</span>
+        {/* Hero */}
+        <section className="min-h-[75vh] grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 items-center">
+          <div className="space-y-8">
+            <div
+              className="anim-rise font-mono text-[10px] text-brand-muted flex items-center space-x-2 tracking-widest uppercase"
+              style={{ "--rise-delay": "0s" } as React.CSSProperties}
+            >
+              <span className="status-pulse inline-block w-1.5 h-1.5 bg-brand-accent"></span>
+              <span>{homeData.main_heading}</span>
+            </div>
+
+            <h1
+              className="anim-rise text-6xl md:text-8xl font-black tracking-tighter uppercase leading-[0.9]"
+              style={{ "--rise-delay": "0.1s" } as React.CSSProperties}
+            >
+              Secure <br />
+              Backend <br />
+              <span className="text-brand-muted/25 hover:text-brand-accent transition-colors duration-500 cursor-default">
+                Architect
+              </span>
+            </h1>
+
+            <p
+              className="anim-rise max-w-lg text-brand-muted text-base leading-relaxed border-l-2 border-brand-accent/40 pl-6"
+              style={{ "--rise-delay": "0.22s" } as React.CSSProperties}
+            >
+              {main_text}
+            </p>
+
+            <div
+              className="anim-rise flex flex-wrap gap-4 pt-4"
+              style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
+            >
+              <Link
+                to="/projects"
+                className="group border border-brand-accent bg-brand-accent text-brand-bg px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_var(--brand-accent)]"
+              >
+                <span>{homeData.project}</span>
+                <ArrowRight
+                  size={14}
+                  className="transition-transform duration-300 group-hover:translate-x-1"
+                />
+              </Link>
+
+              <Link
+                to="/certificates"
+                className="border border-brand-border px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 transition-all duration-300 hover:border-brand-accent/60 hover:text-brand-accent hover:-translate-y-0.5"
+              >
+                <span>CERTIFICATES</span>
+              </Link>
+            </div>
           </div>
 
-          <h1 className="text-6xl md:text-9xl font-black tracking-tighter uppercase leading-[0.85]">
-            Secure <br />
-            Backend <br />
-            <span className="text-brand-muted/20 hover:text-brand-accent transition-colors duration-500 cursor-default">
-              Architect
-            </span>
-          </h1>
-
-          <p className="max-w-lg text-brand-muted text-base leading-relaxed border-l border-brand-border pl-6 font-mono">
-            {main_text}
-          </p>
-
-          <div className="flex flex-wrap gap-4 pt-6">
-            <Link
-              to="/projects"
-              className="border border-brand-accent bg-brand-accent text-brand-bg px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 transition-all"
-            >
-              <span>{homeData.project}</span>
-              <ArrowRight size={14} />
-            </Link>
-
-            <Link
-              to="/certificates"
-              className="border border-brand-border px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 hover:bg-white/5 transition-all"
-            >
-              <span>CERTIFICATES</span>
-            </Link>
+          <div
+            className="anim-rise hidden lg:block"
+            style={{ "--rise-delay": "0.3s" } as React.CSSProperties}
+          >
+            <HeroTerminal />
           </div>
-        </div>
-      </section>
+        </section>
 
       {/* Recent Experience / Timeline */}
       <section className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -189,6 +218,7 @@ export const Home: React.FC = () => {
           ))}
         </div>
       </section>
+      </div>
     </div>
   );
 };

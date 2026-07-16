@@ -5,7 +5,6 @@ interface RevealProps {
   /** Stagger delay in seconds */
   delay?: number;
   className?: string;
-  as?: keyof React.JSX.IntrinsicElements;
 }
 
 /**
@@ -16,9 +15,8 @@ export const Reveal: React.FC<RevealProps> = ({
   children,
   delay = 0,
   className = "",
-  as: Tag = "div",
 }) => {
-  const ref = useRef<HTMLElement | null>(null);
+  const ref = useRef<HTMLDivElement>(null);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -40,12 +38,12 @@ export const Reveal: React.FC<RevealProps> = ({
   }, []);
 
   return (
-    <Tag
-      ref={ref as React.Ref<never>}
+    <div
+      ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
       style={{ "--reveal-delay": `${delay}s` } as React.CSSProperties}
     >
       {children}
-    </Tag>
+    </div>
   );
 };
