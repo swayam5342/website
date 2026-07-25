@@ -1,20 +1,35 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import { Github, ExternalLink, ChevronRight } from "lucide-react";
+import React from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { Github, ExternalLink, ChevronRight, X } from "lucide-react";
 import projectsData from "../data/projects";
 import project from "../data/projects.json"
 import categorie from "../data/project_cat.json";
+import { IconBadge } from "../components/IconBadge";
 import type { Project } from "../../types";
 
 export const Projects: React.FC = () => {
-  const [filter, setFilter] = useState("All");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const filter = searchParams.get("tag") ?? "All";
   const categories = categorie as string[];
+
+  const setFilter = (tag: string) => {
+    if (tag === "All") {
+      setSearchParams({}, { replace: true });
+    } else {
+      setSearchParams({ tag }, { replace: true });
+    }
+  };
+
+  const isCategoryFilter = categories.some(
+    (c) => c.toLowerCase() === filter.toLowerCase()
+  );
 
   const filteredProjects = (projectsData as Project[])
     .filter((p) => {
       if (filter === "All") return true;
-      return p.tags.map(tag => tag.toLowerCase())
-  .includes(filter.toLowerCase());
+      return [...p.tags, ...(p.lang ?? [])]
+        .map((tag) => tag.toLowerCase())
+        .includes(filter.toLowerCase());
     })
     .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
 
@@ -49,6 +64,20 @@ export const Projects: React.FC = () => {
         </div>
       </header>
 
+      {/* Active tag filter (set by clicking a language/framework tag) */}
+      {filter !== "All" && !isCategoryFilter && (
+        <div className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest">
+          <span className="text-brand-muted">FILTER_ACTIVE:</span>
+          <button
+            onClick={() => setFilter("All")}
+            className="flex items-center gap-2 border border-brand-accent/50 bg-brand-accent/10 text-brand-accent px-3 py-1 hover:bg-brand-accent hover:text-brand-bg transition-all"
+          >
+            <span>{filter}</span>
+            <X size={10} />
+          </button>
+        </div>
+      )}
+
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {filteredProjects.map((p) => (
           <div
@@ -63,7 +92,7 @@ export const Projects: React.FC = () => {
             </div>
 
             <div className="flex items-center space-x-4 mb-8">
-              <span className="w-0.5 h-10 bg-brand-accent"></span>
+              <IconBadge icon={p.icon} />
 
               <div>
                 {/* Title clickable to GitHub */}
@@ -80,22 +109,40 @@ export const Projects: React.FC = () => {
                   <h3 className="text-2xl font-bold font-mono">{p.title}</h3>
                 )}
 
-                <div className="flex gap-2 mt-2">
+                <div className="flex flex-wrap gap-2 mt-2">
                   {p.tags.map((t) => (
-                    <span
+                    <button
                       key={t}
-                      className="text-[8px] font-mono bg-white text-black border border-white px-2 py-0.5 uppercase"
+                      onClick={() => setFilter(t)}
+                      className="text-[8px] font-mono bg-brand-text text-brand-bg border border-brand-text px-2 py-0.5 uppercase transition-all hover:bg-brand-accent hover:border-brand-accent cursor-pointer"
+                      title={`Show ${t} projects`}
                     >
                       {t}
-                    </span>
+                    </button>
                   ))}
                 </div>
               </div>
             </div>
 
-            <p className="text-sm text-brand-muted leading-relaxed mb-12 flex-grow font-sans">
+            <p className="text-sm text-brand-muted leading-relaxed mb-6 flex-grow font-sans">
               {p.description}
             </p>
+
+            {/* Language / framework tags */}
+            {p.lang && p.lang.length > 0 && (
+              <div className="flex flex-wrap gap-2 mb-8">
+                {p.lang.map((l) => (
+                  <button
+                    key={l}
+                    onClick={() => setFilter(l)}
+                    className="text-[9px] font-mono text-brand-muted border border-brand-border px-2.5 py-1 transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10 cursor-pointer"
+                    title={`Show ${l} projects`}
+                  >
+                    {l}
+                  </button>
+                ))}
+              </div>
+            )}
 
             <div className="flex items-center justify-between border-t border-brand-border pt-8">
               <Link

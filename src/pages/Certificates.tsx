@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Eye, ShieldCheck } from "lucide-react";
 import certificatesData from "../data/certificates";
+import { IconBadge } from "../components/IconBadge";
 import { Certificate } from "../../types";
 
 export const Certificates: React.FC = () => {
@@ -26,10 +27,13 @@ export const Certificates: React.FC = () => {
               className="group bg-brand-bg p-10 flex flex-col border border-brand-border hover:bg-brand-surface transition-all"
             >
               {/* Top Row */}
-              <div className="flex items-center justify-between mb-10">
-                <span className="text-[8px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
-                  CERT {cert.id}
-                </span>
+              <div className="flex items-start justify-between mb-10">
+                <div className="flex items-center space-x-3">
+                  <IconBadge icon={cert.icon} />
+                  <span className="text-[8px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
+                    CERT {String(cert.id).padStart(2, "0")}
+                  </span>
+                </div>
                 <span className="text-[10px] font-mono font-bold text-brand-accent">
                   {cert.year}
                 </span>

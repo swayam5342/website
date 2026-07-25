@@ -6,6 +6,7 @@ export interface Project {
   title: string;
   description: string;
   lang?: string[],
+  icon?: string;
   tags: string[];
   github?: string;
   demo?: string;
@@ -44,6 +45,7 @@ export interface Certificate {
   year: string;
   file: string;
   verify?: string;
+  icon?: string;
 }
 
 export interface Education {
