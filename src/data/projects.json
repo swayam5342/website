@@ -109,11 +109,11 @@
     },
     {
       "id": 6,
-      "slug": "promptto-web",
-      "title": "Prompt to Web",
+      "slug": "Autoscaffold",
+      "title": "Autoscaffold",
       "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
       "tags": ["Backend", "AI", "Automation"],
-      "github": "https://github.com/swayam5342/TDS1",
+      "github": "https://https://github.com/swayam5342/Autoscaffold",
       "featured": true,
       "resume_points": [
         "Built an AI-driven system that converts natural-language prompts into fully functional web applications.",
@@ -125,7 +125,8 @@
         "challenges": "Handling unreliable LLM outputs and GitHub API failures with retry and validation workflows.",
         "security": "Used API key isolation, secure environment variables, and controlled automation pipelines.",
         "improvements": "Future improvements include multi-template generation and CI/CD pipeline customization."
-      }
+      },
+      "demo": "https://autoscaffold.onrender.com"
     }
   ],
   "main_heading": "PROJECTS",
