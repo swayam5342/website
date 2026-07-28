@@ -39,6 +39,18 @@
   --brand-accent-border: rgba(37, 99, 235, 0.35);
 }
 
+/* TOKYO — lavender-on-ink, Tokyo Night inspired */
+[data-theme="tokyo"] {
+  --brand-bg: #15161e;
+  --brand-surface: #1a1b26;
+  --brand-border: #2c2f44;
+  --brand-text: #c0caf5;
+  --brand-muted: #8b93bd;
+  --brand-accent: #7aa2f7;
+  --brand-accent-soft: rgba(122, 162, 247, 0.1);
+  --brand-accent-border: rgba(122, 162, 247, 0.4);
+}
+
 /* NORD — cool arctic dark */
 [data-theme="nord"] {
   --brand-bg: #2e3440;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export type Theme = "dark" | "light" | "nord" | "solarized";
+export type Theme = "dark" | "light" | "tokyo" | "nord" | "solarized";
 
 export interface ThemeInfo {
   id: Theme;
@@ -13,6 +13,7 @@ export interface ThemeInfo {
 export const THEMES: ThemeInfo[] = [
   { id: "dark", label: "CARBON", swatch: { bg: "#0a0a0b", accent: "#4d94ff" } },
   { id: "light", label: "PAPER", swatch: { bg: "#fafaf9", accent: "#2563eb" } },
+  { id: "tokyo", label: "TOKYO", swatch: { bg: "#15161e", accent: "#7aa2f7" } },
   { id: "nord", label: "NORD", swatch: { bg: "#2e3440", accent: "#88c0d0" } },
   {
     id: "solarized",
