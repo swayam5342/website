@@ -39,16 +39,76 @@
   --brand-accent-border: rgba(37, 99, 235, 0.35);
 }
 
-/* TOKYO — lavender-on-ink, Tokyo Night inspired */
-[data-theme="tokyo"] {
-  --brand-bg: #15161e;
-  --brand-surface: #1a1b26;
-  --brand-border: #2c2f44;
+/* AYU LIGHT — warm paper with orange accent */
+[data-theme="ayu-light"] {
+  --brand-bg: #fafafa;
+  --brand-surface: #f3f4f5;
+  --brand-border: #e7eaed;
+  --brand-text: #5c6166;
+  --brand-muted: #828c99;
+  --brand-accent: #fa8d3e;
+  --brand-accent-soft: rgba(250, 141, 62, 0.1);
+  --brand-accent-border: rgba(250, 141, 62, 0.4);
+}
+
+/* CATPPUCCIN LATTE — soft light with blue accent */
+[data-theme="catppuccin-latte"] {
+  --brand-bg: #eff1f5;
+  --brand-surface: #e6e9ef;
+  --brand-border: #ccd0da;
+  --brand-text: #4c4f69;
+  --brand-muted: #6c6f85;
+  --brand-accent: #1e66f5;
+  --brand-accent-soft: rgba(30, 102, 245, 0.08);
+  --brand-accent-border: rgba(30, 102, 245, 0.35);
+}
+
+/* GITHUB LIGHT — clean neutral with GitHub blue */
+[data-theme="github-light"] {
+  --brand-bg: #ffffff;
+  --brand-surface: #f6f8fa;
+  --brand-border: #d0d7de;
+  --brand-text: #1f2328;
+  --brand-muted: #656d76;
+  --brand-accent: #0969da;
+  --brand-accent-soft: rgba(9, 105, 218, 0.08);
+  --brand-accent-border: rgba(9, 105, 218, 0.35);
+}
+
+/* TOKYO NIGHT STORM — lavender-on-slate */
+[data-theme="tokyo-night-storm"] {
+  --brand-bg: #24283b;
+  --brand-surface: #1f2335;
+  --brand-border: #414868;
   --brand-text: #c0caf5;
-  --brand-muted: #8b93bd;
+  --brand-muted: #565f89;
   --brand-accent: #7aa2f7;
   --brand-accent-soft: rgba(122, 162, 247, 0.1);
   --brand-accent-border: rgba(122, 162, 247, 0.4);
+}
+
+/* CATPPUCCIN MOCHA — dark with mauve accent */
+[data-theme="catppuccin-mocha"] {
+  --brand-bg: #1e1e2e;
+  --brand-surface: #313244;
+  --brand-border: #45475a;
+  --brand-text: #cdd6f4;
+  --brand-muted: #a6adc8;
+  --brand-accent: #cba6f7;
+  --brand-accent-soft: rgba(203, 166, 247, 0.1);
+  --brand-accent-border: rgba(203, 166, 247, 0.4);
+}
+
+/* GRUVBOX DARK — retro warm dark with aqua accent */
+[data-theme="gruvbox-dark"] {
+  --brand-bg: #1d2021;
+  --brand-surface: #282828;
+  --brand-border: #504945;
+  --brand-text: #ebdbb2;
+  --brand-muted: #928374;
+  --brand-accent: #83a598;
+  --brand-accent-soft: rgba(131, 165, 152, 0.1);
+  --brand-accent-border: rgba(131, 165, 152, 0.4);
 }
 
 /* NORD — cool arctic dark */

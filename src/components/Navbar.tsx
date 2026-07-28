@@ -93,6 +93,7 @@ export const Navbar: React.FC = () => {
                   <p className="px-4 pt-3 pb-2 font-mono text-[8px] text-brand-muted uppercase tracking-widest border-b border-brand-border">
                     COLOR_SCHEME
                   </p>
+                  <div className="max-h-72 overflow-y-auto">
                   {THEMES.map((t) => (
                     <button
                       key={t.id}
@@ -121,6 +122,7 @@ export const Navbar: React.FC = () => {
                       {theme === t.id && <Check size={12} />}
                     </button>
                   ))}
+                  </div>
                 </div>
               )}
             </div>
