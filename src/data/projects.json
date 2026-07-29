@@ -139,6 +139,29 @@
       "lang": ["Python", "FastAPI", "Google GenAI"],
       "icon": "bot",
       "demo": "https://autoscaffold.onrender.com"
+    },
+    {
+      "id": 7,
+      "slug": "api2mcp",
+      "title": "api2mcp",
+      "description": "Standalone TypeScript npm package that converts API specifications into working MCP servers, exposing any documented API as MCP tools. Forms a core component of the PlugFit platform, published independently for reuse.",
+      "tags": ["Backend", "AI", "Developer Tools", "Open Source"],
+      "github": "https://github.com/swayam5342/api2mcp",
+      "npm": "https://www.npmjs.com/package/@swayam5342/api2mcp",
+      "featured": true,
+      "resume_points": [
+        "Built and published a standalone TypeScript npm package (@swayam5342/api2mcp) that transforms API specs into runnable MCP servers.",
+        "Developed it as a core component of the PlugFit platform, published independently for reuse.",
+        "Designed a spec-parsing and tool-generation pipeline mapping API endpoints to MCP tool definitions."
+      ],
+      "details": {
+        "architecture": "TypeScript library that parses API specs and generates MCP server definitions with per-endpoint tool mappings; a core piece of PlugFit, also published standalone to npm.",
+        "challenges": "Handling inconsistent and incomplete API specs while producing valid, usable MCP tool schemas.",
+        "security": "Input validation and safe handling of untrusted spec definitions.",
+        "improvements": "Future work includes broader spec-format support and auto-generated auth handling."
+      },
+      "lang": ["TypeScript", "Node.js"],
+      "icon": "package"
     }
   ],
   "main_heading": "PROJECTS",
