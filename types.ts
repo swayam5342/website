@@ -88,3 +88,27 @@ export interface TimelineItem {
   date: string;
   description: string;
 }
+
+export interface SkillData {
+  core: string[];
+  backend: string[];
+  database: string[];
+  devops: string[];
+  cyber: string[];
+}
+
+export interface AboutData {
+  heading: string;
+  name: string;
+  roles: string[];
+  photo: string;
+  main_text: string;
+  sub_text: string;
+  security_principles: string[];
+}
+
+export interface HomeData {
+  main_heading: string;
+  project: string;
+  main_text: string;
+}

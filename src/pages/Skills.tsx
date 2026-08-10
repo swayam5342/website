@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import skillsjson from "../data/skill.json";
+import skillsjson from "../data/skill";
 import projectsData from "../data/projects";
 import { IconBadge } from "../components/IconBadge";
 import { Reveal } from "../components/Reveal";

@@ -2,13 +2,12 @@ import React from "react";
 import { ArrowRight } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
 import projectsData from "../data/projects";
-import homeData from "../data/home.json";
-import experiencesData from "../data/experiences.json";
+import homeData from "../data/home";
+import experiencesData from "../data/experiences";
 import timelineData from "../data/timeline";
 import { HeroTerminal } from "../components/home/HeroTerminal";
 import { IconBadge } from "../components/IconBadge";
 import { Reveal } from "../components/Reveal";
-import type { Experience } from "../../types";
 
 export const Home: React.FC = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ export const Home: React.FC = () => {
 
   const main_text = homeData.main_text;
 
-  const recentExperiences = (experiencesData as Experience[]).slice(0, 2);
+  const recentExperiences = experiencesData.slice(0, 2);
   const recentTimeline = timelineData.slice(0, 2);
 
   return (

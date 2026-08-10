@@ -1,17 +1,11 @@
 import React, { useState } from "react";
-import skillsjson from "../data/skill.json";
-import aboutjson from "../data/about.json";
+import skillsjson from "../data/skill";
+import aboutjson from "../data/about";
 import timelineData from "../data/timeline";
 import { TimelineIcon } from "../components/TimelineIcon";
 
 export const AboutPage: React.FC = () => {
-  const skills = skillsjson as {
-    cyber: string[];
-    backend: string[];
-    database: string[];
-    devops: string[];
-    core: string[];
-  };
+  const skills = skillsjson;
   const backendSkills = [
     ...skills.backend,
     ...skills.database,
@@ -19,7 +13,7 @@ export const AboutPage: React.FC = () => {
   ];
   const main_text = aboutjson.main_text;
   const sub_text = aboutjson.sub_text;
-  const securityPrinciples = aboutjson.security_principles as string[];
+  const securityPrinciples = aboutjson.security_principles;
   const [photoMissing, setPhotoMissing] = useState(false);
 
   return (
