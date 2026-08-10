@@ -24,14 +24,12 @@ export const Projects: React.FC = () => {
     (c) => c.toLowerCase() === filter.toLowerCase()
   );
 
-  const filteredProjects = (projectsData as Project[])
-    .filter((p) => {
-      if (filter === "All") return true;
-      return [...p.tags, ...(p.lang ?? [])]
-        .map((tag) => tag.toLowerCase())
-        .includes(filter.toLowerCase());
-    })
-    .sort((a, b) => (b.featured ? 1 : 0) - (a.featured ? 1 : 0));
+  const filteredProjects = (projectsData as Project[]).filter((p) => {
+    if (filter === "All") return true;
+    return [...p.tags, ...(p.lang ?? [])]
+      .map((tag) => tag.toLowerCase())
+      .includes(filter.toLowerCase());
+  });
 
   return (
     <div className="max-w-7xl mx-auto px-4">

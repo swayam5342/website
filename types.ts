@@ -2,6 +2,7 @@ export type ResumeVariant = "security" | "backend" | "development";
 
 export interface Project {
   id: number;
+  order: number;
   slug: string;
   title: string;
   description: string;
@@ -40,6 +41,7 @@ export interface ResumeData {
 
 export interface Certificate {
   id: number;
+  order: number;
   name: string;
   issuer: string;
   year: string;
@@ -79,6 +81,7 @@ export type TimelineCategory =
 
 export interface TimelineItem {
   id: number;
+  order: number;
   type: TimelineCategory;
   title: string;
   subtitle: string;

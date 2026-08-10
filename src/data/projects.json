@@ -2,6 +2,7 @@
   "project": [
     {
       "id": 1,
+      "order": 1,
       "slug": "kargo-backend",
       "title": "Kargo Backend",
       "description": "Backend platform enabling containerized app deployments with AI-powered setup and Kubernetes-native scaling.",
@@ -25,6 +26,7 @@
     },
     {
       "id": 2,
+      "order": 2,
       "slug": "plugfit",
       "title": "PlugFit",
       "description": "Multi-tenant SaaS platform acting as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints as live MCP endpoints. (Active Development)",
@@ -49,6 +51,7 @@
     },
     {
       "id": 3,
+      "order": 3,
       "slug": "windows-soc-lab",
       "title": "Windows SIEM",
       "description": "End-to-end SIEM pipeline that collects Windows telemetry, detects suspicious activity using custom rules, and sends real-time alerts to Telegram and automation workflows.",
@@ -71,6 +74,7 @@
     },
     {
       "id": 4,
+      "order": 4,
       "slug": "sandboxd",
       "title": "Sandboxd",
       "description": "Secure Linux sandboxing engine for safely executing untrusted code using isolated environments and resource-controlled execution.",
@@ -95,6 +99,7 @@
     },
     {
       "id": 5,
+      "order": 5,
       "slug": "scamzap",
       "title": "Scamzap Backend",
       "description": "Backend system for a crowdsourced scam reporting platform enabling phone number verification, rating aggregation, and trend analytics via REST APIs.",
@@ -119,6 +124,7 @@
     },
     {
       "id": 6,
+      "order": 6,
       "slug": "Autoscaffold",
       "title": "Autoscaffold",
       "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
@@ -142,6 +148,7 @@
     },
     {
       "id": 7,
+      "order": 7,
       "slug": "api2mcp",
       "title": "api2mcp",
       "description": "Standalone TypeScript npm package that converts API specifications into working MCP servers, exposing any documented API as MCP tools. Forms a core component of the PlugFit platform, published independently for reuse.",

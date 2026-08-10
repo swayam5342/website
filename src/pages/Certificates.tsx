@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Eye, ShieldCheck } from "lucide-react";
 import certificatesData from "../data/certificates";
 import { IconBadge } from "../components/IconBadge";
-import { Certificate } from "../../types";
+import type { Certificate } from "../../types";
 
 export const Certificates: React.FC = () => {
   return (

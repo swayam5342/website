@@ -1,6 +1,7 @@
 [
   {
     "id": 1,
+    "order": 1,
     "name": "Introduction to Cybersecurity",
     "issuer": "CISCO",
     "year": "2026",
@@ -10,6 +11,7 @@
   },
   {
     "id": 2,
+    "order": 2,
     "name": "Foundations of Log Analysis for Cyber Defense",
     "issuer": "RED TEAM LEADERS",
     "year": "2026",

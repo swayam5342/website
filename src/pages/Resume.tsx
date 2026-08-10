@@ -104,7 +104,6 @@ export const Resume: React.FC = () => {
     className="w-full h-full border-none"
     title="Resume Viewer"
     key={activeVersion}
-    toolbar={"0"}
     />
 
   </div>
