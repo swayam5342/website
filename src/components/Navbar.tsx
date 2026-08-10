@@ -27,6 +27,7 @@ export const Navbar: React.FC = () => {
     { name: "SKILLS", path: "/skills" },
     { name: "CERTIFICATES", path: "/certificates" },
     { name: "RESUME", path: "/resume" },
+    { name: "CONTACT", path: "/contact" },
   ];
 
   const activeClass =

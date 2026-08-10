@@ -1,70 +1,123 @@
+import React, { useState } from "react";
+import { Mail, Github, Linkedin, PenSquare, Copy, Check } from "lucide-react";
+import { Reveal } from "../components/Reveal";
 
-import React from 'react';
-import { Mail, Github, Linkedin, Send, ShieldCheck } from 'lucide-react';
+const EMAIL = "swayamsb50@gmail.com";
+
+const CHANNELS = [
+  {
+    label: "GITHUB",
+    value: "github.com/swayam5342",
+    href: "https://github.com/swayam5342",
+    icon: Github,
+  },
+  {
+    label: "LINKEDIN",
+    value: "linkedin.com/in/swayam5342",
+    href: "https://linkedin.com/in/swayam5342",
+    icon: Linkedin,
+  },
+  {
+    label: "BLOG",
+    value: "blog.swayam.li",
+    href: "https://blog.swayam.li",
+    icon: PenSquare,
+  },
+];
 
 export const ContactPage: React.FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(EMAIL);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    } catch {
+      // Clipboard API unavailable — the mailto link still works as a fallback.
+    }
+  };
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-16">
-      <header className="mb-12 border-b border-brand-border pb-8">
-        <h1 className="text-4xl font-mono font-bold tracking-tighter">COMMS // CHANNEL</h1>
-        <p className="text-brand-muted mt-2 font-mono text-[10px] tracking-widest">ENDPOINT: HELLO@JOHNDOE.COM</p>
+    <div className="max-w-5xl mx-auto px-4 py-16">
+      <header className="mb-16 border-b border-brand-border pb-8">
+        <div className="flex items-center gap-3 mb-3">
+          <span className="w-2 h-2 rounded-full bg-brand-accent status-pulse" />
+          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest">
+            CHANNEL_OPEN
+          </span>
+        </div>
+        <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
+          CONTACT // ESTABLISH_LINK
+        </h1>
+        <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
+          Reach out for collaborations, roles, or just to talk shop.
+        </p>
       </header>
 
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-16">
-        <div className="md:col-span-2 space-y-10">
-          <div className="space-y-6">
-            <h3 className="font-mono text-[9px] text-brand-accent uppercase tracking-widest border-b border-brand-border pb-2">Public_Keys</h3>
-            <div className="space-y-4">
-              <a href="https://github.com" className="flex items-center space-x-4 text-brand-muted hover:text-brand-accent transition-colors font-mono text-xs">
-                <Github size={16} />
-                <span>GITHUB_ENTITY</span>
-              </a>
-              <a href="https://linkedin.com" className="flex items-center space-x-4 text-brand-muted hover:text-brand-accent transition-colors font-mono text-xs">
-                <Linkedin size={16} />
-                <span>LINKEDIN_ENTRY</span>
-              </a>
-              <a href="mailto:hello@johndoe.com" className="flex items-center space-x-4 text-brand-muted hover:text-brand-accent transition-colors font-mono text-xs">
-                <Mail size={16} />
-                <span>SMTP_SERVER</span>
-              </a>
-            </div>
+      <Reveal>
+        <div className="bg-brand-surface border border-brand-border p-10 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <div>
+            <p className="font-mono text-[9px] text-brand-muted uppercase tracking-widest mb-2">
+              PRIMARY_CHANNEL
+            </p>
+            <a
+              href={`mailto:${EMAIL}`}
+              className="text-xl md:text-2xl font-mono font-bold text-brand-text hover:text-brand-accent transition-colors break-all"
+            >
+              {EMAIL}
+            </a>
           </div>
 
-          <div className="p-6 bg-brand-surface border border-brand-border font-mono text-[9px] text-brand-muted/50 uppercase leading-loose">
-            CIPHER: CHACHA20-POLY1305<br />
-            VERSION: SEC_OPS_V4.0<br />
-            ORIGIN: 127.0.0.1<br />
-            STATUS: WAITING_FOR_INPUT
-          </div>
-        </div>
-
-        <div className="md:col-span-3">
-          <form className="space-y-8" onSubmit={(e) => e.preventDefault()}>
-            <div className="space-y-2">
-              <label className="font-mono text-[9px] text-brand-muted uppercase tracking-widest">CLAIMED_IDENTITY</label>
-              <input type="text" className="w-full bg-brand-surface border border-brand-border p-4 outline-none focus:border-brand-accent text-xs font-mono transition-colors" placeholder="NAME_REQUIRED" />
-            </div>
-            <div className="space-y-2">
-              <label className="font-mono text-[9px] text-brand-muted uppercase tracking-widest">RETURN_PROXY</label>
-              <input type="email" className="w-full bg-brand-surface border border-brand-border p-4 outline-none focus:border-brand-accent text-xs font-mono transition-colors" placeholder="EMAIL@DOMAIN.COM" />
-            </div>
-            <div className="space-y-2">
-              <label className="font-mono text-[9px] text-brand-muted uppercase tracking-widest">DATA_PAYLOAD</label>
-              <textarea rows={6} className="w-full bg-brand-surface border border-brand-border p-4 outline-none focus:border-brand-accent text-xs font-mono resize-none transition-colors" placeholder="MESSAGE_BODY_0x00..."></textarea>
-            </div>
-            
-            <button className="w-full bg-brand-accent text-brand-bg font-mono font-bold py-5 hover:bg-brand-muted transition-all uppercase text-xs tracking-widest flex items-center justify-center space-x-4">
-              <Send size={16} />
-              <span>TRANSMIT_PACKET</span>
+          <div className="flex items-center gap-3 shrink-0">
+            <a
+              href={`mailto:${EMAIL}`}
+              className="flex items-center gap-2 bg-brand-accent text-brand-bg px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-brand-muted transition-all"
+            >
+              <Mail size={14} />
+              <span>SEND_MAIL</span>
+            </a>
+            <button
+              onClick={copyEmail}
+              className="flex items-center gap-2 border border-brand-border text-brand-muted px-4 py-3 font-mono text-[10px] uppercase tracking-widest hover:border-brand-accent hover:text-brand-accent transition-all"
+              aria-label="Copy email address"
+            >
+              {copied ? <Check size={14} /> : <Copy size={14} />}
+              <span>{copied ? "COPIED" : "COPY"}</span>
             </button>
-            
-            <div className="flex items-center space-x-3 text-[8px] font-mono text-brand-muted justify-center uppercase tracking-widest mt-6">
-              <ShieldCheck size={12} />
-              <span>Sanitization_Protocol_Active</span>
-            </div>
-          </form>
+          </div>
         </div>
+      </Reveal>
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {CHANNELS.map((c, i) => (
+          <Reveal key={c.label} delay={0.05 * (i + 1)}>
+            <a
+              href={c.href}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group block bg-brand-bg border border-brand-border p-8 hover:bg-brand-surface hover:border-brand-accent/40 transition-all h-full"
+            >
+              <span className="inline-flex items-center justify-center w-11 h-11 border border-brand-accent/30 bg-brand-accent/10 text-brand-accent mb-6">
+                <c.icon size={18} />
+              </span>
+              <p className="font-mono text-[9px] text-brand-muted uppercase tracking-widest mb-2">
+                {c.label}
+              </p>
+              <p className="font-mono text-sm text-brand-text group-hover:text-brand-accent transition-colors break-all">
+                {c.value}
+              </p>
+            </a>
+          </Reveal>
+        ))}
       </div>
+
+      <Reveal delay={0.2}>
+        <div className="mt-8 border border-brand-border p-8 bg-brand-bg font-mono text-xs text-brand-muted">
+          <span className="text-brand-accent">{">"}</span> status: open to backend,
+          security, and infrastructure roles — response time typically under 48h.
+        </div>
+      </Reveal>
     </div>
   );
 };

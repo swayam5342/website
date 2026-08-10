@@ -10,6 +10,7 @@ import { Certificates } from './src/pages/Certificates';
 import { Skills } from './src/pages/Skills';
 import { CertificateDetail } from './src/pages/CertificateDetail';
 import { Resume } from './src/pages/Resume';
+import { ContactPage } from './src/pages/ContactPage';
 import './index.css';
 
 
@@ -37,6 +38,7 @@ const App: React.FC = () => {
           <Route path="/certificates" element={<Certificates />} />
           <Route path="/certificates/:id" element={<CertificateDetail />} />
           <Route path="/resume" element={<Resume />} />
+          <Route path="/contact" element={<ContactPage />} />
         </Routes>
       </Layout>
     </Router>

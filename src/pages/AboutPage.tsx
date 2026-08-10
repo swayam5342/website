@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import skillsjson from "../data/skill.json";
 import aboutjson from "../data/about.json";
-import timelineRaw from "../data/timeline.json";
-import type { TimelineItem } from "../../types";
+import timelineData from "../data/timeline";
 import { TimelineIcon } from "../components/TimelineIcon";
 
 export const AboutPage: React.FC = () => {
@@ -21,7 +20,6 @@ export const AboutPage: React.FC = () => {
   const main_text = aboutjson.main_text;
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles as string[];
-  const timelineData = timelineRaw as TimelineItem[];
   const [photoMissing, setPhotoMissing] = useState(false);
 
   return (
