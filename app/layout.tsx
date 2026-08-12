@@ -2,12 +2,39 @@ import type { Metadata } from "next";
 import type React from "react";
 import { Navbar } from "@/src/components/Navbar";
 import { Footer } from "@/src/components/Footer";
+import homeData from "@/src/data/home";
+import siteData from "@/src/data/site";
 import "./globals.css";
 
+const description = homeData.main_text;
+
 export const metadata: Metadata = {
-  title: "SWAYAM",
+  metadataBase: new URL(siteData.url),
+  title: {
+    default: siteData.name,
+    template: siteData.titleTemplate,
+  },
+  description,
   icons: {
     icon: "/Namelogo.png",
+  },
+  openGraph: {
+    type: "website",
+    url: siteData.url,
+    siteName: siteData.name,
+    title: siteData.name,
+    description,
+    images: [{ url: siteData.ogImage }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteData.name,
+    description,
+    images: [siteData.ogImage],
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 

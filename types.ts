@@ -119,3 +119,10 @@ export interface SocialData {
   linkedin: string;
   blog: string;
 }
+
+export interface SiteData {
+  name: string;
+  url: string;
+  titleTemplate: string;
+  ogImage: string;
+}
