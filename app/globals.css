@@ -1,6 +1,6 @@
 @import "tailwindcss";
-@import "./src/styles/theme.css";
-@import "./src/styles/tailwind-theme.css";
+@import "../src/styles/theme.css";
+@import "../src/styles/tailwind-theme.css";
 
 /* ---------------------------------- */
 /* Landing page motion + background   */

@@ -1,10 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import skillsjson from "../data/skill";
-import projectsData from "../data/projects";
-import { IconBadge } from "../components/IconBadge";
-import { Reveal } from "../components/Reveal";
-import type { Project } from "../../types";
+import Link from "next/link";
+import skillsjson from "@/src/data/skill";
+import projectsData from "@/src/data/projects";
+import { IconBadge } from "@/src/components/IconBadge";
+import { Reveal } from "@/src/components/Reveal";
+import type { Project } from "@/types";
 
 const SKILL_GROUPS: { label: string; icon: string; skills: string[] }[] = [
   { label: "CORE_LANGUAGES", icon: "code", skills: skillsjson.core },
@@ -22,7 +21,7 @@ const PROJECT_TAGS = new Set(
   )
 );
 
-export const Skills: React.FC = () => {
+export default function Skills() {
   const totalModules = SKILL_GROUPS.reduce((n, g) => n + g.skills.length, 0);
 
   return (
@@ -62,7 +61,7 @@ export const Skills: React.FC = () => {
                   PROJECT_TAGS.has(skill.toLowerCase()) ? (
                     <Link
                       key={skill}
-                      to={`/projects?tag=${encodeURIComponent(skill)}`}
+                      href={`/projects?tag=${encodeURIComponent(skill)}`}
                       title={`Show ${skill} projects`}
                       className="border border-brand-accent/40 bg-brand-accent/10 text-brand-accent px-3 py-1.5 text-xs font-mono transition-all duration-200 hover:bg-brand-accent hover:text-brand-bg hover:-translate-y-0.5"
                     >
@@ -88,4 +87,4 @@ export const Skills: React.FC = () => {
       </p>
     </div>
   );
-};
+}

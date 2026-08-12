@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import { Shield, Server, Code, GraduationCap, FolderGit2, Award } from "lucide-react";
 import type { TimelineCategory } from "../../types";
 
@@ -6,7 +6,7 @@ interface Props {
   category: TimelineCategory;
 }
 
-export const TimelineIcon: React.FC<Props> = ({ category }) => {
+export const TimelineIcon: FC<Props> = ({ category }) => {
   const size = 18;
 
   switch (category) {

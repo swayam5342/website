@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 import {
   Award,
   Bot,
@@ -48,7 +48,7 @@ interface IconBadgeProps {
 }
 
 /** Square boxed icon used on project, certificate, and skill cards. */
-export const IconBadge: React.FC<IconBadgeProps> = ({
+export const IconBadge: FC<IconBadgeProps> = ({
   icon,
   size = 18,
   className = "",

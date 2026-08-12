@@ -1,20 +1,24 @@
-import React from "react";
-import { Link, useSearchParams } from "react-router-dom";
-import { Github, ExternalLink, ChevronRight, X } from "lucide-react";
-import projectsData, { projectsMeta } from "../data/projects";
-import categories from "../data/projectCategories";
-import { IconBadge } from "../components/IconBadge";
-import type { Project } from "../../types";
+"use client";
 
-export const Projects: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+import { Suspense } from "react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { GithubIcon, ExternalLink, ChevronRight, X } from "lucide-react";
+import projectsData, { projectsMeta } from "@/src/data/projects";
+import categories from "@/src/data/projectCategories";
+import { IconBadge } from "@/src/components/IconBadge";
+import type { Project } from "@/types";
+
+function ProjectsView() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const filter = searchParams.get("tag") ?? "All";
 
   const setFilter = (tag: string) => {
     if (tag === "All") {
-      setSearchParams({}, { replace: true });
+      router.replace("/projects");
     } else {
-      setSearchParams({ tag }, { replace: true });
+      router.replace(`/projects?tag=${encodeURIComponent(tag)}`);
     }
   };
 
@@ -142,7 +146,7 @@ export const Projects: React.FC = () => {
 
             <div className="flex items-center justify-between border-t border-brand-border pt-8">
               <Link
-                to={`/projects/${p.slug}`}
+                href={`/projects/${p.slug}`}
                 className="flex items-center text-[10px] font-mono text-brand-accent hover:underline tracking-widest"
               >
                 [DEEP_INSPECT] <ChevronRight size={12} className="ml-1" />
@@ -156,7 +160,7 @@ export const Projects: React.FC = () => {
                     rel="noopener noreferrer"
                     className="hover:text-brand-accent"
                   >
-                    <Github size={20} />
+                    <GithubIcon size={20} />
                   </a>
                 )}
                 {p.demo && (
@@ -176,4 +180,12 @@ export const Projects: React.FC = () => {
       </div>
     </div>
   );
-};
+}
+
+export default function Projects() {
+  return (
+    <Suspense fallback={null}>
+      <ProjectsView />
+    </Suspense>
+  );
+}

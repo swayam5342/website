@@ -112,3 +112,10 @@ export interface HomeData {
   project: string;
   main_text: string;
 }
+
+export interface SocialData {
+  email: string;
+  github: string;
+  linkedin: string;
+  blog: string;
+}

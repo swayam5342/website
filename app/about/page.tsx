@@ -1,10 +1,12 @@
-import React, { useState } from "react";
-import skillsjson from "../data/skill";
-import aboutjson from "../data/about";
-import timelineData from "../data/timeline";
-import { TimelineIcon } from "../components/TimelineIcon";
+"use client";
 
-export const AboutPage: React.FC = () => {
+import { useState } from "react";
+import skillsjson from "@/src/data/skill";
+import aboutjson from "@/src/data/about";
+import timelineData from "@/src/data/timeline";
+import { TimelineIcon } from "@/src/components/TimelineIcon";
+
+export default function AboutPage() {
   const skills = skillsjson;
   const backendSkills = [
     ...skills.backend,
@@ -59,7 +61,7 @@ export const AboutPage: React.FC = () => {
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         {/* LEFT CONTENT */}
         <div className="md:col-span-8 space-y-8 text-brand-muted leading-relaxed font-sans">
-          
+
           <div className="bg-brand-surface border border-brand-border p-10 relative">
             <div className="absolute top-0 right-0 p-3 font-mono text-[8px] text-brand-muted/20 uppercase text-white">
               CORE VALUES
@@ -209,4 +211,4 @@ export const AboutPage: React.FC = () => {
 
     </div>
   );
-};
+}

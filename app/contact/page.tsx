@@ -1,31 +1,36 @@
-import React, { useState } from "react";
-import { Mail, Github, Linkedin, PenSquare, Copy, Check } from "lucide-react";
-import { Reveal } from "../components/Reveal";
+"use client";
 
-const EMAIL = "swayamsb50@gmail.com";
+import { useState } from "react";
+import { Mail, GithubIcon, LinkedinIcon, PenSquare, Copy, Check } from "lucide-react";
+import { Reveal } from "@/src/components/Reveal";
+import socialData from "@/src/data/social";
+
+const EMAIL = socialData.email;
+
+const stripProtocol = (url: string) => url.replace(/^https?:\/\//, "");
 
 const CHANNELS = [
   {
     label: "GITHUB",
-    value: "github.com/swayam5342",
-    href: "https://github.com/swayam5342",
-    icon: Github,
+    value: stripProtocol(socialData.github),
+    href: socialData.github,
+    icon: GithubIcon,
   },
   {
     label: "LINKEDIN",
-    value: "linkedin.com/in/swayam5342",
-    href: "https://linkedin.com/in/swayam5342",
-    icon: Linkedin,
+    value: stripProtocol(socialData.linkedin),
+    href: socialData.linkedin,
+    icon: LinkedinIcon,
   },
   {
     label: "BLOG",
-    value: "blog.swayam.li",
-    href: "https://blog.swayam.li",
+    value: stripProtocol(socialData.blog),
+    href: socialData.blog,
     icon: PenSquare,
   },
 ];
 
-export const ContactPage: React.FC = () => {
+export default function ContactPage() {
   const [copied, setCopied] = useState(false);
 
   const copyEmail = async () => {
@@ -120,4 +125,4 @@ export const ContactPage: React.FC = () => {
       </Reveal>
     </div>
   );
-};
+}

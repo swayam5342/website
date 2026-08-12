@@ -1,11 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import Link from "next/link";
 import { Eye, ShieldCheck } from "lucide-react";
-import certificatesData from "../data/certificates";
-import { IconBadge } from "../components/IconBadge";
-import type { Certificate } from "../../types";
+import certificatesData from "@/src/data/certificates";
+import { IconBadge } from "@/src/components/IconBadge";
+import type { Certificate } from "@/types";
 
-export const Certificates: React.FC = () => {
+export default function Certificates() {
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">
       <header className="mb-16 border-b border-brand-border pb-8">
@@ -52,7 +51,7 @@ export const Certificates: React.FC = () => {
                   </a>
                 ) : (
                   <Link
-                    to={`/certificates/${cert.id}`}
+                    href={`/certificates/${cert.id}`}
                     className="text-xl font-bold font-mono tracking-tight leading-tight hover:underline"
                   >
                     {cert.name}
@@ -66,7 +65,7 @@ export const Certificates: React.FC = () => {
               {/* Actions */}
               <div className="grid grid-cols-2 gap-2 mt-12">
                 <Link
-                  to={`/certificates/${cert.id}`}
+                  href={`/certificates/${cert.id}`}
                   className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                 >
                   <Eye size={12} />
@@ -93,4 +92,4 @@ export const Certificates: React.FC = () => {
       </div>
     </div>
   );
-};
+}

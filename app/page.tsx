@@ -1,16 +1,19 @@
-import React from "react";
-import { ArrowRight } from "lucide-react";
-import { Link, useNavigate } from "react-router-dom";
-import projectsData from "../data/projects";
-import homeData from "../data/home";
-import experiencesData from "../data/experiences";
-import timelineData from "../data/timeline";
-import { HeroTerminal } from "../components/home/HeroTerminal";
-import { IconBadge } from "../components/IconBadge";
-import { Reveal } from "../components/Reveal";
+"use client";
 
-export const Home: React.FC = () => {
-  const navigate = useNavigate();
+import type React from "react";
+import { ArrowRight } from "lucide-react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import projectsData from "@/src/data/projects";
+import homeData from "@/src/data/home";
+import experiencesData from "@/src/data/experiences";
+import timelineData from "@/src/data/timeline";
+import { HeroTerminal } from "@/src/components/home/HeroTerminal";
+import { IconBadge } from "@/src/components/IconBadge";
+import { Reveal } from "@/src/components/Reveal";
+
+export default function Home() {
+  const router = useRouter();
   const featuredProjects = projectsData
     .filter((p) => p.featured)
     .slice(0, 2);
@@ -64,7 +67,7 @@ export const Home: React.FC = () => {
               style={{ "--rise-delay": "0.34s" } as React.CSSProperties}
             >
               <Link
-                to="/projects"
+                href="/projects"
                 className="group border border-brand-accent bg-brand-accent text-brand-bg px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_8px_30px_-8px_var(--brand-accent)]"
               >
                 <span>{homeData.project}</span>
@@ -75,7 +78,7 @@ export const Home: React.FC = () => {
               </Link>
 
               <Link
-                to="/certificates"
+                href="/certificates"
                 className="border border-brand-border px-8 py-3 font-mono text-xs font-bold flex items-center space-x-3 transition-all duration-300 hover:border-brand-accent/60 hover:text-brand-accent hover:-translate-y-0.5"
               >
                 <span>CERTIFICATES</span>
@@ -99,7 +102,7 @@ export const Home: React.FC = () => {
               RECENT_ACTIVITY.LOG
             </h2>
             <Link
-              to="/about"
+              href="/about"
               className="text-brand-accent text-[9px] font-mono hover:underline"
             >
               FULL_HISTORY
@@ -192,7 +195,7 @@ export const Home: React.FC = () => {
             </h2>
 
             <Link
-              to="/projects"
+              href="/projects"
               className="text-brand-accent text-[9px] font-mono hover:underline"
             >
               EXTRACT_ALL_DATA
@@ -204,7 +207,7 @@ export const Home: React.FC = () => {
           {featuredProjects.map((p, i) => (
             <Reveal key={p.id} delay={i * 0.12}>
               <Link
-                to={`/projects/${p.slug}`}
+                href={`/projects/${p.slug}`}
                 className="group relative block h-full border border-brand-border p-10 md:p-12 bg-brand-surface overflow-hidden transition-all duration-300 hover:border-brand-accent/50 hover:-translate-y-1 hover:shadow-[0_16px_40px_-20px_var(--brand-accent)]"
               >
                 {/* Accent line that grows across the top on hover */}
@@ -221,7 +224,7 @@ export const Home: React.FC = () => {
                     onClick={(e) => {
                       e.preventDefault();
                       e.stopPropagation();
-                      navigate(`/projects?tag=${encodeURIComponent(p.tags[0])}`);
+                      router.push(`/projects?tag=${encodeURIComponent(p.tags[0])}`);
                     }}
                     title={`Show ${p.tags[0]} projects`}
                     className="text-[9px] font-mono text-brand-accent uppercase tracking-widest border border-brand-accent/40 bg-brand-accent/10 px-2 py-0.5 transition-all hover:bg-brand-accent hover:text-brand-bg cursor-pointer"
@@ -253,4 +256,4 @@ export const Home: React.FC = () => {
       </div>
     </div>
   );
-};
+}
