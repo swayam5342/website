@@ -1,9 +1,11 @@
-import React, { useState } from "react";
-import { Download, Maximize2, ChevronDown } from "lucide-react";
-import resumesData from "../data/resumes";
-import type { ResumeData } from "../../types";
+"use client";
 
-export const Resume: React.FC = () => {
+import { useState } from "react";
+import { Download, Maximize2, ChevronDown } from "lucide-react";
+import resumesData from "@/src/data/resumes";
+import type { ResumeData } from "@/types";
+
+export default function Resume() {
   const versions = [
     { id: "default", label: "GEN SYSTEMS" },
     { id: "security", label: "CYBER" },
@@ -95,10 +97,10 @@ export const Resume: React.FC = () => {
       </div>
 
 <div className="flex-1 flex justify-center items-start pt-6">
-  
+
   {/* A4 sized container */}
   <div className="w-full max-w-3xl aspect-[1/1.414] bg-[#111111] border border-brand-border shadow-2xl relative">
-    
+
   <iframe
     src={`${currentFile}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
     className="w-full h-full border-none"
@@ -110,4 +112,4 @@ export const Resume: React.FC = () => {
 </div>
     </div>
   );
-};
+}

@@ -4,30 +4,28 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview"
+    "dev": "next dev",
+    "build": "next build",
+    "lint": "eslint ."
   },
   "dependencies": {
-    "@tailwindcss/vite": "^4.2.0",
     "lucide-react": "^0.563.0",
+    "next": "^16.3.0",
     "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-router-dom": "^7.13.0"
+    "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^22.14.0",
     "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.4",
     "@typescript-eslint/eslint-plugin": "^8.59.1",
     "@typescript-eslint/parser": "^8.59.1",
-    "@vitejs/plugin-react": "^5.0.0",
     "autoprefixer": "^10.4.24",
     "eslint": "^10.2.1",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.2.0",
-    "typescript": "~5.8.2",
-    "vite": "^6.2.0"
+    "typescript": "~5.8.2"
   },
   "description": "A high-performance, professional portfolio focused on technical depth and security.",
   "main": "eslint.config.js",

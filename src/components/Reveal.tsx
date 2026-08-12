@@ -1,7 +1,10 @@
-import React, { useEffect, useRef, useState } from "react";
+"use client";
+
+import type { FC, ReactNode, CSSProperties } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface RevealProps {
-  children: React.ReactNode;
+  children: ReactNode;
   /** Stagger delay in seconds */
   delay?: number;
   className?: string;
@@ -11,7 +14,7 @@ interface RevealProps {
  * Fades content up once it scrolls into view. Pure IntersectionObserver,
  * no animation library; motion is disabled via prefers-reduced-motion in CSS.
  */
-export const Reveal: React.FC<RevealProps> = ({
+export const Reveal: FC<RevealProps> = ({
   children,
   delay = 0,
   className = "",
@@ -41,7 +44,7 @@ export const Reveal: React.FC<RevealProps> = ({
     <div
       ref={ref}
       className={`reveal ${visible ? "is-visible" : ""} ${className}`}
-      style={{ "--reveal-delay": `${delay}s` } as React.CSSProperties}
+      style={{ "--reveal-delay": `${delay}s` } as CSSProperties}
     >
       {children}
     </div>

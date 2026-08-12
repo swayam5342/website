@@ -1,13 +1,18 @@
-import React, { useEffect, useRef, useState } from "react";
-import { NavLink, Link } from "react-router-dom";
+"use client";
+
+import type { FC } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Menu, X, Palette, Check } from "lucide-react";
 import { useTheme, THEMES } from "../hooks/useTheme";
 
-export const Navbar: React.FC = () => {
+export const Navbar: FC = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [pickerOpen, setPickerOpen] = useState(false);
   const pickerRef = useRef<HTMLDivElement>(null);
   const { theme, setTheme } = useTheme();
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!pickerOpen) return;
@@ -41,7 +46,7 @@ export const Navbar: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
 {/* Logo */}
-<Link to="/" className="flex items-center space-x-3">
+<Link href="/" className="flex items-center space-x-3">
   <img
     src="/Namelogo.png"
     alt="Swayam Logo"
@@ -57,17 +62,15 @@ export const Navbar: React.FC = () => {
           {/* Desktop Links */}
           <div className="hidden md:flex items-center space-x-8">
             {navLinks.map((link) => (
-              <NavLink
+              <Link
                 key={link.name}
-                to={link.path}
-                className={({ isActive }) =>
-                  `font-mono text-sm font-medium transition-all py-1 ${
-                    isActive ? activeClass : inactiveClass
-                  }`
-                }
+                href={link.path}
+                className={`font-mono text-sm font-medium transition-all py-1 ${
+                  pathname === link.path ? activeClass : inactiveClass
+                }`}
               >
                 {link.name}
-              </NavLink>
+              </Link>
             ))}
           </div>
 
@@ -146,14 +149,14 @@ export const Navbar: React.FC = () => {
       {isOpen && (
         <div className="md:hidden bg-brand-bg border-b border-brand-border px-4 py-6 space-y-4">
           {navLinks.map((link) => (
-            <NavLink
+            <Link
               key={link.name}
-              to={link.path}
+              href={link.path}
               onClick={() => setIsOpen(false)}
               className="block font-mono text-sm text-brand-muted hover:text-brand-accent"
             >
               {`> ${link.name}`}
-            </NavLink>
+            </Link>
           ))}
         </div>
       )}

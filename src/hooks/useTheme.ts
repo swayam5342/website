@@ -1,3 +1,5 @@
+"use client";
+
 import { useEffect, useState } from "react";
 
 export type Theme =
@@ -96,6 +98,7 @@ const pickThemeForDevice = (): Theme => {
 
 export function useTheme() {
   const [theme, setTheme] = useState<Theme>(() => {
+    if (typeof window === "undefined") return "dark";
     const saved = localStorage.getItem(STORAGE_KEY);
     if (saved && isTheme(saved)) return saved;
     if (saved && LEGACY_THEMES[saved]) return LEGACY_THEMES[saved];

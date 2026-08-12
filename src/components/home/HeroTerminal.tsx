@@ -1,4 +1,7 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+"use client";
+
+import type { FC } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 type ScriptLine =
   | { kind: "cmd"; text: string }
@@ -26,7 +29,7 @@ const COMMAND_PAUSE_MS = 500;
  * then rests on a blinking prompt. Renders instantly when the
  * user prefers reduced motion.
  */
-export const HeroTerminal: React.FC = () => {
+export const HeroTerminal: FC = () => {
   const reducedMotion = useMemo(
     () =>
       typeof window !== "undefined" &&

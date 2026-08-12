@@ -1,7 +1,8 @@
-import React from "react";
-import { Mail, Github, Linkedin,PenSquare} from "lucide-react";
+import type { FC } from "react";
+import { Mail, GithubIcon, LinkedinIcon, PenSquare } from "lucide-react";
+import socialData from "../data/social";
 
-export const Footer: React.FC = () => {
+export const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
@@ -15,9 +16,9 @@ export const Footer: React.FC = () => {
 
         {/* Right: Contacts */}
         <div className="flex items-center gap-6">
-          
+
           <a
-            href="mailto:swayamsb50@gmail.com"
+            href={`mailto:${socialData.email}`}
             className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
             <Mail size={16} />
@@ -25,27 +26,27 @@ export const Footer: React.FC = () => {
           </a>
 
           <a
-            href="https://github.com/swayam5342"
+            href={socialData.github}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
-            <Github size={16} />
+            <GithubIcon size={16} />
             <span className="text-xs font-mono">GITHUB</span>
           </a>
 
           <a
-            href="https://linkedin.com/in/swayam5342"
+            href={socialData.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
-            <Linkedin size={16} />
+            <LinkedinIcon size={16} />
             <span className="text-xs font-mono">LINKEDIN</span>
           </a>
 
           <a
-            href="https://blog.swayam.li"
+            href={socialData.blog}
             target="_blank"
             className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
