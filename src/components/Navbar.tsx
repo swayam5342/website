@@ -2,6 +2,7 @@
 
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X, Palette, Check } from "lucide-react";
@@ -47,12 +48,13 @@ export const Navbar: FC = () => {
         <div className="flex items-center justify-between h-14">
 {/* Logo */}
 <Link href="/" className="flex items-center space-x-3">
-  <img
+  <Image
     src="/Namelogo.png"
     alt="Swayam Logo"
     className="w-10 h-10 object-contain"
-    width="2000"
-    height="2000"
+    width={40}
+    height={40}
+    priority
   />
   <span className="font-mono font-bold tracking-tight text-sm">
     SWAYAM

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import skillsjson from "@/src/data/skill";
 import aboutjson from "@/src/data/about";
 import timelineData from "@/src/data/timeline";
@@ -48,10 +49,13 @@ export default function AboutView() {
               <span>profile.png not found</span>
             </div>
           ) : (
-            <img
+            <Image
               src={aboutjson.photo}
               alt={`Portrait of ${aboutjson.name}`}
               onError={() => setPhotoMissing(true)}
+              width={176}
+              height={176}
+              priority
               className="w-36 h-36 md:w-44 md:h-44 object-cover border border-brand-border bg-brand-surface grayscale hover:grayscale-0 transition-all duration-500"
             />
           )}
