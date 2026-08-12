@@ -1,8 +1,22 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { Eye, ShieldCheck } from "lucide-react";
 import certificatesData from "@/src/data/certificates";
 import { IconBadge } from "@/src/components/IconBadge";
 import type { Certificate } from "@/types";
+
+const description = "Validated certification data and identity proofs.";
+
+export const metadata: Metadata = {
+  title: "Certificates",
+  description,
+  alternates: { canonical: "/certificates" },
+  openGraph: {
+    title: "Certificates",
+    description,
+    url: "/certificates",
+  },
+};
 
 export default function Certificates() {
   return (

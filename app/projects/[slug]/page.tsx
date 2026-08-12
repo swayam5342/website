@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, GithubIcon, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from "lucide-react";
@@ -7,6 +8,28 @@ import type { Project } from "@/types";
 
 export function generateStaticParams() {
   return (projectsData as Project[]).map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+  const { slug } = await params;
+  const project = (projectsData as Project[]).find((p) => p.slug === slug);
+
+  if (!project) return {};
+
+  return {
+    title: project.title,
+    description: project.description,
+    alternates: { canonical: `/projects/${project.slug}` },
+    openGraph: {
+      title: project.title,
+      description: project.description,
+      url: `/projects/${project.slug}`,
+    },
+  };
 }
 
 export default async function ProjectDetail({

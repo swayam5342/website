@@ -1,9 +1,23 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import skillsjson from "@/src/data/skill";
 import projectsData from "@/src/data/projects";
 import { IconBadge } from "@/src/components/IconBadge";
 import { Reveal } from "@/src/components/Reveal";
 import type { Project } from "@/types";
+
+const description = "Languages, frameworks, and security tooling in active use.";
+
+export const metadata: Metadata = {
+  title: "Skills",
+  description,
+  alternates: { canonical: "/skills" },
+  openGraph: {
+    title: "Skills",
+    description,
+    url: "/skills",
+  },
+};
 
 const SKILL_GROUPS: { label: string; icon: string; skills: string[] }[] = [
   { label: "CORE_LANGUAGES", icon: "code", skills: skillsjson.core },

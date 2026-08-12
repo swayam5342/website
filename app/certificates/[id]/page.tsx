@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, Download, Maximize2 } from "lucide-react";
@@ -6,6 +7,30 @@ import type { Certificate } from "@/types";
 
 export function generateStaticParams() {
   return (certificatesData as Certificate[]).map((c) => ({ id: String(c.id) }));
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
+  const { id } = await params;
+  const cert = (certificatesData as Certificate[]).find((c) => c.id === Number(id));
+
+  if (!cert) return {};
+
+  const description = `${cert.name} — issued by ${cert.issuer} (${cert.year}).`;
+
+  return {
+    title: cert.name,
+    description,
+    alternates: { canonical: `/certificates/${cert.id}` },
+    openGraph: {
+      title: cert.name,
+      description,
+      url: `/certificates/${cert.id}`,
+    },
+  };
 }
 
 export default async function CertificateDetail({
