@@ -3,22 +3,80 @@
   "typeSpeedMs": 40,
   "linePauseMs": 260,
   "bootHint": "type a command below (try: about, skills, projects, contact)",
-  "helpLines": [
-    "available commands:",
-    "  whoami      - who i am",
-    "  about       - short bio",
-    "  skills      - tech stack",
-    "  projects    - things i've built",
-    "  education   - degrees / timeline",
-    "  contact     - reach me",
-    "  resume      - open resume",
-    "  clear       - clear the screen",
-    "  help        - show this list"
-  ],
-  "projectsLimit": 4,
-  "projectDescriptionMaxChars": 56,
-  "projectsFooter": "→ /projects for full details",
-  "resumeOpening": "opening /resume ...",
-  "sudoResponse": "nice try.",
-  "commandNotFound": "command not found: {cmd} (try 'help')"
+  "bootCommands": ["whoami", "help"],
+  "helpHeader": "available commands:",
+  "helpNameWidth": 12,
+  "commandNotFound": "command not found: {cmd} (try 'help')",
+  "commands": [
+    {
+      "name": "whoami",
+      "description": "who i am",
+      "output": ["swayam :: backend x cybersecurity x ai systems"]
+    },
+    {
+      "name": "about",
+      "description": "short bio",
+      "output": [
+        "I build the invisible parts of software — APIs, deployment platforms, sandboxes, and detection pipelines.",
+        "Security is a design constraint, not a feature bolted on at the end."
+      ]
+    },
+    {
+      "name": "skills",
+      "description": "tech stack",
+      "output": [
+        "core: Python, Go, JavaScript, C, C++, SQL, NoSQL",
+        "backend: FastAPI, Flask, Express.js, Gin (Go), REST APIs, OAuth2, Webhooks",
+        "database: Redis, PostgreSQL, MongoDB, MySQL, SQLite",
+        "devops: Docker, Kubernetes, GitHub Actions, Nginx, Linux",
+        "cyber: Threat Detection, Log Analysis, Reverse Engineering, Defensive Security"
+      ]
+    },
+    {
+      "name": "education",
+      "aliases": ["timeline"],
+      "description": "degrees / timeline",
+      "output": [
+        "2024 — Present   BS in Data Science @ IIT Madras",
+        "2024 — Present   B.Tech in Cybersecurity @ VIT Vellore"
+      ]
+    },
+    {
+      "name": "contact",
+      "description": "reach me",
+      "output": [
+        "email      swayamsb50@gmail.com",
+        "github     https://github.com/swayam5342",
+        "linkedin   https://linkedin.com/in/swayam5342",
+        "blog       https://blog.swayam.li"
+      ]
+    },
+    {
+      "name": "projects",
+      "description": "open projects",
+      "redirect": "/projects",
+      "opening": "opening /projects ..  ."
+    },
+    {
+      "name": "resume",
+      "description": "open resume",
+      "redirect": "/resume",
+      "opening": "opening /resume ..."
+    },
+    {
+      "name": "clear",
+      "description": "clear the screen",
+      "output": ["__CLEAR__"]
+    },
+    {
+      "name": "help",
+      "description": "show this list"
+    },
+    {
+      "name": "sudo",
+      "description": "",
+      "hidden": true,
+      "output": ["nice try."]
+    }
+  ]
 }

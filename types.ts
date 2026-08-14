@@ -127,16 +127,24 @@ export interface SiteData {
   ogImage: string;
 }
 
+export interface TerminalCommand {
+  name: string;
+  description: string;
+  aliases?: string[];
+  hidden?: boolean;
+  output?: string[];
+  redirect?: string;
+  opening?: string;
+}
+
 export interface TerminalData {
   prompt: string;
   typeSpeedMs: number;
   linePauseMs: number;
   bootHint: string;
-  helpLines: string[];
-  projectsLimit: number;
-  projectDescriptionMaxChars: number;
-  projectsFooter: string;
-  resumeOpening: string;
-  sudoResponse: string;
+  bootCommands: string[];
+  helpHeader: string;
+  helpNameWidth: number;
   commandNotFound: string;
+  commands: TerminalCommand[];
 }

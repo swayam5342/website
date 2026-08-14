@@ -3,89 +3,55 @@
 import type { FC, KeyboardEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
-import aboutData from "@/src/data/about";
-import skillData from "@/src/data/skill";
-import socialData from "@/src/data/social";
-import projectsData from "@/src/data/projects";
-import timelineData from "@/src/data/timeline";
 import terminalData from "@/src/data/terminal";
+import type { TerminalCommand } from "@/types";
 
 type Line = { text: string; accent?: boolean; isCmd?: boolean };
-
-const whoamiLine = () =>
-  `${aboutData.name.toLowerCase()} :: ${aboutData.roles.join(" x ").toLowerCase()}`;
-
-const BOOT_SCRIPT: { text: string; isCmd?: boolean }[] = [
-  { text: "whoami", isCmd: true },
-  { text: whoamiLine() },
-  { text: "help", isCmd: true },
-  { text: terminalData.bootHint },
-];
 
 const TYPE_SPEED_MS = terminalData.typeSpeedMs;
 const LINE_PAUSE_MS = terminalData.linePauseMs;
 
-const skillList = () =>
-  Object.entries(skillData).map(
-    ([group, items]) => `${group}: ${items.join(", ")}`
-  );
+// Every alias (and the canonical name itself) maps to its command entry.
+const commandLookup: Record<string, TerminalCommand> = {};
+for (const c of terminalData.commands) {
+  commandLookup[c.name] = c;
+  for (const alias of c.aliases ?? []) commandLookup[alias] = c;
+}
 
-const truncate = (text: string, max: number) =>
-  text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
-
-const projectList = () => {
-  const shown = projectsData.slice(0, terminalData.projectsLimit);
-  const lines = shown.map(
-    (p) =>
-      `${p.title.padEnd(20)} ${truncate(p.description, terminalData.projectDescriptionMaxChars)}`
-  );
-  const remaining = projectsData.length - shown.length;
-  if (remaining > 0) lines.push(`… and ${remaining} more`);
-  return lines;
-};
-
-const timelineList = () =>
-  timelineData.map(
-    (t) => `${t.date.padEnd(16)} ${t.title} @ ${t.subtitle}`
-  );
+const helpLines = () => [
+  terminalData.helpHeader,
+  ...terminalData.commands
+    .filter((c) => !c.hidden)
+    .map((c) => `  ${c.name.padEnd(terminalData.helpNameWidth)}- ${c.description}`),
+];
 
 function runCommand(raw: string, router: ReturnType<typeof useRouter>): string[] {
   const cmd = raw.trim().toLowerCase();
+  if (cmd === "") return [];
 
-  switch (cmd) {
-    case "":
-      return [];
-    case "help":
-      return terminalData.helpLines;
-    case "whoami":
-      return [whoamiLine()];
-    case "about":
-      return [aboutData.main_text];
-    case "skills":
-      return skillList();
-    case "projects":
-      return [...projectList(), "", terminalData.projectsFooter];
-    case "education":
-    case "timeline":
-      return timelineList();
-    case "contact":
-      return [
-        `email      ${socialData.email}`,
-        `github     ${socialData.github}`,
-        `linkedin   ${socialData.linkedin}`,
-        `blog       ${socialData.blog}`,
-      ];
-    case "resume":
-      router.push("/resume");
-      return [terminalData.resumeOpening];
-    case "clear":
-      return ["__CLEAR__"];
-    case "sudo":
-      return [terminalData.sudoResponse];
-    default:
-      return [terminalData.commandNotFound.replace("{cmd}", cmd)];
+  if (cmd === "help") return helpLines();
+
+  const command = commandLookup[cmd];
+  if (!command) return [terminalData.commandNotFound.replace("{cmd}", cmd)];
+
+  if (command.redirect) {
+    router.push(command.redirect);
+    return command.opening ? [command.opening] : [];
   }
+
+  return command.output ?? [];
 }
+
+const BOOT_SCRIPT: { text: string; isCmd?: boolean }[] =
+  terminalData.bootCommands.flatMap((name) => [
+    { text: name, isCmd: true },
+    {
+      text:
+        name === "help"
+          ? terminalData.bootHint
+          : (commandLookup[name]?.output ?? []).join("\n"),
+    },
+  ]);
 
 /**
  * Boots with a short typed intro, then becomes a live prompt the
