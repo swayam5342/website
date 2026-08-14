@@ -126,3 +126,17 @@ export interface SiteData {
   titleTemplate: string;
   ogImage: string;
 }
+
+export interface TerminalData {
+  prompt: string;
+  typeSpeedMs: number;
+  linePauseMs: number;
+  bootHint: string;
+  helpLines: string[];
+  projectsLimit: number;
+  projectDescriptionMaxChars: number;
+  projectsFooter: string;
+  resumeOpening: string;
+  sudoResponse: string;
+  commandNotFound: string;
+}

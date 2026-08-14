@@ -1,0 +1,24 @@
+{
+  "prompt": "swayam@sec:~",
+  "typeSpeedMs": 40,
+  "linePauseMs": 260,
+  "bootHint": "type a command below (try: about, skills, projects, contact)",
+  "helpLines": [
+    "available commands:",
+    "  whoami      - who i am",
+    "  about       - short bio",
+    "  skills      - tech stack",
+    "  projects    - things i've built",
+    "  education   - degrees / timeline",
+    "  contact     - reach me",
+    "  resume      - open resume",
+    "  clear       - clear the screen",
+    "  help        - show this list"
+  ],
+  "projectsLimit": 4,
+  "projectDescriptionMaxChars": 56,
+  "projectsFooter": "→ /projects for full details",
+  "resumeOpening": "opening /resume ...",
+  "sudoResponse": "nice try.",
+  "commandNotFound": "command not found: {cmd} (try 'help')"
+}
