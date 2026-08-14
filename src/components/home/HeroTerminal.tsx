@@ -192,7 +192,7 @@ export const HeroTerminal: FC = () => {
         {/* Session */}
         <div
           ref={bodyRef}
-          className="p-5 md:p-6 font-mono text-[11px] md:text-xs leading-relaxed min-h-[280px] max-h-[420px] overflow-y-auto"
+          className="p-5 md:p-6 font-mono text-[11px] md:text-xs leading-relaxed min-h-[280px] max-h-[420px] overflow-y-auto no-scrollbar"
         >
           {history.map((line, i) =>
             line.isCmd ? (

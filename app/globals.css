@@ -80,6 +80,16 @@
   -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
 }
 
+/* Hide scrollbar visually while keeping the element scrollable */
+.no-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/Edge */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome/Safari/Edge */
+}
+
 @media (prefers-reduced-motion: reduce) {
   .anim-rise {
     animation: none;
