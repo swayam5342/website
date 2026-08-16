@@ -11,7 +11,12 @@
     {
       "name": "whoami",
       "description": "who i am",
-      "output": ["swayam :: backend x cybersecurity x ai systems"]
+      "output": [
+        {
+          "text": "swayam :: backend x cybersecurity x ai systems",
+          "accent": true
+        }
+      ]
     },
     {
       "name": "about",

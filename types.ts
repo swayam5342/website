@@ -127,14 +127,31 @@ export interface SiteData {
   ogImage: string;
 }
 
+// A line can be plain text, or an object opting into extra styling/layout.
+export interface TerminalOutputLine {
+  text: string;
+  /** Highlight the line in the accent color. */
+  accent?: boolean;
+  /** Render with heavier font weight. */
+  bold?: boolean;
+  /** Render faded/lower-emphasis. */
+  dim?: boolean;
+  /** Number of leading spaces to prepend. */
+  indent?: number;
+  /** Prefix the line with a bullet/glyph, e.g. "-", "*", "→". */
+  prefix?: string;
+}
+
+export type TerminalLine = string | TerminalOutputLine;
+
 export interface TerminalCommand {
   name: string;
   description: string;
   aliases?: string[];
   hidden?: boolean;
-  output?: string[];
+  output?: TerminalLine[];
   redirect?: string;
-  opening?: string;
+  opening?: TerminalLine;
   dynamic?: string;
   limit?: number;
   titleWidth?: number;

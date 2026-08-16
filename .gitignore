@@ -31,3 +31,4 @@ next-env.d.ts
 feature
 note.md
 session.md
+tsconfig.tsbuildinfo

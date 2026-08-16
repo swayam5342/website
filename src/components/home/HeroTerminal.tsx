@@ -5,12 +5,35 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import terminalData from "@/src/data/terminal";
 import projectsData from "@/src/data/projects";
-import type { TerminalCommand } from "@/types";
+import type { TerminalCommand, TerminalLine, TerminalOutputLine } from "@/types";
 
-type Line = { text: string; accent?: boolean; isCmd?: boolean };
+type Line = {
+  text: string;
+  isCmd?: boolean;
+  accent?: boolean;
+  bold?: boolean;
+  dim?: boolean;
+};
 
 const TYPE_SPEED_MS = terminalData.typeSpeedMs;
 const LINE_PAUSE_MS = terminalData.linePauseMs;
+
+
+const normalizeLine = (line: TerminalLine): TerminalOutputLine =>
+  typeof line === "string" ? { text: line } : line;
+
+const renderLineText = (line: TerminalOutputLine) =>
+  `${" ".repeat(line.indent ?? 0)}${line.prefix ? `${line.prefix} ` : ""}${line.text}`;
+
+const toHistoryLine = (line: TerminalLine): Line => {
+  const l = normalizeLine(line);
+  return {
+    text: renderLineText(l),
+    accent: l.accent,
+    bold: l.bold,
+    dim: l.dim,
+  };
+};
 
 const truncate = (text: string, max: number) =>
   text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
@@ -44,7 +67,7 @@ const helpLines = () => [
     .map((c) => `  ${c.name.padEnd(terminalData.helpNameWidth)}- ${c.description}`),
 ];
 
-function runCommand(raw: string, router: ReturnType<typeof useRouter>): string[] {
+function runCommand(raw: string, router: ReturnType<typeof useRouter>): TerminalLine[] {
   const cmd = raw.trim().toLowerCase();
   if (cmd === "") return [];
 
@@ -70,14 +93,13 @@ const BOOT_SCRIPT: { text: string; isCmd?: boolean }[] =
       text:
         name === "help"
           ? terminalData.bootHint
-          : (commandLookup[name]?.output ?? []).join("\n"),
+          : (commandLookup[name]?.output ?? [])
+              .map((l) => renderLineText(normalizeLine(l)))
+              .join("\n"),
     },
   ]);
 
-/**
- * Boots with a short typed intro, then becomes a live prompt the
- * visitor can type real commands into (about/skills/projects/...).
- */
+
 export const HeroTerminal: FC = () => {
   const router = useRouter();
   const reducedMotion = useMemo(
@@ -159,7 +181,7 @@ export const HeroTerminal: FC = () => {
     setHistory((h) => [
       ...h,
       { text: value, isCmd: true },
-      ...output.map((text) => ({ text })),
+      ...output.map(toHistoryLine),
     ]);
   };
 
@@ -224,10 +246,14 @@ export const HeroTerminal: FC = () => {
             ) : (
               <p
                 key={i}
-                className={
-                  (line.accent ? "text-brand-accent" : "text-brand-muted") +
-                  " whitespace-pre-wrap"
-                }
+                className={[
+                  "whitespace-pre-wrap",
+                  line.accent ? "text-brand-accent" : "text-brand-muted",
+                  line.bold ? "font-semibold" : "",
+                  line.dim ? "opacity-60" : "",
+                ]
+                  .filter(Boolean)
+                  .join(" ")}
               >
                 {line.text}
               </p>
