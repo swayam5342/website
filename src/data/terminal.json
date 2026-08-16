@@ -52,6 +52,15 @@
       ]
     },
     {
+      "name": "project",
+      "description": "projects that i have made",
+      "dynamic": "projects",
+      "limit": 4,
+      "titleWidth": 20,
+      "descriptionMaxChars": 56,
+      "footer": "→ /projects for full details"
+    },
+    {
       "name": "projects",
       "description": "open projects",
       "redirect": "/projects",

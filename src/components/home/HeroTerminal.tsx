@@ -4,12 +4,31 @@ import type { FC, KeyboardEvent } from "react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import terminalData from "@/src/data/terminal";
+import projectsData from "@/src/data/projects";
 import type { TerminalCommand } from "@/types";
 
 type Line = { text: string; accent?: boolean; isCmd?: boolean };
 
 const TYPE_SPEED_MS = terminalData.typeSpeedMs;
 const LINE_PAUSE_MS = terminalData.linePauseMs;
+
+const truncate = (text: string, max: number) =>
+  text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
+
+const projectList = (command: TerminalCommand): string[] => {
+  const shown = projectsData.slice(0, command.limit ?? projectsData.length);
+  const lines = shown.map(
+    (p) =>
+      `${p.title.padEnd(command.titleWidth ?? 20)} ${truncate(
+        p.description,
+        command.descriptionMaxChars ?? 60
+      )}`
+  );
+  const remaining = projectsData.length - shown.length;
+  if (remaining > 0) lines.push(`… and ${remaining} more`);
+  if (command.footer) lines.push("", command.footer);
+  return lines;
+};
 
 // Every alias (and the canonical name itself) maps to its command entry.
 const commandLookup: Record<string, TerminalCommand> = {};
@@ -38,6 +57,8 @@ function runCommand(raw: string, router: ReturnType<typeof useRouter>): string[]
     router.push(command.redirect);
     return command.opening ? [command.opening] : [];
   }
+
+  if (command.dynamic === "projects") return projectList(command);
 
   return command.output ?? [];
 }

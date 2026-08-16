@@ -135,6 +135,11 @@ export interface TerminalCommand {
   output?: string[];
   redirect?: string;
   opening?: string;
+  dynamic?: string;
+  limit?: number;
+  titleWidth?: number;
+  descriptionMaxChars?: number;
+  footer?: string;
 }
 
 export interface TerminalData {
