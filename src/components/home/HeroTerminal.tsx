@@ -39,7 +39,8 @@ const truncate = (text: string, max: number) =>
   text.length > max ? `${text.slice(0, max - 1).trimEnd()}…` : text;
 
 const projectList = (command: TerminalCommand): string[] => {
-  const shown = projectsData.slice(0, command.limit ?? projectsData.length);
+  const visibleProjects = projectsData.filter((p) => p.show !== false);
+  const shown = visibleProjects.slice(0, command.limit ?? visibleProjects.length);
   const lines = shown.map(
     (p) =>
       `${p.title.padEnd(command.titleWidth ?? 20)} ${truncate(
@@ -47,7 +48,7 @@ const projectList = (command: TerminalCommand): string[] => {
         command.descriptionMaxChars ?? 60
       )}`
   );
-  const remaining = projectsData.length - shown.length;
+  const remaining = visibleProjects.length - shown.length;
   if (remaining > 0) lines.push(`… and ${remaining} more`);
   if (command.footer) lines.push("", command.footer);
   return lines;

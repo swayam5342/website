@@ -12,6 +12,7 @@ export interface Project {
   github?: string;
   demo?: string;
   featured: boolean;
+  show?: boolean;
   resume_points: string[];
   details?: {
     architecture: string;

@@ -8,4 +8,11 @@ export const projectsMeta = {
   sub_heading: projectsJson.sub_heading,
 };
 
+/** A project's own icon wins; Recreational projects without one get a shared generic icon. */
+export const getProjectIcon = (project: Project): string | undefined => {
+  if (project.icon) return project.icon;
+  if (project.tags.includes('Recreational')) return 'gamepad-2';
+  return undefined;
+};
+
 export default projectsData;

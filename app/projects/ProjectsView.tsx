@@ -4,7 +4,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { GithubIcon, ExternalLink, ChevronRight, X } from "lucide-react";
-import projectsData, { projectsMeta } from "@/src/data/projects";
+import projectsData, { projectsMeta, getProjectIcon } from "@/src/data/projects";
 import categories from "@/src/data/projectCategories";
 import { IconBadge } from "@/src/components/IconBadge";
 import type { Project } from "@/types";
@@ -27,7 +27,7 @@ function ProjectsContent() {
   );
 
   const filteredProjects = (projectsData as Project[]).filter((p) => {
-    if (filter === "All") return true;
+    if (filter === "All") return p.show !== false;
     return [...p.tags, ...(p.lang ?? [])]
       .map((tag) => tag.toLowerCase())
       .includes(filter.toLowerCase());
@@ -92,7 +92,7 @@ function ProjectsContent() {
             </div>
 
             <div className="flex items-center space-x-4 mb-8">
-              <IconBadge icon={p.icon} />
+              <IconBadge icon={getProjectIcon(p)} />
 
               <div>
                 {/* Title clickable to GitHub */}

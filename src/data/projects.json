@@ -2,7 +2,7 @@
   "project": [
     {
       "id": 1,
-      "order": 1,
+      "order": 4,
       "slug": "kargo-backend",
       "title": "Kargo Backend",
       "description": "Backend platform enabling containerized app deployments with AI-powered setup and Kubernetes-native scaling.",
@@ -26,7 +26,7 @@
     },
     {
       "id": 2,
-      "order": 2,
+      "order": 1,
       "slug": "plugfit",
       "title": "PlugFit",
       "description": "Multi-tenant SaaS platform acting as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints as live MCP endpoints. (Active Development)",
@@ -51,7 +51,7 @@
     },
     {
       "id": 3,
-      "order": 3,
+      "order": 6,
       "slug": "windows-soc-lab",
       "title": "Windows SIEM",
       "description": "End-to-end SIEM pipeline that collects Windows telemetry, detects suspicious activity using custom rules, and sends real-time alerts to Telegram and automation workflows.",
@@ -74,7 +74,7 @@
     },
     {
       "id": 4,
-      "order": 4,
+      "order": 3,
       "slug": "sandboxd",
       "title": "Sandboxd",
       "description": "Secure Linux sandboxing engine for safely executing untrusted code using isolated environments and resource-controlled execution.",
@@ -98,33 +98,8 @@
       "icon": "box"
     },
     {
-      "id": 5,
-      "order": 5,
-      "slug": "scamzap",
-      "title": "Scamzap Backend",
-      "description": "Backend system for a crowdsourced scam reporting platform enabling phone number verification, rating aggregation, and trend analytics via REST APIs.",
-      "tags": ["Backend", "Cybersecurity"],
-      "github": "https://github.com/upayanmazumder/scamzap",
-      "featured": true,
-      "resume_points": [
-        "Designed REST APIs for scam reporting and number verification",
-        "Implemented MongoDB data modeling and indexing for fast lookups",
-        "Containerized backend service using Docker",
-        "Integrated MongoDB Atlas for scalable cloud storage"
-      ],
-      "details": {
-        "architecture": "Node.js + Express backend with MongoDB Atlas, containerized using Docker and exposed via REST endpoints.",
-        "challenges": "Handling duplicate submissions and optimizing database indexing for high-frequency number searches.",
-        "security": "Implemented input validation, rate limiting, and environment-based secret management.",
-        "improvements": "Future enhancements include caching with Redis and role-based moderation controls."
-      },
-      "date": "May 2025",
-      "lang": ["JavaScript", "Node.js", "Express.js", "MongoDB"],
-      "icon": "phone-off"
-    },
-    {
       "id": 6,
-      "order": 6,
+      "order": 7,
       "slug": "Autoscaffold",
       "title": "Autoscaffold",
       "description": "AI system that converts natural language prompts into fully functional web applications and deploys them automatically.",
@@ -148,13 +123,13 @@
     },
     {
       "id": 7,
-      "order": 7,
+      "order": 5,
       "slug": "api2mcp",
       "title": "api2mcp",
       "description": "Standalone TypeScript npm package that converts API specifications into working MCP servers, exposing any documented API as MCP tools. Forms a core component of the PlugFit platform, published independently for reuse.",
       "tags": ["Backend", "AI", "Developer Tools", "Open Source"],
       "github": "https://github.com/swayam5342/api2mcp",
-      "npm": "https://www.npmjs.com/package/@swayam5342/api2mcp",
+      "demo": "https://www.npmjs.com/package/@swayam5342/api2mcp",
       "featured": true,
       "resume_points": [
         "Built and published a standalone TypeScript npm package (@swayam5342/api2mcp) that transforms API specs into runnable MCP servers.",
@@ -169,6 +144,49 @@
       },
       "lang": ["TypeScript", "Node.js"],
       "icon": "package"
+    },
+    {
+      "id": 8,
+      "order": 2,
+      "slug": "vulnscan",
+      "title": "VulnScan",
+      "description": "Language-agnostic dependency vulnerability scanner CLI written in Go, querying OSV.dev to detect and score known vulnerabilities across Go, npm, and Python projects.",
+      "tags": ["Cybersecurity", "Backend", "CLI", "DevOps"],
+      "github": "https://github.com/swayam5342/vulnscan",
+      "featured": true,
+      "resume_points": [
+        "Built a stdlib-only Go CLI that detects project ecosystems and parses Go, npm, and Python dependency manifests.",
+        "Integrated the OSV.dev API for batch vulnerability queries and implemented a CVSS v3.1 base-score calculator from scratch.",
+        "Designed a concurrent worker-pool scanner with context-based cancellation, an on-disk TTL cache, and offline scan mode.",
+        "Built a pluggable Parser/Provider architecture so new ecosystems and vulnerability databases can be added without touching core logic."
+      ],
+      "details": {
+        "architecture": "Stdlib-only Go CLI: a detector walks the project tree to identify ecosystems, self-registering Parser implementations extract dependencies, a worker-pool scanner queries pluggable vulnerability Providers (OSV.dev) concurrently, and results are scored and rendered via terminal/JSON/Markdown/CSV reporters.",
+        "challenges": "Designing a CVSS v3.1 base-score calculator from the raw vector spec for advisories that ship a vector but no pre-bucketed severity, and building an extensible Parser/Provider interface so new ecosystems and databases are additive, not invasive.",
+        "security": "Scans dependency manifests against known-vulnerability data (OSV.dev), computes severity and a security score per project, and generates remediation commands as a review-before-you-run script rather than auto-applying fixes.",
+        "improvements": "Planned: Rust/Java/.NET/PHP/Ruby/Docker/Terraform ecosystem parsers, additional providers (GHSA, NVD), SARIF/HTML output, SBOM generation (CycloneDX/SPDX), typosquat/malicious-package detection, and CI templates."
+      },
+      "lang": ["Go"],
+      "icon": "shield-alert"
+    },
+    {
+      "id": 9,
+      "order": 8,
+      "show": false,
+      "slug": "boids-sim",
+      "title": "Boids Simulation",
+      "description": "A flocking simulation built in Go using Ebiten, compiled to WebAssembly and runs in the browser.",
+      "tags": ["Recreational"],
+      "featured": false,
+      "lang": ["Go"],
+      "icon": "bird",
+      "github": "https://github.com/swayam5342/boid",
+      "demo": "https://swayamcyber.in/boid",
+      "resume_points": [
+        "Implemented Craig Reynolds' boids algorithm with alignment, cohesion, and separation behaviors.",
+        "Compiled Go to WebAssembly for browser-based real-time rendering using Ebiten.",
+        "Resolved WebGL texture size limits across browsers for stable cross-platform execution."
+      ]
     }
   ],
   "main_heading": "PROJECTS",

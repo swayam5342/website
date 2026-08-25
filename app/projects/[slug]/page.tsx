@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, GithubIcon, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from "lucide-react";
-import projectsData from "@/src/data/projects";
+import projectsData, { getProjectIcon } from "@/src/data/projects";
 import { IconBadge } from "@/src/components/IconBadge";
 import type { Project } from "@/types";
 
@@ -73,7 +73,7 @@ export default async function ProjectDetail({
           ))}
         </div>
         <div className="flex items-center gap-4 mb-4">
-          <IconBadge icon={project.icon} size={22} />
+          <IconBadge icon={getProjectIcon(project)} size={22} />
           <h1 className="text-4xl md:text-5xl font-bold">{project.title}</h1>
         </div>
         <p className="text-xl text-brand-muted leading-relaxed">{project.description}</p>
