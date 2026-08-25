@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import type React from "react";
+import { Analytics } from "@vercel/analytics/next";
 import { Navbar } from "@/src/components/Navbar";
 import { Footer } from "@/src/components/Footer";
 import homeData from "@/src/data/home";
@@ -63,6 +64,7 @@ export default function RootLayout({
           <main className="flex-grow pt-24 pb-12">{children}</main>
           <Footer />
         </div>
+        <Analytics />
       </body>
     </html>
   );
