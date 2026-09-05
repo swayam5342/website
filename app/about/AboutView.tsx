@@ -6,6 +6,10 @@ import skillsjson from "@/src/data/skill";
 import aboutjson from "@/src/data/about";
 import timelineData from "@/src/data/timeline";
 import { TimelineIcon } from "@/src/components/TimelineIcon";
+import { useTheme, THEMES } from "@/src/hooks/useTheme";
+
+const GITHUB_CARD_BASE =
+  "https://raw.githubusercontent.com/swayam5342/swayam5342/main";
 
 export default function AboutView() {
   const skills = skillsjson;
@@ -18,6 +22,9 @@ export default function AboutView() {
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles;
   const [photoMissing, setPhotoMissing] = useState(false);
+  const { theme } = useTheme();
+  const themeMode = THEMES.find((t) => t.id === theme)?.mode ?? "dark";
+  const githubCardSrc = `${GITHUB_CARD_BASE}/${themeMode === "light" ? "light" : "dark"}_mode.svg`;
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
@@ -211,7 +218,30 @@ export default function AboutView() {
       </div>
     ))}
   </div>
+
+  {/*FIX: HYDRATION ISSUE WITH DARK/LIGHT MOSE */}
 </section>
+
+      {/* GitHub Activity */}
+      <section className="space-y-6">
+        <div className="flex items-center space-x-4">
+          <h2 className="text-2xl font-mono font-bold tracking-tighter uppercase text-brand-accent">
+            GITHUB_ACTIVITY
+          </h2>
+          <div className="flex-grow border-b border-brand-border opacity-20"></div>
+          <span className="text-[10px] font-mono text-brand-muted uppercase">
+            LIVE_STATS
+          </span>
+        </div>
+
+        <div className="border border-brand-border bg-brand-surface p-4 overflow-x-auto">
+          <img
+            src={githubCardSrc}
+            alt="Swayam's GitHub Dashboard"
+            className="w-full max-w-[1040px] mx-auto"
+          />
+        </div>
+      </section>
 
     </div>
   );
