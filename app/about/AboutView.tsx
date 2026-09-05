@@ -1,15 +1,36 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import skillsjson from "@/src/data/skill";
 import aboutjson from "@/src/data/about";
 import timelineData from "@/src/data/timeline";
 import { TimelineIcon } from "@/src/components/TimelineIcon";
-import { useTheme, THEMES } from "@/src/hooks/useTheme";
+import { THEMES } from "@/src/hooks/useTheme";
 
 const GITHUB_CARD_BASE =
   "https://raw.githubusercontent.com/swayam5342/swayam5342/main";
+const GITHUB_CARD_SOURCE_COLORS: Record<
+  "light" | "dark",
+  { bg: string; accent: string; text: string; key: string; value: string; cc: string }
+> = {
+  dark: {
+    bg: "#161b22",
+    accent: "#7aa2f7",
+    text: "#c9d1d9",
+    key: "#ffa657",
+    value: "#a5d6ff",
+    cc: "#616e7f",
+  },
+  light: {
+    bg: "#f6f8fa",
+    accent: "#0969da",
+    text: "#24292f",
+    key: "#953800",
+    value: "#0a3069",
+    cc: "#c2cfde",
+  },
+};
 
 export default function AboutView() {
   const skills = skillsjson;
@@ -22,9 +43,60 @@ export default function AboutView() {
   const sub_text = aboutjson.sub_text;
   const securityPrinciples = aboutjson.security_principles;
   const [photoMissing, setPhotoMissing] = useState(false);
-  const { theme } = useTheme();
-  const themeMode = THEMES.find((t) => t.id === theme)?.mode ?? "dark";
+  const [activeThemeId, setActiveThemeId] = useState<string>("dark");
+  useEffect(() => {
+    const root = document.documentElement;
+    const readTheme = () => {
+      const attr = root.getAttribute("data-theme");
+      return attr && THEMES.some((t) => t.id === attr) ? attr : "dark";
+    };
+    setActiveThemeId(readTheme());
+
+    const observer = new MutationObserver(() => setActiveThemeId(readTheme()));
+    observer.observe(root, { attributes: true, attributeFilter: ["data-theme"] });
+    return () => observer.disconnect();
+  }, []);
+
+  const themeMode = THEMES.find((t) => t.id === activeThemeId)?.mode ?? "dark";
   const githubCardSrc = `${GITHUB_CARD_BASE}/${themeMode === "light" ? "light" : "dark"}_mode.svg`;
+  const [githubCardSvg, setGithubCardSvg] = useState<string | null>(null);
+
+  useEffect(() => {
+    let cancelled = false;
+
+    fetch(githubCardSrc)
+      .then((res) => res.text())
+      .then((svg) => {
+        if (cancelled) return;
+        const root = getComputedStyle(document.documentElement);
+        const brand = (name: string) => root.getPropertyValue(name).trim();
+        const source = GITHUB_CARD_SOURCE_COLORS[themeMode];
+
+        let recolored = svg
+          .replaceAll(source.bg, brand("--brand-bg"))
+          .replaceAll(source.accent, brand("--brand-accent"))
+          .replaceAll(source.text, brand("--brand-text"))
+          .replaceAll(source.key, brand("--brand-accent"))
+          .replaceAll(source.value, brand("--brand-text"))
+          .replaceAll(source.cc, brand("--brand-muted"))
+          .replace(/<script[\s\S]*?<\/script>/gi, "")
+          .replace(/\son\w+="[^"]*"/gi, "");
+
+        if (!/viewBox=/.test(recolored)) {
+          recolored = recolored.replace(
+            /<svg /,
+            '<svg viewBox="0 0 1040 530" '
+          );
+        }
+
+        setGithubCardSvg(recolored);
+      })
+      .catch(() => setGithubCardSvg(null));
+
+    return () => {
+      cancelled = true;
+    };
+  }, [githubCardSrc, themeMode, activeThemeId]);
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-16 space-y-16">
@@ -235,11 +307,20 @@ export default function AboutView() {
         </div>
 
         <div className="border border-brand-border bg-brand-surface p-4 overflow-x-auto">
-          <img
-            src={githubCardSrc}
-            alt="Swayam's GitHub Dashboard"
-            className="w-full max-w-[1040px] mx-auto"
-          />
+          {githubCardSvg ? (
+            <div
+              role="img"
+              aria-label="Swayam's GitHub Dashboard"
+              className="w-full max-w-[1040px] mx-auto [&_svg]:w-full [&_svg]:h-auto"
+              dangerouslySetInnerHTML={{ __html: githubCardSvg }}
+            />
+          ) : (
+            <img
+              src={githubCardSrc}
+              alt="Swayam's GitHub Dashboard"
+              className="w-full max-w-[1040px] mx-auto"
+            />
+          )}
         </div>
       </section>
 
