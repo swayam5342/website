@@ -1,36 +1,8 @@
 {
-  "core": [
-    "Python",
-    "Go",
-    "JavaScript",
-    "C",
-    "C++",
-    "SQL",
-    "NoSQL"
-  ],
-  "backend": [
-    "FastAPI",
-    "Flask",
-    "Express.js",
-    "Gin (Go)",
-    "REST APIs",
-    "OAuth2",
-    "Webhooks"
-  ],
-  "database": [
-    "Redis",
-    "PostgreSQL",
-    "MongoDB",
-    "MySQL",
-    "SQLite"
-  ],
-  "devops": [
-    "Docker",
-    "Kubernetes",
-    "GitHub Actions",
-    "Nginx",
-    "Linux"
-  ],
+  "core": ["Python", "Go", "JavaScript", "C", "C++", "SQL", "NoSQL"],
+  "backend": ["FastAPI", "Flask", "Express.js", "Fiber"],
+  "database": ["Redis", "PostgreSQL", "MongoDB", "MySQL", "SQLite"],
+  "devops": ["Docker", "Kubernetes", "GitHub Actions", "Nginx", "Linux"],
   "cyber": [
     "Threat Detection",
     "Log Analysis",
