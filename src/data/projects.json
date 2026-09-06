@@ -187,6 +187,31 @@
         "Compiled Go to WebAssembly for browser-based real-time rendering using Ebiten.",
         "Resolved WebGL texture size limits across browsers for stable cross-platform execution."
       ]
+    },
+    {
+      "id": 10,
+      "order": 9,
+      "slug": "jgateway",
+      "title": "jgateway",
+      "description": "Production-grade reverse proxy / API gateway in Go with a composable middleware pipeline — auth, rate limiting, request signing, circuit breaking, and retries, all wired from a single declarative config.",
+      "tags": ["Backend", "Systems", "DevOps"],
+      "github": "https://github.com/swayam5342/rever_proxy",
+      "featured": true,
+      "resume_points": [
+        "Built a data-driven reverse proxy in Go with a composable middleware chain, keeping the core proxy dumb and all cross-cutting behavior in independently testable middleware.",
+        "Implemented pluggable auth (JWT + API key, fail-closed), a spoof-resistant token-bucket rate limiter, and HMAC request signing with constant-time comparison.",
+        "Built resilience primitives from scratch: idempotency-aware retries with jittered exponential backoff, and a per-upstream circuit breaker (closed/open/half-open).",
+        "Added structured logging, Prometheus metrics, liveness/readiness health checks, fail-fast config validation, and graceful shutdown with in-flight request draining."
+      ],
+      "details": {
+        "architecture": "Stdlib-only Go (net/http, httputil.ReverseProxy, slog). Longest-prefix router dispatches to per-upstream handlers built from a YAML-defined middleware chain: logging, metrics, auth, rate limit, signing, retry, circuit breaker, wrapped in a top-level panic-recovery middleware.",
+        "challenges": "Designing a middleware contract where ordering dependencies are explicit and safe (e.g. auth before rate-limiting-by-identity) while keeping every middleware independently unit-testable via httptest, with no shared global state.",
+        "security": "Auth fails closed on any validation error; API keys and HMAC signatures use constant-time comparison; rate-limit keys avoid trusting client IP unless explicitly configured behind a trusted LB; secrets are sourced only from env vars, never hardcoded or logged.",
+        "improvements": "Planned: OpenTelemetry tracing hooks, Redis-backed rate-limit store for multi-instance deployments, govulncheck + golangci-lint wired into CI."
+      },
+      "date": "July 2026",
+      "lang": ["Go"],
+      "icon": "route"
     }
   ],
   "main_heading": "PROJECTS",
