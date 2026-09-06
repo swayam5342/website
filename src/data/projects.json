@@ -30,7 +30,7 @@
       "slug": "plugfit",
       "title": "PlugFit",
       "description": "Multi-tenant SaaS platform acting as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints as live MCP endpoints. (Active Development)",
-      "tags": ["Backend", "AI", "SaaS", "Infrastructure"],
+      "tags": ["Backend", "AI", "SaaS"],
       "github": "https://github.com/swayam5342/plugfit_backend",
       "featured": true,
       "resume_points": [
@@ -94,7 +94,7 @@
         "improvements": "Future improvements include seccomp filtering, microVM integration, and advanced runtime monitoring."
       },
       "date": "May 2026",
-      "lang": ["Go", "NsJail", "Docker"],
+      "lang": ["Go", "NsJail", "Docker", "Fiber"],
       "icon": "box"
     },
     {
