@@ -212,6 +212,32 @@
       "date": "July 2026",
       "lang": ["Go"],
       "icon": "route"
+    },
+    {
+      "id": 11,
+      "order": 10,
+      "show": false,
+      "slug": "6502-emulator",
+      "title": "6502 Emulator",
+      "description": "Cycle-counted MOS 6502 CPU emulator in C++17 with a flat 64KB memory bus, memory-mapped I/O and timer devices, and an interactive command-line debugger/monitor.",
+      "tags": ["CPU", "Recreational"],
+      "github": "https://github.com/swayam5342/6502",
+      "demo": "https://blog.swayam.li/projects/6502",
+      "featured": true,
+      "resume_points": [
+        "Built a cycle-accurate MOS 6502 CPU emulator in C++17, passing Klaus Dormann's official 6502_functional_test.bin opcode test suite.",
+        "Implemented a 256-entry opcode dispatch table covering all 56 official mnemonics across 12 addressing modes.",
+        "Designed memory-mapped I/O and timer peripherals (modeled on an ACIA/UART and 6522 VIA) with real hardware-interrupt delivery.",
+        "Built an interactive command-line debugger/monitor supporting stepping, breakpoints, and live memory/register inspection."
+      ],
+      "details": {
+        "architecture": "A flat 64KB Bus intercepts fixed-address console and timer registers before falling through to plain RAM; the CPU core drives fetch-decode-execute via a 256-element opcode table of addressing-mode/instruction function pointers, calling Bus::tick() each step to advance the timer.",
+        "challenges": "Getting non-blocking keyboard input into a running emulated program without stalling emulation speed -- polling every instruction dropped a 96-million-instruction test run from under a second to minutes, so input is instead polled via a real syscall (_kbhit) every 4096 instructions.",
+        "security": "Not a security-focused project; the ROM-region write-protect (setRomRegion) and automatic I/O-region disabling on loads that overlap memory-mapped device addresses are the closest analogues, guarding against a runaway program clobbering ROM or misinterpreting device registers as data.",
+        "improvements": "Planned: broader illegal-opcode coverage and 65C02 extended-opcode support (currently unsupported, per the Klaus Dormann 65C02 test suite)."
+      },
+      "lang": ["C++"],
+      "icon": "cpu"
     }
   ],
   "main_heading": "PROJECTS",
