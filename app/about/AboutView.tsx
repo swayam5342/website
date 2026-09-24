@@ -59,7 +59,9 @@ export default function AboutView() {
 
   const themeMode = THEMES.find((t) => t.id === activeThemeId)?.mode ?? "dark";
   const githubCardSrc = `${GITHUB_CARD_BASE}/${themeMode === "light" ? "light" : "dark"}_mode.svg`;
-  const [githubCardSvg, setGithubCardSvg] = useState<string | null>(null);
+  const [githubCard, setGithubCard] = useState<
+    { src: string; width: number; height: number } | null
+  >(null);
 
   useEffect(() => {
     let cancelled = false;
@@ -89,9 +91,20 @@ export default function AboutView() {
           );
         }
 
-        setGithubCardSvg(recolored);
+        // Rendered as an <img> so the browser reserves the aspect ratio and
+        // the card scales as one unit instead of reflowing at small widths.
+        const viewBox = recolored.match(/viewBox="([\d.\s-]+)"/);
+        const [, , vbWidth, vbHeight] = viewBox
+          ? viewBox[1].trim().split(/\s+/).map(Number)
+          : [];
+
+        setGithubCard({
+          src: `data:image/svg+xml;charset=utf-8,${encodeURIComponent(recolored)}`,
+          width: vbWidth || 1040,
+          height: vbHeight || 530,
+        });
       })
-      .catch(() => setGithubCardSvg(null));
+      .catch(() => setGithubCard(null));
 
     return () => {
       cancelled = true;
@@ -307,12 +320,13 @@ export default function AboutView() {
         </div>
 
         <div className="border border-brand-border bg-brand-surface p-4 overflow-x-auto">
-          {githubCardSvg ? (
-            <div
-              role="img"
-              aria-label="Swayam's GitHub Dashboard"
-              className="w-full max-w-[1040px] mx-auto [&_svg]:w-full [&_svg]:h-auto"
-              dangerouslySetInnerHTML={{ __html: githubCardSvg }}
+          {githubCard ? (
+            <img
+              src={githubCard.src}
+              alt="Swayam's GitHub Dashboard"
+              width={githubCard.width}
+              height={githubCard.height}
+              className="w-full max-w-[1040px] h-auto mx-auto"
             />
           ) : (
             <img
