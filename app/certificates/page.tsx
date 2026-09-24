@@ -3,7 +3,6 @@ import Link from "next/link";
 import { Eye, ShieldCheck } from "lucide-react";
 import certificatesData from "@/src/data/certificates";
 import { IconBadge } from "@/src/components/IconBadge";
-import { PageHeader } from "@/src/components/PageHeader";
 import type { Certificate } from "@/types";
 
 const description = "Validated certification data and identity proofs.";
@@ -21,55 +20,70 @@ export const metadata: Metadata = {
 
 export default function Certificates() {
   return (
-    <div className="max-w-6xl mx-auto px-6 md:px-10 py-12">
-      <PageHeader
-        eyebrow="Verified achievements"
-        title="Certificates"
-        description={description}
-      />
+    <div className="max-w-7xl mx-auto px-4 py-16">
+      <header className="mb-16 border-b border-brand-border pb-8">
+        <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
+          CERTIFICATES // VERIFIED ACHIEVEMENTS
+        </h1>
+        <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
+          Validated certification data and identity proofs.
+        </p>
+      </header>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {(certificatesData as Certificate[]).map((cert) => {
           const hasVerify = cert.verify && cert.verify.trim() !== "";
 
           return (
-            <div key={cert.id} className="card flex flex-col p-8">
+            <div
+              key={cert.id}
+              className="group bg-brand-bg p-10 flex flex-col border border-brand-border hover:bg-brand-surface transition-all"
+            >
               {/* Top Row */}
-              <div className="flex items-start justify-between mb-12">
-                <IconBadge icon={cert.icon} />
-                <span className="eyebrow">{cert.year}</span>
+              <div className="flex items-start justify-between mb-10">
+                <div className="flex items-center space-x-3">
+                  <IconBadge icon={cert.icon} />
+                  <span className="text-[8px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
+                    CERT {String(cert.id).padStart(2, "0")}
+                  </span>
+                </div>
+                <span className="text-[10px] font-mono font-bold text-brand-accent">
+                  {cert.year}
+                </span>
               </div>
 
               {/* Title + Issuer */}
-              <div className="flex-grow space-y-3">
+              <div className="flex-grow space-y-4">
                 {hasVerify ? (
                   <a
                     href={cert.verify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="display text-2xl leading-tight hover:text-brand-accent transition-colors"
+                    className="text-xl font-bold font-mono tracking-tight leading-tight hover:underline"
                   >
                     {cert.name}
                   </a>
                 ) : (
                   <Link
                     href={`/certificates/${cert.id}`}
-                    className="display text-2xl leading-tight hover:text-brand-accent transition-colors"
+                    className="text-xl font-bold font-mono tracking-tight leading-tight hover:underline"
                   >
                     {cert.name}
                   </Link>
                 )}
-                <p className="text-sm text-brand-muted">{cert.issuer}</p>
+                <p className="w-fit mt-2 text-[10px] font-mono bg-white text-black uppercase border border-white px-2 py-0.5 tracking-widest">
+                  {cert.issuer}
+                </p>
               </div>
 
               {/* Actions */}
-              <div className="grid grid-cols-2 gap-2 mt-10">
+              <div className="grid grid-cols-2 gap-2 mt-12">
                 <Link
                   href={`/certificates/${cert.id}`}
-                  className="btn btn-ghost justify-center !px-4 !py-2.5 text-xs"
+                  className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                 >
                   <Eye size={12} />
-                  <span>Inspect</span>
+                  <span>INSPECT</span>
                 </Link>
 
                 {hasVerify ? (
@@ -77,10 +91,10 @@ export default function Certificates() {
                     href={cert.verify}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="btn btn-solid justify-center !px-4 !py-2.5 text-xs"
+                    className="flex items-center justify-center space-x-2 text-[10px] font-mono font-bold py-4 border border-brand-border text-brand-accent hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                   >
                     <ShieldCheck size={12} />
-                    <span>Verify</span>
+                    <span>VERIFY</span>
                   </a>
                 ) : (
                   <div></div>

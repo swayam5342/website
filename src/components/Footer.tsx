@@ -2,52 +2,58 @@ import type { FC } from "react";
 import { Mail, GithubIcon, LinkedinIcon, PenSquare } from "lucide-react";
 import socialData from "../data/social";
 
-const linkClass =
-  "flex items-center gap-2 text-brand-muted hover:text-brand-text transition-colors";
-
 export const Footer: FC = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="py-12 border-t border-brand-border bg-brand-bg">
-      <div className="max-w-6xl mx-auto px-6 md:px-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+    <footer className="py-10 border-t border-brand-border bg-brand-bg">
+      <div className="max-w-7xl mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-6">
 
         {/* Left: Name / Copyright */}
-        <p className="display text-2xl">
-          Swayam <span className="text-brand-muted">© {currentYear}</span>
+        <p className="text-xs font-mono text-brand-muted uppercase tracking-widest">
+          © {currentYear} SWAYAM
         </p>
 
         {/* Right: Contacts */}
-        <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-          <a href={`mailto:${socialData.email}`} className={linkClass}>
+        <div className="flex items-center gap-6">
+
+          <a
+            href={`mailto:${socialData.email}`}
+            className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
+          >
             <Mail size={16} />
-            <span className="text-sm">Email</span>
+            <span className="text-xs font-mono">EMAIL</span>
           </a>
 
           <a
             href={socialData.github}
             target="_blank"
             rel="noopener noreferrer"
-            className={linkClass}
+            className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
             <GithubIcon size={16} />
-            <span className="text-sm">GitHub</span>
+            <span className="text-xs font-mono">GITHUB</span>
           </a>
 
           <a
             href={socialData.linkedin}
             target="_blank"
             rel="noopener noreferrer"
-            className={linkClass}
+            className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
             <LinkedinIcon size={16} />
-            <span className="text-sm">LinkedIn</span>
+            <span className="text-xs font-mono">LINKEDIN</span>
           </a>
 
-          <a href={socialData.blog} target="_blank" className={linkClass}>
-            <PenSquare size={16} />
-            <span className="text-sm">Blog</span>
+          <a
+            href={socialData.blog}
+            target="_blank"
+            className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
+          >
+            <PenSquare size={16}/>
+            <span className="text-xs font-mono">BLOG</span>
           </a>
+
         </div>
       </div>
     </footer>

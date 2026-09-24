@@ -70,123 +70,14 @@
   animation: status-pulse 2.4s ease-in-out infinite;
 }
 
-/* ---------------------------------- */
-/* Editorial primitives               */
-/* ---------------------------------- */
-
-@layer base {
-  body {
-    background: var(--brand-bg);
-    color: var(--brand-text);
-    font-family: var(--font-sans);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  ::selection {
-    background: var(--brand-accent);
-    color: var(--brand-bg);
-  }
-}
-
-@layer components {
-  /* Serif display type for headings */
-  .display {
-    font-family: var(--font-serif);
-    font-weight: 400;
-    letter-spacing: -0.02em;
-    line-height: 1.02;
-  }
-
-  .display em {
-    font-style: italic;
-    color: var(--brand-accent);
-  }
-
-  /* Small uppercase label */
-  .eyebrow {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--brand-muted);
-  }
-
-  /* Flat pill for tags and skills */
-  .chip {
-    display: inline-flex;
-    align-items: center;
-    border: 1px solid var(--brand-border);
-    border-radius: 0;
-    padding: 0.25rem 0.75rem;
-    font-size: 0.75rem;
-    line-height: 1.25rem;
-    color: var(--brand-muted);
-    transition:
-      color var(--transition-fast),
-      border-color var(--transition-fast),
-      background-color var(--transition-fast);
-  }
-
-  .chip-accent {
-    border-color: var(--brand-accent-border);
-    color: var(--brand-accent);
-  }
-
-  a.chip:hover,
-  button.chip:hover {
-    border-color: var(--brand-text);
-    color: var(--brand-text);
-  }
-
-  /* Filled and outlined pill buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    border: 1px solid var(--brand-text);
-    border-radius: 0;
-    padding: 0.7rem 1.4rem;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition:
-      background-color var(--transition-fast),
-      color var(--transition-fast),
-      border-color var(--transition-fast);
-  }
-
-  .btn-solid {
-    background: var(--brand-text);
-    color: var(--brand-bg);
-  }
-
-  .btn-solid:hover {
-    background: var(--brand-accent);
-    border-color: var(--brand-accent);
-  }
-
-  .btn-ghost {
-    border-color: var(--brand-border);
-    color: var(--brand-text);
-  }
-
-  .btn-ghost:hover {
-    border-color: var(--brand-text);
-  }
-
-  /* Flat card */
-  .card {
-    border: 1px solid var(--brand-border);
-    border-radius: var(--radius-md);
-    background: var(--brand-surface);
-    transition:
-      border-color var(--transition-fast),
-      background-color var(--transition-fast);
-  }
-
-  a.card:hover,
-  .card-hover:hover {
-    border-color: var(--brand-muted);
-  }
+/* Blueprint grid backdrop, drawn from brand tokens so it follows every theme */
+.bg-blueprint {
+  background-image:
+    linear-gradient(var(--brand-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--brand-border) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, black 30%, transparent 75%);
 }
 
 /* Hide scrollbar visually while keeping the element scrollable */
@@ -213,4 +104,26 @@
   .status-pulse {
     animation: none;
   }
+}
+
+/* ---------------------------------- */
+/* Font preview: Instrument Serif      */
+/* Swaps the heading face only. The old layout keeps its sizes,   */
+/* grid and spacing; these reset the mono-era metrics (heavy      */
+/* weight, negative tracking, sub-1 leading) that a serif cannot  */
+/* wear without colliding.                                        */
+/* ---------------------------------- */
+:is(h1, h2, h3):is(
+    [class*="text-xl"],
+    [class*="text-2xl"],
+    [class*="text-3xl"],
+    [class*="text-4xl"],
+    [class*="text-5xl"],
+    [class*="text-6xl"],
+    [class*="text-8xl"]
+  ) {
+  font-family: var(--font-serif) !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.01em !important;
+  line-height: 1.08 !important;
 }

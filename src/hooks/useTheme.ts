@@ -25,48 +25,48 @@ export interface ThemeInfo {
 
 /** To add or remove a theme: edit this list and its palette in theme.css. */
 export const THEMES: ThemeInfo[] = [
-  { id: "dark", label: "Charcoal", mode: "dark", swatch: { bg: "#131312", accent: "#e58a5b" } },
-  { id: "light", label: "Paper", mode: "light", swatch: { bg: "#f6f4ee", accent: "#b4451f" } },
+  { id: "dark", label: "CARBON", mode: "dark", swatch: { bg: "#0a0a0b", accent: "#4d94ff" } },
+  { id: "light", label: "PAPER", mode: "light", swatch: { bg: "#fafaf9", accent: "#2563eb" } },
   {
     id: "ayu-light",
-    label: "Ayu Light",
+    label: "AYU_LIGHT",
     mode: "light",
     swatch: { bg: "#fafafa", accent: "#fa8d3e" },
   },
   {
     id: "catppuccin-latte",
-    label: "Latte",
+    label: "LATTE",
     mode: "light",
     swatch: { bg: "#eff1f5", accent: "#1e66f5" },
   },
   {
     id: "github-light",
-    label: "GitHub Light",
+    label: "GITHUB_LIGHT",
     mode: "light",
     swatch: { bg: "#ffffff", accent: "#0969da" },
   },
   {
     id: "tokyo-night-storm",
-    label: "Tokyo Storm",
+    label: "TOKYO_STORM",
     mode: "dark",
     swatch: { bg: "#24283b", accent: "#7aa2f7" },
   },
   {
     id: "catppuccin-mocha",
-    label: "Mocha",
+    label: "MOCHA",
     mode: "dark",
     swatch: { bg: "#1e1e2e", accent: "#cba6f7" },
   },
   {
     id: "gruvbox-dark",
-    label: "Gruvbox",
+    label: "GRUVBOX",
     mode: "dark",
     swatch: { bg: "#1d2021", accent: "#83a598" },
   },
-  { id: "nord", label: "Nord", mode: "dark", swatch: { bg: "#2e3440", accent: "#88c0d0" } },
+  { id: "nord", label: "NORD", mode: "dark", swatch: { bg: "#2e3440", accent: "#88c0d0" } },
   {
     id: "solarized",
-    label: "Solarized",
+    label: "SOLARIZED",
     mode: "dark",
     swatch: { bg: "#002b36", accent: "#d4a017" },
   },

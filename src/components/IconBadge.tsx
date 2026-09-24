@@ -68,7 +68,7 @@ export const IconBadge: FC<IconBadgeProps> = ({
   const Icon = (icon && ICONS[icon]) || Terminal;
   return (
     <span
-      className={`inline-flex items-center justify-center w-11 h-11 shrink-0 border border-brand-border text-brand-text ${className}`}
+      className={`inline-flex items-center justify-center w-11 h-11 shrink-0 border border-brand-accent/30 bg-brand-accent/10 text-brand-accent ${className}`}
     >
       <Icon size={size} />
     </span>
