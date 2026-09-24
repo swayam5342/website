@@ -24,7 +24,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }));
 
   const certificateRoutes = (certificatesData as Certificate[]).map((c) => ({
-    url: `${siteData.url}/certificates/${c.id}`,
+    url: `${siteData.url}/certificates/${c.slug}`,
   }));
 
   return [...staticRoutes, ...projectRoutes, ...certificateRoutes];

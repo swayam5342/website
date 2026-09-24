@@ -2,6 +2,7 @@
   {
     "id": 1,
     "order": 1,
+    "slug": "intro-to-cybersecurity",
     "name": "Introduction to Cybersecurity",
     "issuer": "CISCO",
     "year": "2026",
@@ -12,6 +13,7 @@
   {
     "id": 2,
     "order": 2,
+    "slug": "log-analysis-for-cyber-defense",
     "name": "Foundations of Log Analysis for Cyber Defense",
     "issuer": "RED TEAM LEADERS",
     "year": "2026",

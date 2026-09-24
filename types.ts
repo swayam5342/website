@@ -43,6 +43,7 @@ export interface ResumeData {
 export interface Certificate {
   id: number;
   order: number;
+  slug: string;
   name: string;
   issuer: string;
   year: string;

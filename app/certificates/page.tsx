@@ -65,7 +65,7 @@ export default function Certificates() {
                   </a>
                 ) : (
                   <Link
-                    href={`/certificates/${cert.id}`}
+                    href={`/certificates/${cert.slug}`}
                     className="text-xl font-bold font-mono tracking-tight leading-tight hover:underline"
                   >
                     {cert.name}
@@ -79,7 +79,7 @@ export default function Certificates() {
               {/* Actions */}
               <div className="grid grid-cols-2 gap-2 mt-12">
                 <Link
-                  href={`/certificates/${cert.id}`}
+                  href={`/certificates/${cert.slug}`}
                   className="flex items-center justify-center space-x-2 text-[10px] font-mono py-4 border border-brand-border text-brand-muted hover:bg-brand-accent hover:text-brand-bg transition-all uppercase tracking-widest"
                 >
                   <Eye size={12} />

@@ -6,16 +6,16 @@ import certificatesData from "@/src/data/certificates";
 import type { Certificate } from "@/types";
 
 export function generateStaticParams() {
-  return (certificatesData as Certificate[]).map((c) => ({ id: String(c.id) }));
+  return (certificatesData as Certificate[]).map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
-  const { id } = await params;
-  const cert = (certificatesData as Certificate[]).find((c) => c.id === Number(id));
+  const { slug } = await params;
+  const cert = (certificatesData as Certificate[]).find((c) => c.slug === slug);
 
   if (!cert) return {};
 
@@ -24,11 +24,11 @@ export async function generateMetadata({
   return {
     title: cert.name,
     description,
-    alternates: { canonical: `/certificates/${cert.id}` },
+    alternates: { canonical: `/certificates/${cert.slug}` },
     openGraph: {
       title: cert.name,
       description,
-      url: `/certificates/${cert.id}`,
+      url: `/certificates/${cert.slug}`,
     },
   };
 }
@@ -36,10 +36,10 @@ export async function generateMetadata({
 export default async function CertificateDetail({
   params,
 }: {
-  params: Promise<{ id: string }>;
+  params: Promise<{ slug: string }>;
 }) {
-  const { id } = await params;
-  const cert = (certificatesData as Certificate[]).find((c) => c.id === Number(id));
+  const { slug } = await params;
+  const cert = (certificatesData as Certificate[]).find((c) => c.slug === slug);
 
   if (!cert) notFound();
 
