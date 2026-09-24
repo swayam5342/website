@@ -1,5 +1,6 @@
 @theme{
   --font-space: "Space Mono", monospace;
+  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
 }
 
 :root {
