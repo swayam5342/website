@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, GithubIcon, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from "lucide-react";
+import { ArrowLeft, GithubIcon, Globe } from "lucide-react";
 import projectsData, { getProjectIcon } from "@/src/data/projects";
 import { IconBadge } from "@/src/components/IconBadge";
 import type { Project } from "@/types";
@@ -42,109 +42,98 @@ export default async function ProjectDetail({
 
   if (!project) notFound();
 
+  const sections = project.details
+    ? [
+        { index: "01", title: "Architecture", body: project.details.architecture },
+        { index: "02", title: "Key challenges", body: project.details.challenges },
+        { index: "03", title: "Security considerations", body: project.details.security },
+        { index: "04", title: "Future improvements", body: project.details.improvements },
+      ]
+    : [];
+
   return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href="/projects" className="inline-flex items-center space-x-2 text-brand-muted hover:text-brand-accent transition-colors mb-8 group">
-        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        <span>Back to Projects</span>
+    <div className="max-w-4xl mx-auto px-6 md:px-10 py-12">
+      <Link
+        href="/projects"
+        className="group mb-12 inline-flex items-center gap-2 text-sm text-brand-muted transition-colors hover:text-brand-text"
+      >
+        <ArrowLeft size={16} className="transition-transform group-hover:-translate-x-1" />
+        <span>All projects</span>
       </Link>
 
-      <div className="mb-12">
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map(t => (
+      <header className="mb-20 border-b border-brand-border pb-14">
+        <div className="mb-8 flex flex-wrap gap-2">
+          {project.tags.map((t) => (
             <Link
               key={t}
               href={`/projects?tag=${encodeURIComponent(t)}`}
               title={`Show ${t} projects`}
-              className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent transition-all hover:bg-brand-accent hover:text-brand-bg"
+              className="chip chip-accent"
             >
               {t}
             </Link>
           ))}
-          {project.lang?.map(l => (
+          {project.lang?.map((l) => (
             <Link
               key={l}
               href={`/projects?tag=${encodeURIComponent(l)}`}
               title={`Show ${l} projects`}
-              className="text-xs font-mono px-3 py-1 rounded border border-brand-border text-brand-muted transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10"
+              className="chip"
             >
               {l}
             </Link>
           ))}
         </div>
-        <div className="flex items-center gap-4 mb-4">
-          <IconBadge icon={getProjectIcon(project)} size={22} />
-          <h1 className="text-4xl md:text-5xl font-bold">{project.title}</h1>
-        </div>
-        <p className="text-xl text-brand-muted leading-relaxed">{project.description}</p>
 
-        <div className="flex items-center space-x-4 mt-8">
+        <div className="mb-6 flex items-center gap-5">
+          <IconBadge icon={getProjectIcon(project)} size={22} />
+          <h1 className="display text-5xl md:text-7xl">{project.title}</h1>
+        </div>
+        <p className="max-w-2xl text-xl leading-relaxed text-brand-muted">
+          {project.description}
+        </p>
+
+        <div className="mt-10 flex flex-wrap items-center gap-3">
           {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-brand-surface border border-white/10 px-5 py-2.5 rounded-lg font-bold hover:border-brand-accent/50 transition-all">
-              <GithubIcon size={18} />
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn btn-ghost">
+              <GithubIcon size={16} />
               <span>Repository</span>
             </a>
           )}
           {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-brand-accent text-brand-bg px-5 py-2.5 rounded-lg font-bold hover:scale-[1.02] transition-all">
-              <Globe size={18} />
-              <span>Live System</span>
+            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="btn btn-solid">
+              <Globe size={16} />
+              <span>Live system</span>
             </a>
           )}
         </div>
-      </div>
+      </header>
 
-      <div className="space-y-12">
-        {project.details && (<>
-          <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <Layers className="text-brand-accent" />
-            <span>Architecture Overview</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.architecture}
+      <div className="space-y-16">
+        {sections.map((s) => (
+          <section
+            key={s.index}
+            className="grid grid-cols-1 gap-4 md:grid-cols-12 md:gap-10"
+          >
+            <div className="md:col-span-4">
+              <p className="eyebrow mb-2">{s.index}</p>
+              <h2 className="display text-3xl">{s.title}</h2>
+            </div>
+            <p className="leading-relaxed text-brand-muted md:col-span-8">
+              {s.body}
+            </p>
+          </section>
+        ))}
+
+        <section className="grid grid-cols-1 gap-4 border-t border-brand-border pt-16 md:grid-cols-12 md:gap-10">
+          <div className="md:col-span-4">
+            <h2 className="display text-3xl">Technical impact</h2>
           </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <AlertCircle className="text-brand-accent" />
-            <span>Key Challenges</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.challenges}
-          </div>
-        </section>
-
-        <section className="relative overflow-hidden">
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <ShieldCheck className="text-brand-accent" />
-            <span>Security Considerations</span>
-          </h2>
-          <div className="p-6 bg-brand-accent/5 rounded-2xl border border-brand-accent/20 text-brand-muted leading-relaxed backdrop-blur-sm">
-            {project.details?.security}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <RefreshCw className="text-brand-accent" />
-            <span>Future Improvements</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.improvements}
-          </div>
-        </section>
-        </>)
-        }
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6">Technical Impact</h2>
-          <ul className="space-y-4">
+          <ul className="space-y-4 md:col-span-8">
             {project.resume_points.map((point, i) => (
-              <li key={i} className="flex items-start space-x-3 text-brand-muted">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0"></span>
-                <span>{point}</span>
+              <li key={i} className="flex items-start gap-3 text-brand-muted">
+                <span className="mt-2.5 h-px w-4 shrink-0 bg-brand-accent" />
+                <span className="leading-relaxed">{point}</span>
               </li>
             ))}
           </ul>

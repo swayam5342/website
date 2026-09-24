@@ -1,12 +1,12 @@
-@theme{
-  --font-space: "Space Mono", monospace;
+@theme {
+  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
 }
 
 :root {
-  --font-mono: "JetBrains Mono", monospace;
-  --font-sans: "Inter", sans-serif;
-  --radius-sm: 4px;
-  --radius-md: 8px;
+  --radius-sm: 0;
+  --radius-md: 0;
   --transition-fast: 0.2s ease;
   --transition-slow: 0.35s ease;
   transition:
@@ -14,27 +14,27 @@
     color var(--transition-fast),
     border-color var(--transition-fast);
 
-  /* CARBON — dark-first default */
-  --brand-bg: #0a0a0b;
-  --brand-surface: #121214;
-  --brand-border: #26262a;
-  --brand-text: #ededef;
-  --brand-muted: #8f8f98;
-  --brand-accent: #4d94ff;
-  --brand-accent-soft: rgba(77, 148, 255, 0.1);
-  --brand-accent-border: rgba(77, 148, 255, 0.4);
+  /* CHARCOAL — warm dark-first default */
+  --brand-bg: #131312;
+  --brand-surface: #1b1b19;
+  --brand-border: #2d2c29;
+  --brand-text: #ecebe6;
+  --brand-muted: #98968c;
+  --brand-accent: #e58a5b;
+  --brand-accent-soft: rgba(229, 138, 91, 0.1);
+  --brand-accent-border: rgba(229, 138, 91, 0.4);
 }
 
-/* PAPER — refined light */
+/* PAPER — warm editorial light */
 [data-theme="light"] {
-  --brand-bg: #fafaf9;
-  --brand-surface: #f1f1ef;
-  --brand-border: #e0e0dc;
-  --brand-text: #18181b;
-  --brand-muted: #6f6f78;
-  --brand-accent: #2563eb;
-  --brand-accent-soft: rgba(37, 99, 235, 0.08);
-  --brand-accent-border: rgba(37, 99, 235, 0.35);
+  --brand-bg: #f6f4ee;
+  --brand-surface: #ece9e0;
+  --brand-border: #d8d4c8;
+  --brand-text: #1a1917;
+  --brand-muted: #69665d;
+  --brand-accent: #b4451f;
+  --brand-accent-soft: rgba(180, 69, 31, 0.08);
+  --brand-accent-border: rgba(180, 69, 31, 0.35);
 }
 
 /* AYU LIGHT — warm paper with orange accent */
