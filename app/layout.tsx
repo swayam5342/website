@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import type React from "react";
 import { Analytics } from "@vercel/analytics/next";
-import { Navbar } from "@/src/components/Navbar";
-import { Footer } from "@/src/components/Footer";
+import { SiteShell } from "@/src/components/SiteShell";
 import homeData from "@/src/data/home";
 import siteData from "@/src/data/site";
 import "./globals.css";
@@ -59,11 +58,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <div className="min-h-screen bg-brand-bg text-brand-text flex flex-col font-sans">
-          <Navbar />
-          <main className="flex-grow pt-24 pb-12">{children}</main>
-          <Footer />
-        </div>
+        <SiteShell>{children}</SiteShell>
         <Analytics />
       </body>
     </html>

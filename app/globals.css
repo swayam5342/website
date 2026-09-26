@@ -2,6 +2,16 @@
 @import "../src/styles/theme.css";
 @import "../src/styles/tailwind-theme.css";
 
+/* The page background follows the active theme everywhere, including
+   routes that render without the site shell. */
+@layer base {
+  html,
+  body {
+    background: var(--brand-bg);
+    color: var(--brand-text);
+  }
+}
+
 /* ---------------------------------- */
 /* Landing page motion + background   */
 /* ---------------------------------- */

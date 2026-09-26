@@ -172,3 +172,84 @@ export interface TerminalData {
   commandNotFound: string;
   commands: TerminalCommand[];
 }
+
+/* ---------------------------------- */
+/* Typing test (/speed)               */
+/* ---------------------------------- */
+
+export type TypingMode = "time" | "words";
+
+export interface TypingConfig {
+  mode: TypingMode;
+  time: number;
+  words: number;
+  punct: boolean;
+  nums: boolean;
+}
+
+/** One punctuation rule, picked by a random roll below `upTo`. */
+export interface PunctuationRule {
+  upTo: number;
+  suffix?: string;
+  wrap?: [string, string];
+}
+
+export interface TypingGeneration {
+  numberChance: number;
+  smallNumberMax: number;
+  largeNumberMax: number;
+  /** Words generated up front in time mode, where the stream is endless. */
+  timeModeWordCount: number;
+  refillThreshold: number;
+  refillCount: number;
+  /** How far past a word's length the typist may run before input is ignored. */
+  maxOvertype: number;
+  punctuation: PunctuationRule[];
+  sentenceEnd: string;
+}
+
+export interface TypingHint {
+  keys: string[];
+  alt?: string[];
+  label: string;
+  desktopOnly: boolean;
+}
+
+export interface TypingData {
+  brand: string;
+  tagline: string;
+  description: string;
+  defaults: TypingConfig;
+  options: Record<TypingMode, number[]>;
+  generation: TypingGeneration;
+  storageKeys: { config: string; personalBest: string };
+  personalBest: { minAccuracy: number };
+  hints: TypingHint[];
+  words: string[];
+}
+
+/** One second of the test, plotted on the results chart. */
+export interface TypingSample {
+  second: number;
+  wpm: number;
+  raw: number;
+  errors: number;
+}
+
+export interface TypingCounts {
+  correct: number;
+  incorrect: number;
+  extra: number;
+  missed: number;
+  /** Characters in fully correct words, the basis for net WPM. */
+  wordChars: number;
+}
+
+export interface TypingResult {
+  wpm: number;
+  raw: number;
+  accuracy: number;
+  consistency: number;
+  elapsed: number;
+  counts: TypingCounts;
+}

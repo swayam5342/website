@@ -15,6 +15,11 @@
         {
           "text": "swayam :: backend x cybersecurity x ai systems",
           "accent": true
+        },
+        "",
+        {
+          "text": "not everything here is in 'help'.",
+          "dim": true
         }
       ]
     },
@@ -91,6 +96,14 @@
       "description": "",
       "hidden": true,
       "output": ["nice try."]
+    },
+    {
+      "name": "speed",
+      "description": "",
+      "aliases": ["type", "wpm", "tapline"],
+      "hidden": true,
+      "redirect": "/speed",
+      "opening": "found it. loading tapline ..  ."
     }
   ]
 }
