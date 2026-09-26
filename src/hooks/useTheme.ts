@@ -12,7 +12,8 @@ export type Theme =
   | "catppuccin-mocha"
   | "gruvbox-dark"
   | "nord"
-  | "solarized";
+  | "solarized"
+  | "moss";
 
 export interface ThemeInfo {
   id: Theme;
@@ -70,6 +71,7 @@ export const THEMES: ThemeInfo[] = [
     mode: "dark",
     swatch: { bg: "#002b36", accent: "#d4a017" },
   },
+  { id: "moss", label: "MOSS", mode: "dark", swatch: { bg: "#1f2a24", accent: "#b8d46a" } },
 ];
 
 const STORAGE_KEY = "theme";

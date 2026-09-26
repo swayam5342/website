@@ -133,3 +133,15 @@
   --brand-accent-soft: rgba(212, 160, 23, 0.1);
   --brand-accent-border: rgba(212, 160, 23, 0.4);
 }
+
+/* MOSS — deep green with a lime accent */
+[data-theme="moss"] {
+  --brand-bg: #1f2a24;
+  --brand-surface: #26332c;
+  --brand-border: #334137;
+  --brand-text: #dfe6d3;
+  --brand-muted: #8b9c88;
+  --brand-accent: #b8d46a;
+  --brand-accent-soft: rgba(184, 212, 106, 0.1);
+  --brand-accent-border: rgba(184, 212, 106, 0.4);
+}
