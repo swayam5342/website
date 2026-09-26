@@ -93,6 +93,13 @@ export default function AboutView() {
 
         // Rendered as an <img> so the browser reserves the aspect ratio and
         // the card scales as one unit instead of reflowing at small widths.
+        //
+        // The <img> is also the security control. The card is fetched from a
+        // repo we own, but it is still a remote document: inside an <img> the
+        // browser disables scripting and external references in the SVG, so it
+        // cannot run anything. Do not switch this to inline SVG or
+        // dangerouslySetInnerHTML -- the two regexes above are a blocklist, and
+        // a blocklist does not hold against SVG.
         const viewBox = recolored.match(/viewBox="([\d.\s-]+)"/);
         const [, , vbWidth, vbHeight] = viewBox
           ? viewBox[1].trim().split(/\s+/).map(Number)
