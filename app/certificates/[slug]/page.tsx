@@ -24,11 +24,11 @@ export async function generateMetadata({
   return {
     title: cert.name,
     description,
-    alternates: { canonical: `/certificates/${cert.slug}` },
+    alternates: { canonical: `/${cert.slug}` },
     openGraph: {
       title: cert.name,
       description,
-      url: `/certificates/${cert.slug}`,
+      url: `/${cert.slug}`,
     },
   };
 }
