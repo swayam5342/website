@@ -12,7 +12,7 @@
   },
   {
     "id": 2,
-    "order": 2,
+    "order": 3,
     "slug": "log-analysis-for-cyber-defense",
     "name": "Foundations of Log Analysis for Cyber Defense",
     "issuer": "RED TEAM LEADERS",
@@ -20,5 +20,16 @@
     "file": "/pdf/red_team_leaders_log_analysis.pdf",
     "verify": "https://courses.redteamleaders.com/completion/739bbd1a425e3b56",
     "icon": "file-search"
+  },
+  {
+    "id": 3,
+    "order": 2,
+    "slug": "Networking_Basics_certificate",
+    "name": "Networking Basics",
+    "issuer": "CISCO",
+    "year": "2026",
+    "file": "/pdf/Networking_Basics_certificate.pdf",
+    "verify": "",
+    "icon": "shield"
   }
 ]
