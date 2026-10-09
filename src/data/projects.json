@@ -238,6 +238,57 @@
       },
       "lang": ["C++"],
       "icon": "cpu"
+    },
+    {
+      "id": 12,
+      "order": 11,
+      "show": false,
+      "slug": "grain",
+      "title": "Grain",
+      "description": "Browser falling-sand sandbox built on a chunked cellular automaton, with sand, water, fire, acid, gas, oil, wood, stone, and spawners. Zero dependencies, no build step.",
+      "tags": ["Recreational"],
+      "github": "https://github.com/swayam5342/grain",
+      "demo": "https://swayamcyber.in/grain/",
+      "featured": false,
+      "resume_points": [
+        "Built a falling-sand cellular automaton in plain JavaScript ES modules with no dependencies or build step.",
+        "Implemented chunk-based dirty tracking over 16x16 chunks, so only chunks disturbed in the previous step are simulated and settled regions sleep at zero cost.",
+        "Modeled density-based displacement, liquid viscosity, acid corrosion, fire spread, and gas/steam/smoke lifetimes as per-element update rules.",
+        "Rendered directly into a Uint32Array-backed ImageData using precomputed per-element shade and fire-intensity color lookup tables."
+      ],
+      "details": {
+        "architecture": "Struct-of-arrays world state (type, life, shade, and tick-stamp Uint8Arrays) stepped bottom-up over a double-buffered active-chunk map; a separate UI module handles the toolbar, pointer/keyboard input, and the main loop.",
+        "challenges": "Keeping the simulation unbiased and correct under chunk sleeping: cells on chunk edges wake their neighbours, a per-cell tick stamp prevents double-moves, and the sweep direction alternates per row to avoid sideways drift.",
+        "security": "Not a security-focused project; it is a fully static client-side page with no network calls, accounts, or user data.",
+        "improvements": "Planned: more element interactions and reactions, plus save/load of scenes."
+      },
+      "lang": ["JavaScript", "HTML", "CSS"]
+    },
+    {
+      "id": 13,
+      "order": 12,
+      "show": false,
+      "slug": "thompson",
+      "title": "Thompson",
+      "description": "Regular expression engine in Go built on Ken Thompson's 1968 construction, compiled to WebAssembly to animate the NFA reading a string one character at a time.",
+      "tags": ["Recreational"],
+      "github": "https://github.com/swayam5342/thompson",
+      "demo": "https://blog.swayam.li/projects/thompson",
+      "featured": false,
+      "resume_points": [
+        "Built a regex engine in stdlib-only Go: a recursive-descent parser, Thompson's NFA construction from patched fragments, and a set-of-states simulation that matches in linear time.",
+        "Supported full-Unicode literals, alternation, grouping, * + ? quantifiers, character classes, negated classes, and \\d \\w \\s shorthands, with position-tagged syntax errors.",
+        "Verified correctness by diffing 3,000 random patterns against Go's regexp package over every string up to length 5, plus a pathological-pattern test that guards linear-time matching.",
+        "Compiled the engine to WebAssembly and exposed compile/trace to JavaScript, driving an interactive visualizer that animates active states and fired edges step by step."
+      ],
+      "details": {
+        "architecture": "Pattern → syntax tree (recursive descent) → NFA (Thompson's construction, renumbered left to right) → simulation over the current state set; Trace records fired and epsilon edges per step, and Graph/DOT export the NFA as JSON nodes/edges or Graphviz.",
+        "challenges": "Keeping matching linear for patterns like (x+x+)+y that blow up backtracking engines, using a generation-stamped mark array so each state enters a set at most once per step, while recording the same run in detail for the visualizer without diverging from Match.",
+        "security": "Not a security-focused project; the linear-time guarantee does make it immune to the catastrophic backtracking behind ReDoS.",
+        "improvements": "Possible next steps: subset construction into a DFA, unanchored search, and capture groups."
+      },
+      "lang": ["Go", "WebAssembly"],
+      "icon": "network"
     }
   ],
   "main_heading": "PROJECTS",
