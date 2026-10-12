@@ -288,7 +288,31 @@
         "improvements": "Possible next steps: subset construction into a DFA, unanchored search, and capture groups."
       },
       "lang": ["Go", "WebAssembly"],
-      "icon": "network"
+      "icon": "regex"
+    },
+    {
+      "id": 14,
+      "order": 13,
+      "slug": "crawler",
+      "title": "Crawler",
+      "description": "Production-grade web crawler in Go built for unattended runs against real-world sites, with per-domain politeness, layered resilience, checkpoint/resume, and Prometheus observability.",
+      "tags": ["Backend", "Systems", "DevOps"],
+      "github": "https://github.com/swayam5342/crawler",
+      "featured": true,
+      "resume_points": [
+        "Built a concurrent crawler in Go with a worker pool enforcing global and per-domain concurrency limits, per-domain token-bucket rate limiting, and robots.txt Crawl-delay compliance.",
+        "Implemented a resilient HTTP fetcher with layered DNS/TCP/TLS/request timeouts, retries with exponential backoff and jitter, per-domain circuit breakers, redirect-loop detection, body size caps, gzip/brotli decoding, charset normalization, and HTTP/2-to-1.1 fallback.",
+        "Designed checkpointing of frontier and visited state for crash-safe resumption, plus a JSONL dead-letter log so URLs that exhaust retries never vanish silently.",
+        "Built a pluggable storage pipeline (Postgres metadata, local-disk or S3 content-addressed blob store) with Prometheus metrics, health checks, and graceful SIGTERM shutdown that drains in-flight fetches."
+      ],
+      "details": {
+        "architecture": "Packages mirror the crawl pipeline (frontier, robots, ratelimit, fetcher, breaker, extractor, storage, metrics) and are wired only at cmd/crawler; the crawler core defines minimal consumer-side interfaces that concrete packages satisfy implicitly, keeping the dependency graph a DAG.",
+        "challenges": "Making shutdown and resumability correct together: SIGTERM stops new work, lets in-flight fetches finish within a grace period, then persists a final checkpoint, which required an exact enumerable visited set rather than a bloom filter.",
+        "security": "Respects robots.txt and noindex/nofollow, scopes crawling to allowed domains, caps response bodies and redirect hops to bound resource use from hostile sites, and takes credentials like the Postgres DSN from env vars.",
+        "improvements": "Planned: additional extractors (sitemaps, JSON APIs) and a sharded, bloom-filter-backed dedup service for distributed crawling."
+      },
+      "lang": ["Go", "PostgreSQL", "Docker", "Prometheus"],
+      "icon": "globe"
     }
   ],
   "main_heading": "PROJECTS",
