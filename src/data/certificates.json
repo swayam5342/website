@@ -31,5 +31,16 @@
     "file": "/pdf/Networking_Basics_certificate.pdf",
     "verify": "https://www.netacad.com/recognitions/verify/a407bbd6-e954-43b6-a451-bf00063e0009",
     "icon": "network"
+  },
+  {
+    "id": 4,
+    "order": 4,
+    "slug": "AWS_Cloud_Foundations_Training",
+    "name": "AWS Cloud Foundations Training",
+    "issuer": "AWS",
+    "year": "2026",
+    "file": "/pdf/aws_cloud_foundations_training.pdf",
+    "verify": "https://www.credly.com/go/8tHwuAHQ",
+    "icon": "network"
   }
 ]
