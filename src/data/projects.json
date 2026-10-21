@@ -262,7 +262,8 @@
         "security": "Not a security-focused project; it is a fully static client-side page with no network calls, accounts, or user data.",
         "improvements": "Planned: more element interactions and reactions, plus save/load of scenes."
       },
-      "lang": ["JavaScript", "HTML", "CSS"]
+      "lang": ["JavaScript", "HTML", "CSS"],
+      "icon": "hourglass"
     },
     {
       "id": 13,

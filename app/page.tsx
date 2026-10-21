@@ -4,7 +4,7 @@ import type React from "react";
 import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import projectsData from "@/src/data/projects";
+import projectsData, { getProjectIcon } from "@/src/data/projects";
 import homeData from "@/src/data/home";
 import experiencesData from "@/src/data/experiences";
 import timelineData from "@/src/data/timeline";
@@ -215,7 +215,7 @@ export default function Home() {
 
                 <div className="flex justify-between items-start mb-8">
                   <div className="flex items-center space-x-3">
-                    <IconBadge icon={p.icon} />
+                    <IconBadge icon={getProjectIcon(p)} />
                     <span className="text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5">
                       UID: {String(p.id).padStart(2, "0")}
                     </span>
