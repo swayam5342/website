@@ -314,6 +314,57 @@
       },
       "lang": ["Go", "PostgreSQL", "Docker", "Prometheus"],
       "icon": "globe"
+    },
+    {
+      "id": 15,
+      "order": 14,
+      "slug": "dnsr",
+      "title": "dnsr",
+      "description": "Iterative, DNSSEC-validating DNS resolver written from scratch in Go, walking the hierarchy from the root servers and serving answers over UDP, TCP, and DNS over TLS 1.3.",
+      "tags": ["Cybersecurity", "Systems", "CLI"],
+      "github": "https://github.com/swayam5342/dnsr",
+      "featured": true,
+      "resume_points": [
+        "Built an iterative DNS resolver in stdlib-only Go, hand-encoding the RFC 1035 wire format with name compression, EDNS(0), and 11 record types including DS, DNSKEY, and RRSIG.",
+        "Implemented DNSSEC chain-of-trust validation from the IANA root KSKs through DS and DNSKEY to each answer's RRSIG, supporting RSA, ECDSA P-256/P-384, and Ed25519.",
+        "Hardened resolution against cache poisoning with crypto-random query IDs, 0x20 case randomisation, bailiwick checks, glue filtering, and QNAME minimisation (RFC 9156).",
+        "Built a recursive server over UDP, TCP, and TLS 1.3-only DoT with an access list, per-client token-bucket rate limiting, and in-flight caps, verified by 34 offline tests against a signed fake DNS hierarchy and 1M fuzzed packets with zero panics."
+      ],
+      "details": {
+        "architecture": "Stdlib-only Go split into wire (message parse/build and DNSSEC record formats), resolver (iterative resolution, answer/delegation/key caches, DNSSEC validation), and server (UDP/TCP/DoT listeners, ACL, rate limit) packages, with a dnsr CLI and a small dnsq test client.",
+        "challenges": "Following referrals, glueless delegations, CNAME chains, and TC-to-TCP fallback from the 13 root hints while building a DNSSEC chain of trust that classifies every answer as secure, insecure, or bogus; tested offline with a loopback DNS hierarchy signed with real ECDSA keys, including hostile servers that send forged replies and poisoned glue.",
+        "security": "Defends against off-path spoofing, cache poisoning, poisoned glue, open-resolver amplification, NXNSAttack-style resource exhaustion, and malformed packets via strict reply matching, bailiwick checks, bounded caches and glueless lookups, compression-jump limits, and escaping of untrusted names before printing; bogus DNSSEC answers return SERVFAIL.",
+        "improvements": "Planned: NSEC/NSEC3 authenticated denial of existence, negative caching (RFC 2308), IPv6 transport, parallel queries with RTT-based server selection, DNS Cookies, and DNS over HTTPS."
+      },
+      "date": "October 2026",
+      "lang": ["Go"],
+      "icon": "network"
+    },
+    {
+      "id": 16,
+      "order": 15,
+      "show": false,
+      "slug": "pong",
+      "title": "Pong",
+      "description": "Bootable Pong written in 16-bit x86 assembly with no OS underneath: the BIOS boots the disk image straight into the game, which runs in VGA text mode in QEMU or on bare metal.",
+      "tags": ["Systems", "Recreational"],
+      "github": "https://github.com/swayam5342/pong",
+      "featured": false,
+      "resume_points": [
+        "Built a bare-metal Pong game in NASM x86 real-mode assembly, booted by a hand-written two-stage boot loader that loads the game from disk with BIOS INT 13h.",
+        "Replaced the BIOS keyboard and timer interrupt handlers with custom IRQ1/IRQ0 ISRs, tracking per-scancode key state and reprogramming the PIT to drive a 60 Hz game loop.",
+        "Implemented double-buffered rendering to VGA text memory, PC speaker sound via PIT channel 2, and a beatable CPU opponent alongside local two-player mode.",
+        "Tested the game headlessly through the QEMU monitor (scripted keypresses and screen dumps), which caught and fixed keypresses lost between frames."
+      ],
+      "details": {
+        "architecture": "A 512-byte boot sector loads about 2 KB of game code to 0x7E00; the game is split into NASM modules (boot, main loop, game logic, video, sound, timer, keyboard) joined with %include into a single flat binary padded to a 1.44 MB floppy image.",
+        "challenges": "Doing everything without an OS or libraries: owning the interrupt vector table, timing frames off the PIT with HLT, and latching key presses in the ISR so taps shorter than a frame are not dropped.",
+        "security": "Not a security-focused project; it runs as the only code on the machine in real mode, with no network, file system, or user data.",
+        "improvements": "Possible next steps: a mode 13h graphics version with sub-cell ball movement, and a single 512-byte boot-sector edition."
+      },
+      "date": "October 2026",
+      "lang": ["x86 Assembly", "NASM", "QEMU"],
+      "icon": "gamepad-2"
     }
   ],
   "main_heading": "PROJECTS",
