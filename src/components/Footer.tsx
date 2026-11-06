@@ -48,6 +48,7 @@ export const Footer: FC = () => {
           <a
             href={socialData.blog}
             target="_blank"
+            rel="noopener noreferrer"
             className="flex items-center gap-2 text-brand-muted hover:text-brand-accent transition"
           >
             <PenSquare size={16}/>
