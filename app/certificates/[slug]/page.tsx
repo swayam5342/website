@@ -1,83 +1,81 @@
 import type { Metadata } from "next";
+import siteData from "@/src/data/site";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, Download, Maximize2 } from "lucide-react";
+import { ArrowLeft, ArrowUpRight, Download } from "lucide-react";
 import certificatesData from "@/src/data/certificates";
+import { PageTransition } from "@/src/components/PageTransition";
+import { DocPreview } from "@/src/components/DocPreview";
 import type { Certificate } from "@/types";
 
 export function generateStaticParams() {
   return (certificatesData as Certificate[]).map((c) => ({ slug: c.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const cert = (certificatesData as Certificate[]).find((c) => c.slug === slug);
-
   if (!cert) return {};
 
-  const description = `${cert.name} — issued by ${cert.issuer} (${cert.year}).`;
-
+  const description = `Swayam's ${cert.name} certificate, issued by ${cert.issuer} in ${cert.year}. View it here or download the PDF.`;
   return {
     title: cert.name,
     description,
-    alternates: { canonical: `/${cert.slug}` },
+    alternates: { canonical: `/certificates/${cert.slug}` },
     openGraph: {
-      title: cert.name,
-      description,
-      url: `/${cert.slug}`,
-    },
+      images: [{ url: siteData.ogImage }], title: cert.name, description, url: `/certificates/${cert.slug}` },
   };
 }
 
-export default async function CertificateDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+export default async function CertificateDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const cert = (certificatesData as Certificate[]).find((c) => c.slug === slug);
-
   if (!cert) notFound();
+  const hasVerify = cert.verify && cert.verify.trim() !== "";
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-12 flex flex-col h-[calc(100vh-120px)]">
-      <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 space-y-4 md:space-y-0">
-        <div className="flex items-center space-x-4">
-          <Link href="/certificates" className="p-2 hover:bg-white/5 rounded-full transition-colors text-brand-muted hover:text-brand-accent">
-            <ArrowLeft size={24} />
+    <PageTransition>
+      <div className="frame doc">
+        <p className="study__back">
+          <Link href="/about#certificates" className="go" transitionTypes={["nav-back"]}>
+            <ArrowLeft size={16} aria-hidden="true" />
+            All certificates
           </Link>
+        </p>
+        <header className="doc__head">
           <div>
-            <h1 className="text-2xl font-bold">{cert.name}</h1>
-            <p className="text-sm text-brand-muted">{cert.issuer} • {cert.year}</p>
+            <h1 className="t-h2">{cert.name}</h1>
+            <p className="muted">
+              {cert.issuer}, <span className="tabular">{cert.year}</span>
+            </p>
           </div>
-        </div>
-
-        <div className="flex items-center space-x-3">
-          <a href={cert.file} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-brand-surface border border-white/10 px-4 py-2 rounded-lg text-sm font-bold hover:border-brand-accent/50 transition-all">
-            <Maximize2 size={16} />
-            <span>Fullscreen</span>
-          </a>
-          <a href={cert.file} download className="flex items-center space-x-2 bg-brand-accent text-brand-bg px-4 py-2 rounded-lg text-sm font-bold hover:scale-[1.02] transition-all">
-            <Download size={16} />
-            <span>Download</span>
-          </a>
-        </div>
-      </div>
-
-      <div className="flex-grow bg-brand-surface rounded-2xl border border-white/10 overflow-hidden shadow-2xl relative">
-        <iframe
-          src={`${cert.file}#toolbar=0&navpanes=0`}
-          className="w-full h-full border-none"
-          title={cert.name}
+          <div className="doc__actions">
+            {hasVerify && (
+              <a className="go" data-external href={cert.verify} target="_blank" rel="noopener noreferrer">
+                Verify with {cert.issuer}
+                <ArrowUpRight size={16} aria-hidden="true" />
+              </a>
+            )}
+            <a className="go" data-external href={cert.file} target="_blank" rel="noopener noreferrer">
+              Open the PDF
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+            <a className="btn" href={cert.file} download>
+              <Download size={18} aria-hidden="true" />
+              Download
+            </a>
+          </div>
+        </header>
+        <DocPreview
+          file={cert.file}
+          title={`${cert.name} certificate`}
+          alt={`The ${cert.name} certificate issued to Swayam by ${cert.issuer} in ${cert.year}.`}
+          priority
         />
-        <div className="absolute bottom-4 right-4 bg-brand-bg/80 backdrop-blur px-3 py-1.5 rounded-full text-[10px] uppercase font-mono tracking-widest text-brand-muted pointer-events-none md:hidden">
-          Use two fingers to scroll
-        </div>
+        <p className="muted t-small doc__fallback">
+          Select the certificate to open the PDF{hasVerify ? `, or verify it with ${cert.issuer}` : ""}.
+        </p>
       </div>
-    </div>
+    </PageTransition>
   );
 }

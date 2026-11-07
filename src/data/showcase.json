@@ -1,0 +1,124 @@
+{
+  "_note": "What each case study shows. Every excerpt is copied verbatim from the project's own repository (file and line numbers given); terminal output is a real recorded run. Pictures are the project's own screenshots. 'also' lists extra figures shown only on the case study page.",
+  "tributary": {
+    "kind": "image",
+    "src": "/media/tributary/uploading.webp",
+    "width": 1400,
+    "height": 875,
+    "alt": "Tributary's file view in dark mode, with an upload panel showing three files streaming to Drive at 31%, 20% and 44%.",
+    "caption": "Tributary's web app while three resumable uploads stream to a linked Drive account. From the demo on tributary.swayam.li.",
+    "also": [
+      {
+        "kind": "video",
+        "src": "/media/tributary/demo.mp4",
+        "poster": "/media/tributary/files-dark.webp",
+        "width": 1280,
+        "height": 720,
+        "alt": "Screen recording of Tributary's web app: browsing files, uploading and moving them between linked Drive accounts.",
+        "caption": "A 28-second recording of the web app, from tributary.swayam.li."
+      },
+      {
+        "kind": "diagram",
+        "diagram": "tributary",
+        "caption": "One origin: a Node server serves the React app and proxies the API. The Go server keeps its records and background jobs in PostgreSQL, and reaches every Drive account through one provider interface."
+      }
+    ]
+  },
+  "plugfit": {
+    "kind": "diagram",
+    "diagram": "plugfit",
+    "caption": "How a spec becomes a live endpoint: the API takes the spec, a Celery job cleans it with Gemini 2.0 Flash, and the executor registry serves the result over a custom MCP transport, isolated per tenant."
+  },
+  "sandboxd": {
+    "kind": "diagram",
+    "diagram": "sandboxd",
+    "caption": "What happens to one request: Sandboxd checks it, looks the language up in its registry, then compiles and runs the code inside NsJail, every test case in its own sandboxed process, and returns a verdict for each.",
+    "also": [
+      {
+        "kind": "code",
+        "file": "docs/api.md",
+        "lines": [
+          50,
+          59
+        ],
+        "language": "json",
+        "code": "{\n  \"language\": \"c\",\n  \"source\": \"#include <stdio.h>\\nint main() {\\n    printf(\\\"Hello, World!\\\\n\\\");\\n    return 0;\\n}\",\n  \"tests\": [\n    {\n      \"stdin\": \"\",\n      \"expected_stdout\": \"Hello, World!\\n\"\n    }\n  ]\n}",
+        "caption": "An example request from the API docs: a C program and one test case."
+      },
+      {
+        "kind": "code",
+        "file": "docs/api.md",
+        "lines": [
+          64,
+          82
+        ],
+        "language": "json",
+        "code": "{\n  \"status\": \"accepted\",\n  \"build\": {\n    \"status\": \"ok\",\n    \"stdout\": \"\",\n    \"stderr\": \"\",\n    \"duration_ms\": 142\n  },\n  \"tests\": [\n    {\n      \"status\": \"accepted\",\n      \"stdout\": \"Hello, World!\\n\",\n      \"stderr\": \"\",\n      \"Exitcode\": 0,\n      \"duration_ms\": 4,\n      \"memory_peak_kb\": 1284\n    }\n  ]\n}",
+        "caption": "The response the docs show for it: the build, then each test with its output, time and memory."
+      }
+    ]
+  },
+  "dnsr": {
+    "kind": "diagram",
+    "diagram": "dnsr",
+    "caption": "How dnsr resolved www.github.com in one real run: it starts at a root server and follows each referral down. Every server is asked for only one more label than its own zone, so the root never sees the full name.",
+    "also": [
+      {
+        "kind": "terminal",
+        "title": "dnsr www.github.com",
+        "code": "$ dnsr www.github.com\n;; resolving www.github.com. A\n→ asking e.root-servers.net. (192.203.230.10) for com. NS\n↓ e.root-servers.net. → referral to com. [a.gtld-servers.net, b.gtld-servers.net, c.gtld-servers.net, +10 more] (84ms)\n→ asking j.gtld-servers.net. (192.48.79.30) for github.com. NS\n↓ j.gtld-servers.net. → referral to github.com. [ns-520.awsdns-01.net, ns-421.awsdns-52.com, ns-1707.awsdns-21.co.uk, +5 more] (169ms)\n→ asking ns-421.awsdns-52.com. (205.251.193.165) for www.github.com. A\n↪ CNAME www.github.com. is an alias → github.com., restarting from the top\n  │ ↷ starting at cached zone github.com.\n  │ → asking ns-421.awsdns-52.com. (205.251.193.165) for github.com. A\n  │ ✓ ns-421.awsdns-52.com. answered 1 A record(s) (76ms)\n\n;; NOERROR · 4 hops · 388ms\nwww.github.com.                3600 IN CNAME github.com.\ngithub.com.                      60 IN A     20.207.73.82",
+        "caption": "The same run as dnsr prints it, from the README."
+      }
+    ]
+  },
+  "vulnscan": {
+    "kind": "diagram",
+    "diagram": "vulnscan",
+    "caption": "What a scan does: VulnScan finds the dependency files, asks OSV.dev about every package in batches (cached on disk), scores each advisory with its own CVSS v3.1 calculator, and writes a report and a fix script for you to review.",
+    "also": [
+      {
+        "kind": "code",
+        "file": "internal/osv/severity.go",
+        "lines": [
+          102,
+          127
+        ],
+        "language": "go",
+        "code": "\tiscBase := 1 - ((1 - c) * (1 - i) * (1 - a))\n\n\tvar impact float64\n\tif scopeChanged {\n\t\timpact = 7.52*(iscBase-0.029) - 3.25*math.Pow(iscBase-0.02, 15)\n\t} else {\n\t\timpact = 6.42 * iscBase\n\t}\n\tif impact <= 0 {\n\t\treturn 0, nil\n\t}\n\n\texploitability := 8.22 * av * ac * pr * ui\n\n\tvar base float64\n\tif scopeChanged {\n\t\tbase = roundUpToOneDecimal(math.Min(1.08*(impact+exploitability), 10))\n\t} else {\n\t\tbase = roundUpToOneDecimal(math.Min(impact+exploitability, 10))\n\t}\n\treturn base, nil\n}\n\nfunc roundUpToOneDecimal(v float64) float64 {\n\treturn math.Ceil(v*10) / 10\n}",
+        "caption": "The end of that CVSS v3.1 calculator, written from the FIRST.org formula."
+      }
+    ]
+  },
+  "boids-sim": {
+    "kind": "image",
+    "src": "/media/play/boids.webp",
+    "width": 1142,
+    "height": 714,
+    "alt": "The original Boids Simulation: a hundred pink dots flocking on a cream canvas, running in the browser as WebAssembly.",
+    "caption": "The original, in Go with Ebiten, compiled to WebAssembly. The flock at the top of this page uses its rules."
+  },
+  "6502-emulator": {
+    "kind": "image",
+    "src": "/media/play/6502.webp",
+    "width": 1136,
+    "height": 710,
+    "alt": "The 6502 playground: an assembly program that prints a string, beside the console, registers, status flags and a memory view.",
+    "caption": "The emulator compiled to WebAssembly, with an assembler, console, registers and memory view."
+  },
+  "grain": {
+    "kind": "image",
+    "src": "/media/play/grain.webp",
+    "width": 1164,
+    "height": 727,
+    "alt": "Grain’s sandbox: a pile of sand on a wooden plank above a stone tank of water.",
+    "caption": "The starting scene in Grain. Try fire on the plank or acid on the sand pile."
+  },
+  "thompson": {
+    "kind": "image",
+    "src": "/media/play/thompson.webp",
+    "width": 1072,
+    "height": 670,
+    "alt": "Thompson’s visualizer: the pattern (a|b)*abb and the string babaabb, the NFA with its active states lit, and the tape of characters being read.",
+    "caption": "The NFA for (a|b)*abb reading babaabb. Every lit state is one the machine is in; the tape below shows the string being read."
+  }
+}

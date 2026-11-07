@@ -1,13 +1,18 @@
 {
-  "heading": "ID_IDENTIFIER: SWAYAM",
-  "name": "SWAYAM",
+  "heading": "About",
+  "name": "Swayam",
   "roles": ["Backend Engineering", "Cybersecurity", "AI Systems"],
   "photo": "/profile.jpeg",
   "main_text": "I build the invisible parts of software — APIs, deployment platforms, sandboxes, and detection pipelines — and I treat security as a design constraint, not a feature bolted on at the end.",
   "sub_text": "I'm pursuing two degrees in parallel: a B.Tech in Cybersecurity at VIT Vellore and a BS in Data Science at IIT Madras. That mix shapes how I engineer — every system should be observable, measurable, and hard to break. Recent work includes a Kubernetes-native deployment platform (Kargo), a multi-tenant quality layer for MCP servers (PlugFit), a Linux sandboxing engine built on NsJail (Sandboxd), and a Windows SIEM pipeline with custom detection rules. Off the keyboard-shipping path, I reverse engineer binaries, dig into system internals, and tune detection logic for fun.",
   "security_principles": [
-    "SECURITY IS AN INVARIANT, NOT A FEATURE.",
-    "OBSERVABILITY IS PREREQUISITE FOR SECURITY.",
-    "SIMPLICITY IS THE ULTIMATE HARDENING TOOL."
+    "Security is an invariant, not a feature.",
+    "Observability is a prerequisite for security.",
+    "Simplicity is the ultimate hardening tool."
+  ],
+  "principle_proofs": [
+    { "project": "tributary", "text": "In Tributary, API keys are hashed and closed by default, and a leaked key can trash files but never delete them permanently." },
+    { "project": "windows-soc-lab", "text": "My Windows SIEM collects Windows telemetry, detects suspicious activity with custom rules, and sends real-time alerts." },
+    { "project": "dnsr", "text": "dnsr is stdlib-only Go: it hand-encodes the DNS wire format itself, with no third-party modules." }
   ]
 }

@@ -1,0 +1,27 @@
+{
+  "/pdf/aws_cloud_foundations_training.pdf": {
+    "src": "/pdf/previews/aws_cloud_foundations_training.webp",
+    "width": 1600,
+    "height": 1236
+  },
+  "/pdf/cisco_intro_to_cyber.pdf": {
+    "src": "/pdf/previews/cisco_intro_to_cyber.webp",
+    "width": 1600,
+    "height": 1085
+  },
+  "/pdf/Networking_Basics_certificate.pdf": {
+    "src": "/pdf/previews/Networking_Basics_certificate.webp",
+    "width": 1600,
+    "height": 1085
+  },
+  "/pdf/red_team_leaders_log_analysis.pdf": {
+    "src": "/pdf/previews/red_team_leaders_log_analysis.webp",
+    "width": 1600,
+    "height": 1235
+  },
+  "/pdf/resume.pdf": {
+    "src": "/pdf/previews/resume.webp",
+    "width": 1600,
+    "height": 2072
+  }
+}

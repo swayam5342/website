@@ -12,6 +12,8 @@ export interface Project {
   github?: string;
   demo?: string;
   featured: boolean;
+  /** Position among the large case studies (1 = first). Optional; absent means the project is listed in the index only. */
+  spotlight?: number;
   show?: boolean;
   resume_points: string[];
   details?: {
@@ -107,12 +109,28 @@ export interface AboutData {
   main_text: string;
   sub_text: string;
   security_principles: string[];
+  /** Optional, one per principle, in the same order: a fact from a project that shows it. */
+  principle_proofs?: { project: string; text: string }[];
 }
 
 export interface HomeData {
-  main_heading: string;
-  project: string;
-  main_text: string;
+  /** The h1 on the first screen. */
+  name: string;
+  /** One plain sentence under the name: what I build. */
+  lead: string;
+  /** Who I am, in one line under the lead. */
+  education: string;
+  /** Meta description for search results and link previews. */
+  description: string;
+  work_cta: string;
+  terminal_cta: string;
+  work_heading: string;
+  work_intro: string;
+  index_link: string;
+  play_heading: string;
+  play_intro: string;
+  close_heading: string;
+  close_text: string;
 }
 
 export interface SocialData {
@@ -124,6 +142,8 @@ export interface SocialData {
 
 export interface SiteData {
   name: string;
+  /** Default page title, used on the home page and in link previews. */
+  title: string;
   url: string;
   titleTemplate: string;
   ogImage: string;

@@ -1,147 +1,129 @@
-@theme{
-  --font-space: "Space Mono", monospace;
-  --font-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+/*
+ * Colour tokens. One ground, one ink, one accent per theme.
+ * Stone is the deliberate default; the others are extras in the switcher.
+ * Every pair used for text was checked against WCAG AA (4.5:1):
+ *   ink / ground, muted / ground, accent / ground, and the same on --surface.
+ *
+ * --brand-* names are kept as aliases because /speed and older components
+ * read them.
+ */
+
+:root,
+[data-theme="stone"] {
+  color-scheme: light;
+  --bg: #dfdedb;
+  --surface: #d3d2ce;
+  --surface-2: #c8c7c2;
+  --ink: #22211b;
+  --muted: #57554d;
+  --accent: #1f4dc4;
+  --on-accent: #f4f3ef;
+  /* code and terminal panels: an ink field on the stone page */
+  --code-bg: #22211b;
+  --code-ink: #e6e4dc;
+  --code-muted: #a9a69b;
+  --code-accent: #9db8ff;
+  --flock: #1f4dc4;
+  --focus: #1f4dc4;
+}
+
+[data-theme="carbon"] {
+  /* Softened: a lifted ground and dimmed text (12.3:1, down from 15.7:1)
+     so it doesn't glare at night. */
+  color-scheme: dark;
+  --bg: #171715;
+  --surface: #201f1d;
+  --surface-2: #2a2927;
+  --ink: #d8d6cf;
+  --muted: #a3a199;
+  --accent: #86a8ff;
+  --on-accent: #171715;
+  --code-bg: #201f1d;
+  --code-ink: #d8d6cf;
+  --code-muted: #a3a199;
+  --code-accent: #86a8ff;
+  --flock: #86a8ff;
+  --focus: #86a8ff;
+}
+
+/* NORD: arctic blue-grey with frost cyan */
+[data-theme="nord"] {
+  color-scheme: dark;
+  --bg: #2e3440;
+  --surface: #3b4252;
+  --surface-2: #434c5e;
+  --ink: #e5e9f0;
+  --muted: #b4bfd2;
+  --accent: #88c0d0;
+  --on-accent: #2e3440;
+  --code-bg: #3b4252;
+  --code-ink: #e5e9f0;
+  --code-muted: #b4bfd2;
+  --code-accent: #88c0d0;
+  --flock: #88c0d0;
+  --focus: #88c0d0;
+}
+
+/* TOKYO NIGHT STORM: slate with periwinkle. Its usual comment grey
+   (#565f89) fails contrast, so secondary text uses its lighter fg_dark. */
+[data-theme="tokyo"] {
+  color-scheme: dark;
+  --bg: #24283b;
+  --surface: #2c3148;
+  --surface-2: #363c57;
+  --ink: #c0caf5;
+  --muted: #a9b1d6;
+  --accent: #7aa2f7;
+  --on-accent: #1f2335;
+  --code-bg: #2c3148;
+  --code-ink: #c0caf5;
+  --code-muted: #a9b1d6;
+  --code-accent: #7aa2f7;
+  --flock: #7aa2f7;
+  --focus: #7aa2f7;
+}
+
+[data-theme="solarized"] {
+  color-scheme: dark;
+  --bg: #002b36;
+  --surface: #073642;
+  --surface-2: #0d4150;
+  --ink: #eee8d5;
+  --muted: #a3b1b1;
+  --accent: #e5b93a;
+  --on-accent: #002b36;
+  --code-bg: #073642;
+  --code-ink: #eee8d5;
+  --code-muted: #a3b1b1;
+  --code-accent: #e5b93a;
+  --flock: #e5b93a;
+  --focus: #e5b93a;
+}
+
+[data-theme="moss"] {
+  color-scheme: dark;
+  --bg: #1f2a24;
+  --surface: #28362e;
+  --surface-2: #314136;
+  --ink: #e6ecdb;
+  --muted: #aab8a6;
+  --accent: #c4de7a;
+  --on-accent: #1f2a24;
+  --code-bg: #28362e;
+  --code-ink: #e6ecdb;
+  --code-muted: #aab8a6;
+  --code-accent: #c4de7a;
+  --flock: #c4de7a;
+  --focus: #c4de7a;
 }
 
 :root {
-  --font-mono: "JetBrains Mono", monospace;
-  --font-sans: "Inter", sans-serif;
-  --radius-sm: 4px;
-  --radius-md: 8px;
-  --transition-fast: 0.2s ease;
-  --transition-slow: 0.35s ease;
-  transition:
-    background-color var(--transition-fast),
-    color var(--transition-fast),
-    border-color var(--transition-fast);
-
-  /* CARBON — dark-first default */
-  --brand-bg: #0a0a0b;
-  --brand-surface: #121214;
-  --brand-border: #26262a;
-  --brand-text: #ededef;
-  --brand-muted: #8f8f98;
-  --brand-accent: #4d94ff;
-  --brand-accent-soft: rgba(77, 148, 255, 0.1);
-  --brand-accent-border: rgba(77, 148, 255, 0.4);
-}
-
-/* PAPER — refined light */
-[data-theme="light"] {
-  --brand-bg: #fafaf9;
-  --brand-surface: #f1f1ef;
-  --brand-border: #e0e0dc;
-  --brand-text: #18181b;
-  --brand-muted: #6f6f78;
-  --brand-accent: #2563eb;
-  --brand-accent-soft: rgba(37, 99, 235, 0.08);
-  --brand-accent-border: rgba(37, 99, 235, 0.35);
-}
-
-/* AYU LIGHT — warm paper with orange accent */
-[data-theme="ayu-light"] {
-  --brand-bg: #fafafa;
-  --brand-surface: #f3f4f5;
-  --brand-border: #e7eaed;
-  --brand-text: #5c6166;
-  --brand-muted: #828c99;
-  --brand-accent: #fa8d3e;
-  --brand-accent-soft: rgba(250, 141, 62, 0.1);
-  --brand-accent-border: rgba(250, 141, 62, 0.4);
-}
-
-/* CATPPUCCIN LATTE — soft light with blue accent */
-[data-theme="catppuccin-latte"] {
-  --brand-bg: #eff1f5;
-  --brand-surface: #e6e9ef;
-  --brand-border: #ccd0da;
-  --brand-text: #4c4f69;
-  --brand-muted: #6c6f85;
-  --brand-accent: #1e66f5;
-  --brand-accent-soft: rgba(30, 102, 245, 0.08);
-  --brand-accent-border: rgba(30, 102, 245, 0.35);
-}
-
-/* GITHUB LIGHT — clean neutral with GitHub blue */
-[data-theme="github-light"] {
-  --brand-bg: #ffffff;
-  --brand-surface: #f6f8fa;
-  --brand-border: #d0d7de;
-  --brand-text: #1f2328;
-  --brand-muted: #656d76;
-  --brand-accent: #0969da;
-  --brand-accent-soft: rgba(9, 105, 218, 0.08);
-  --brand-accent-border: rgba(9, 105, 218, 0.35);
-}
-
-/* TOKYO NIGHT STORM — lavender-on-slate */
-[data-theme="tokyo-night-storm"] {
-  --brand-bg: #24283b;
-  --brand-surface: #1f2335;
-  --brand-border: #414868;
-  --brand-text: #c0caf5;
-  --brand-muted: #565f89;
-  --brand-accent: #7aa2f7;
-  --brand-accent-soft: rgba(122, 162, 247, 0.1);
-  --brand-accent-border: rgba(122, 162, 247, 0.4);
-}
-
-/* CATPPUCCIN MOCHA — dark with mauve accent */
-[data-theme="catppuccin-mocha"] {
-  --brand-bg: #1e1e2e;
-  --brand-surface: #313244;
-  --brand-border: #45475a;
-  --brand-text: #cdd6f4;
-  --brand-muted: #a6adc8;
-  --brand-accent: #cba6f7;
-  --brand-accent-soft: rgba(203, 166, 247, 0.1);
-  --brand-accent-border: rgba(203, 166, 247, 0.4);
-}
-
-/* GRUVBOX DARK — retro warm dark with aqua accent */
-[data-theme="gruvbox-dark"] {
-  --brand-bg: #1d2021;
-  --brand-surface: #282828;
-  --brand-border: #504945;
-  --brand-text: #ebdbb2;
-  --brand-muted: #928374;
-  --brand-accent: #83a598;
-  --brand-accent-soft: rgba(131, 165, 152, 0.1);
-  --brand-accent-border: rgba(131, 165, 152, 0.4);
-}
-
-/* NORD — cool arctic dark */
-[data-theme="nord"] {
-  --brand-bg: #2e3440;
-  --brand-surface: #3b4252;
-  --brand-border: #4c566a;
-  --brand-text: #eceff4;
-  --brand-muted: #a8b5cc;
-  --brand-accent: #88c0d0;
-  --brand-accent-soft: rgba(136, 192, 208, 0.1);
-  --brand-accent-border: rgba(136, 192, 208, 0.4);
-}
-
-/* SOLARIZED — warm amber on deep teal */
-[data-theme="solarized"] {
-  --brand-bg: #002b36;
-  --brand-surface: #073642;
-  --brand-border: #35555e;
-  --brand-text: #d4ccb2;
-  --brand-muted: #8ba0a4;
-  --brand-accent: #d4a017;
-  --brand-accent-soft: rgba(212, 160, 23, 0.1);
-  --brand-accent-border: rgba(212, 160, 23, 0.4);
-}
-
-/* MOSS — deep green with a lime accent */
-[data-theme="moss"] {
-  --brand-bg: #1f2a24;
-  --brand-surface: #26332c;
-  --brand-border: #334137;
-  --brand-text: #dfe6d3;
-  --brand-muted: #8b9c88;
-  --brand-accent: #b8d46a;
-  --brand-accent-soft: rgba(184, 212, 106, 0.1);
-  --brand-accent-border: rgba(184, 212, 106, 0.4);
+  --brand-bg: var(--bg);
+  --brand-surface: var(--surface);
+  --brand-border: var(--surface-2);
+  --brand-text: var(--ink);
+  --brand-muted: var(--muted);
+  --brand-accent: var(--accent);
+  --brand-accent-soft: color-mix(in srgb, var(--accent) 12%, transparent);
+  --brand-accent-border: color-mix(in srgb, var(--accent) 40%, transparent);
 }

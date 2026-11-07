@@ -29,6 +29,7 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
+/** Icon names a project or certificate may use in its `icon` field. */
 const ICONS: Record<string, LucideIcon> = {
   award: Award,
   bird: Bird,
@@ -65,17 +66,11 @@ interface IconBadgeProps {
   className?: string;
 }
 
-/** Square boxed icon used on project, certificate, and skill cards. */
-export const IconBadge: FC<IconBadgeProps> = ({
-  icon,
-  size = 18,
-  className = "",
-}) => {
+/** A project's or certificate's small glyph, shown beside its name in lists. Decorative. */
+export const IconBadge: FC<IconBadgeProps> = ({ icon, size = 18, className = "" }) => {
   const Icon = (icon && ICONS[icon]) || Terminal;
   return (
-    <span
-      className={`inline-flex items-center justify-center w-11 h-11 shrink-0 border border-brand-accent/30 bg-brand-accent/10 text-brand-accent ${className}`}
-    >
+    <span className={`icon-glyph ${className}`} aria-hidden="true">
       <Icon size={size} />
     </span>
   );

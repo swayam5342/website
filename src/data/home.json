@@ -1,6 +1,15 @@
 {
-
-  "main_heading":"SYSTEM_READY // SOURCE_VERIFIED",
-  "project" : "PROJECT",
-    "main_text" : "Focus on building secure and efficient backend systems, I am passionate about securing applications and ensuring data integrity"
+  "name": "Swayam",
+  "lead": "I build backends, security tools and low-level systems.",
+  "education": "Studying cybersecurity at VIT Vellore and data science at IIT Madras.",
+  "description": "Swayam builds backends, security tools and low-level systems. B.Tech in Cybersecurity at VIT Vellore and BS in Data Science at IIT Madras.",
+  "work_cta": "See my work",
+  "terminal_cta": "Open the terminal",
+  "work_heading": "Selected work",
+  "work_intro": "Five projects, each shown by the part worth looking at: the product, the design, the config, the output or the code.",
+  "index_link": "See all {count} projects",
+  "play_heading": "Made for fun",
+  "play_intro": "Small things I built to see how they work. Each one runs in your browser.",
+  "close_heading": "About me",
+  "close_text": "Write to me, or read my code and notes."
 }

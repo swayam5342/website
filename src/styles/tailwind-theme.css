@@ -5,4 +5,8 @@
   --color-brand-text: var(--brand-text);
   --color-brand-muted: var(--brand-muted);
   --color-brand-accent: var(--brand-accent);
+
+  --font-serif: var(--ff-serif), Georgia, serif;
+  --font-sans: var(--ff-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--ff-mono), ui-monospace, monospace;
 }

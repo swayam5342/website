@@ -18,13 +18,18 @@ const isDev = process.env.NODE_ENV === "development";
  */
 const contentSecurityPolicy = [
   "default-src 'self'",
-  `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com${isDev ? " 'unsafe-eval'" : ""}`,
-  "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-  "font-src 'self' https://fonts.gstatic.com",
-  // data: is the recoloured GitHub card on /about; raw.githubusercontent.com
-  // is where the original comes from, and is also the no-JS fallback image.
-  "img-src 'self' data: https://raw.githubusercontent.com",
-  `connect-src 'self' https://raw.githubusercontent.com https://va.vercel-scripts.com${isDev ? " ws: http://localhost:*" : ""}`,
+  // static.cloudflareinsights.com: Cloudflare Web Analytics. Cloudflare's
+  // proxy injects its beacon into every page, so it is allowed here rather
+  // than blocked.
+  `script-src 'self' 'unsafe-inline' https://va.vercel-scripts.com https://static.cloudflareinsights.com${isDev ? " 'unsafe-eval'" : ""}`,
+  // Fonts are self-hosted by next/font, so no font host is needed.
+  "style-src 'self' 'unsafe-inline'",
+  "font-src 'self'",
+  "img-src 'self' data:",
+  // Videos (the Tributary recording) are same-origin.
+  "media-src 'self'",
+  // cloudflareinsights.com is where the beacon reports to.
+  `connect-src 'self' https://va.vercel-scripts.com https://cloudflareinsights.com${isDev ? " ws: http://localhost:*" : ""}`,
   // The certificate and resume viewers frame same-origin PDFs from /pdf.
   "frame-src 'self'",
   "object-src 'none'",
@@ -51,8 +56,18 @@ const securityHeaders = [
 ];
 
 const nextConfig = {
+  // 90 is used for screenshots and document previews, where text must stay sharp.
+  images: { qualities: [75, 90] },
   async headers() {
     return [{ source: "/:path*", headers: securityHeaders }];
+  },
+  // Skills and Certificates now live on the About page. The old URLs keep
+  // working; /certificates/:slug is unchanged.
+  async redirects() {
+    return [
+      { source: "/skills", destination: "/about#skills", permanent: true },
+      { source: "/certificates", destination: "/about#certificates", permanent: true },
+    ];
   },
 };
 

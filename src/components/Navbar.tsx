@@ -2,166 +2,127 @@
 
 import type { FC } from "react";
 import { useEffect, useRef, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Palette, Check } from "lucide-react";
-import { useTheme, THEMES } from "../hooks/useTheme";
+import { Menu, SquareTerminal, X } from "lucide-react";
+import { openTerminal } from "./TerminalPalette";
 
+const NAV_LINKS = [
+  { name: "Projects", path: "/projects" },
+  { name: "About", path: "/about" },
+  { name: "Resume", path: "/resume" },
+  { name: "Contact", path: "/contact" },
+];
+
+const isCurrent = (pathname: string, path: string) =>
+  pathname === path || pathname.startsWith(`${path}/`);
+
+/**
+ * A plain bar: wordmark, four links, the terminal. It slides away while
+ * you scroll down and comes back as soon as you scroll up.
+ */
 export const Navbar: FC = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [pickerOpen, setPickerOpen] = useState(false);
-  const pickerRef = useRef<HTMLDivElement>(null);
-  const { theme, setTheme } = useTheme();
   const pathname = usePathname();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const lastY = useRef(0);
 
   useEffect(() => {
-    if (!pickerOpen) return;
-    const close = (e: MouseEvent) => {
-      if (!pickerRef.current?.contains(e.target as Node)) {
-        setPickerOpen(false);
-      }
+    let ticking = false;
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(() => {
+        const y = window.scrollY;
+        const delta = y - lastY.current;
+        if (y < 80) setHidden(false);
+        else if (delta > 6) setHidden(true);
+        else if (delta < -6) setHidden(false);
+        lastY.current = y;
+        ticking = false;
+      });
     };
-    document.addEventListener("mousedown", close);
-    return () => document.removeEventListener("mousedown", close);
-  }, [pickerOpen]);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
-  const navLinks = [
-    { name: "HOME", path: "/" },
-    { name: "ABOUT", path: "/about" },
-    { name: "PROJECTS", path: "/projects" },
-    { name: "SKILLS", path: "/skills" },
-    { name: "CERTIFICATES", path: "/certificates" },
-    { name: "RESUME", path: "/resume" },
-    { name: "CONTACT", path: "/contact" },
-  ];
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && setMenuOpen(false);
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [menuOpen]);
 
-  const activeClass =
-    "text-brand-accent border-b border-brand-accent";
-
-  const inactiveClass =
-    "text-brand-muted hover:text-brand-accent border-b border-transparent";
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (prevPath !== pathname) {
+    setPrevPath(pathname);
+    setMenuOpen(false);
+  }
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-brand-bg/90 backdrop-blur-sm border-b border-brand-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-14">
-{/* Logo */}
-<Link href="/" className="flex items-center space-x-3">
-  <Image
-    src="/Namelogo.png"
-    alt="Swayam Logo"
-    className="w-10 h-10 object-contain"
-    width={40}
-    height={40}
-    priority
-  />
-  <span className="font-mono font-bold tracking-tight text-sm">
-    SWAYAM
-  </span>
-</Link>
+    <header className="site-header" data-hidden={hidden && !menuOpen}>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
+      <div className="frame site-header__bar">
+        <Link href="/" className="wordmark" aria-current={pathname === "/" ? "page" : undefined}>
+          Swayam
+        </Link>
 
-          {/* Desktop Links */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.name}
-                href={link.path}
-                className={`font-mono text-sm font-medium transition-all py-1 ${
-                  pathname === link.path ? activeClass : inactiveClass
-                }`}
-              >
-                {link.name}
-              </Link>
+        <nav className="site-nav" aria-label="Main">
+          <ul className="site-nav__links">
+            {NAV_LINKS.map((link) => (
+              <li key={link.path}>
+                <Link
+                  href={link.path}
+                  className="site-nav__link"
+                  aria-current={isCurrent(pathname, link.path) ? "page" : undefined}
+                >
+                  {link.name}
+                </Link>
+              </li>
             ))}
-          </div>
+          </ul>
 
-          {/* Right Section */}
-          <div className="flex items-center space-x-4">
+          <button type="button" className="term-btn" onClick={openTerminal}>
+            <SquareTerminal size={18} aria-hidden="true" />
+            <span>Terminal</span>
+            <kbd className="key" aria-hidden="true">
+              /
+            </kbd>
+          </button>
 
-            {/* Theme Picker */}
-            <div className="relative" ref={pickerRef}>
-              <button
-                onClick={() => setPickerOpen((o) => !o)}
-                className={`transition-all p-1 ${
-                  pickerOpen
-                    ? "text-brand-accent"
-                    : "text-brand-muted hover:text-brand-accent"
-                }`}
-                aria-label="Select theme"
-                aria-expanded={pickerOpen}
-              >
-                <Palette size={18} />
-              </button>
-
-              {pickerOpen && (
-                <div className="absolute right-0 top-full mt-3 w-44 border border-brand-border bg-brand-bg shadow-[0_16px_40px_-16px_rgba(0,0,0,0.5)]">
-                  <p className="px-4 pt-3 pb-2 font-mono text-[8px] text-brand-muted uppercase tracking-widest border-b border-brand-border">
-                    COLOR_SCHEME
-                  </p>
-                  <div className="max-h-72 overflow-y-auto">
-                  {THEMES.map((t) => (
-                    <button
-                      key={t.id}
-                      onClick={() => {
-                        setTheme(t.id);
-                        setPickerOpen(false);
-                      }}
-                      className={`w-full flex items-center justify-between px-4 py-2.5 font-mono text-[10px] tracking-widest transition-colors ${
-                        theme === t.id
-                          ? "text-brand-accent bg-brand-accent/10"
-                          : "text-brand-muted hover:text-brand-text hover:bg-brand-surface"
-                      }`}
-                    >
-                      <span className="flex items-center gap-3">
-                        <span
-                          className="inline-flex w-4 h-4 border border-brand-border"
-                          style={{ backgroundColor: t.swatch.bg }}
-                        >
-                          <span
-                            className="w-1.5 h-1.5 m-auto"
-                            style={{ backgroundColor: t.swatch.accent }}
-                          />
-                        </span>
-                        {t.label}
-                      </span>
-                      {theme === t.id && <Check size={12} />}
-                    </button>
-                  ))}
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="text-brand-muted hover:text-brand-accent p-1"
-              >
-                {isOpen ? <X size={20} /> : <Menu size={20} />}
-              </button>
-            </div>
-
-          </div>
-        </div>
+          <button
+            type="button"
+            className="btn-text site-nav__menu-btn"
+            aria-expanded={menuOpen}
+            aria-controls="menu-sheet"
+            onClick={() => setMenuOpen((o) => !o)}
+          >
+            {menuOpen ? <X size={20} aria-hidden="true" /> : <Menu size={20} aria-hidden="true" />}
+            <span>Menu</span>
+          </button>
+        </nav>
       </div>
 
-      {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-brand-bg border-b border-brand-border px-4 py-6 space-y-4">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              href={link.path}
-              onClick={() => setIsOpen(false)}
-              className="block font-mono text-sm text-brand-muted hover:text-brand-accent"
-            >
-              {`> ${link.name}`}
-            </Link>
-          ))}
+      {menuOpen && (
+        <div id="menu-sheet" className="menu-sheet">
+          <ul>
+            <li>
+              <Link href="/" aria-current={pathname === "/" ? "page" : undefined}>
+                Home
+              </Link>
+            </li>
+            {NAV_LINKS.map((link) => (
+              <li key={link.path}>
+                <Link href={link.path} aria-current={isCurrent(pathname, link.path) ? "page" : undefined}>
+                  {link.name}
+                </Link>
+              </li>
+            ))}
+          </ul>
         </div>
       )}
-    </nav>
+    </header>
   );
 };

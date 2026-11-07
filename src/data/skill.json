@@ -1,9 +1,13 @@
 {
-  "core": ["Python", "Go", "JavaScript", "C", "C++", "SQL", "NoSQL"],
-  "backend": ["FastAPI", "Flask", "Express.js", "Fiber"],
+  "core": ["Python", "Go", "TypeScript", "JavaScript", "C", "C++", "SQL", "NoSQL"],
+  "backend": ["FastAPI", "chi", "Node.js", "Celery", "SQLAlchemy", "Flask", "Express.js", "Fiber"],
   "database": ["Redis", "PostgreSQL", "MongoDB", "MySQL", "SQLite"],
-  "devops": ["Docker", "Kubernetes", "GitHub Actions", "Nginx", "Linux"],
+  "devops": ["Docker", "Kubernetes", "Prometheus", "GitHub Actions", "Nginx", "Linux"],
   "cyber": [
+    "NsJail",
+    "Sysmon",
+    "Elasticsearch",
+    "Kibana",
     "Threat Detection",
     "Log Analysis",
     "Reverse Engineering",

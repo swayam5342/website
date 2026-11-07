@@ -1,6 +1,7 @@
 {
-  "name": "SWAYAM",
+  "name": "Swayam",
+  "title": "Swayam: backends, security tools and systems",
   "url": "https://swayam.li",
-  "titleTemplate": "%s | SWAYAM",
+  "titleTemplate": "%s · Swayam",
   "ogImage": "/Namelogo.png"
 }

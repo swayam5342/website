@@ -1,35 +1,24 @@
 "use client";
 
+import type { CSSProperties } from "react";
 import { useState } from "react";
-import { Mail, GithubIcon, LinkedinIcon, PenSquare, Copy, Check } from "lucide-react";
-import { Reveal } from "@/src/components/Reveal";
+import { ArrowUpRight, Check, Copy, Mail } from "lucide-react";
 import socialData from "@/src/data/social";
+import { FlockHero, FLOCK_SCATTER_EVENT } from "@/src/components/home/FlockHero";
 
 const EMAIL = socialData.email;
-
-const stripProtocol = (url: string) => url.replace(/^https?:\/\//, "");
+const stripProtocol = (url: string) => url.replace(/^https?:\/\//, "").replace(/\/$/, "");
 
 const CHANNELS = [
-  {
-    label: "GITHUB",
-    value: stripProtocol(socialData.github),
-    href: socialData.github,
-    icon: GithubIcon,
-  },
-  {
-    label: "LINKEDIN",
-    value: stripProtocol(socialData.linkedin),
-    href: socialData.linkedin,
-    icon: LinkedinIcon,
-  },
-  {
-    label: "BLOG",
-    value: stripProtocol(socialData.blog),
-    href: socialData.blog,
-    icon: PenSquare,
-  },
+  { label: "GitHub", href: socialData.github },
+  { label: "LinkedIn", href: socialData.linkedin },
+  { label: "Blog", href: socialData.blog },
 ];
 
+/**
+ * One screen: the address, set large, with the home page's flock behind it.
+ * Copying the address scatters the flock; it gathers again by its own rules.
+ */
 export default function ContactView() {
   const [copied, setCopied] = useState(false);
 
@@ -37,92 +26,53 @@ export default function ContactView() {
     try {
       await navigator.clipboard.writeText(EMAIL);
       setCopied(true);
+      window.dispatchEvent(new Event(FLOCK_SCATTER_EVENT));
       setTimeout(() => setCopied(false), 1800);
     } catch {
-      // Clipboard API unavailable — the mailto link still works as a fallback.
+      // Clipboard API unavailable: the mailto link still works.
     }
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-4 py-16">
-      <header className="mb-16 border-b border-brand-border pb-8">
-        <div className="flex items-center gap-3 mb-3">
-          <span className="w-2 h-2 rounded-full bg-brand-accent status-pulse" />
-          <span className="font-mono text-[10px] text-brand-accent uppercase tracking-widest">
-            CHANNEL_OPEN
-          </span>
-        </div>
-        <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
-          CONTACT // ESTABLISH_LINK
-        </h1>
-        <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
-          Reach out for collaborations, roles, or just to talk shop.
-        </p>
-      </header>
-
-      <Reveal>
-        <div className="bg-brand-surface border border-brand-border p-10 mb-8 flex flex-col md:flex-row md:items-center justify-between gap-6">
-          <div>
-            <p className="font-mono text-[9px] text-brand-muted uppercase tracking-widest mb-2">
-              PRIMARY_CHANNEL
-            </p>
-            <a
-              href={`mailto:${EMAIL}`}
-              className="text-xl md:text-2xl font-mono font-bold text-brand-text hover:text-brand-accent transition-colors break-all"
-            >
-              {EMAIL}
-            </a>
-          </div>
-
-          <div className="flex items-center gap-3 shrink-0">
-            <a
-              href={`mailto:${EMAIL}`}
-              className="flex items-center gap-2 bg-brand-accent text-brand-bg px-6 py-3 font-mono text-[10px] font-bold uppercase tracking-widest hover:bg-brand-muted transition-all"
-            >
-              <Mail size={14} />
-              <span>SEND_MAIL</span>
-            </a>
-            <button
-              onClick={copyEmail}
-              className="flex items-center gap-2 border border-brand-border text-brand-muted px-4 py-3 font-mono text-[10px] uppercase tracking-widest hover:border-brand-accent hover:text-brand-accent transition-all"
-              aria-label="Copy email address"
-            >
-              {copied ? <Check size={14} /> : <Copy size={14} />}
-              <span>{copied ? "COPIED" : "COPY"}</span>
-            </button>
-          </div>
-        </div>
-      </Reveal>
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {CHANNELS.map((c, i) => (
-          <Reveal key={c.label} delay={0.05 * (i + 1)}>
-            <a
-              href={c.href}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group block bg-brand-bg border border-brand-border p-8 hover:bg-brand-surface hover:border-brand-accent/40 transition-all h-full"
-            >
-              <span className="inline-flex items-center justify-center w-11 h-11 border border-brand-accent/30 bg-brand-accent/10 text-brand-accent mb-6">
-                <c.icon size={18} />
-              </span>
-              <p className="font-mono text-[9px] text-brand-muted uppercase tracking-widest mb-2">
-                {c.label}
-              </p>
-              <p className="font-mono text-sm text-brand-text group-hover:text-brand-accent transition-colors break-all">
-                {c.value}
-              </p>
-            </a>
-          </Reveal>
-        ))}
+    <FlockHero
+      labelledBy="contact-title"
+      showRules={false}
+      className="hero--contact"
+      readout={{ pause: "Pause the flock", play: "Play the flock" }}
+    >
+      <h1 id="contact-title" className="contact__title t-h2">
+        Contact
+      </h1>
+      <p className="contact__big-wrap">
+        <a href={`mailto:${EMAIL}`} className="contact__big">
+          {EMAIL}
+        </a>
+      </p>
+      <p className="t-lead contact__note hero-fade" style={{ "--i": 0 } as CSSProperties}>
+        Write to me about roles, collaborations, or anything you saw here. I am open to backend, security and
+        infrastructure roles, and usually reply within 48 hours.
+      </p>
+      <div className="hero__actions hero-fade" style={{ "--i": 1 } as CSSProperties}>
+        <a href={`mailto:${EMAIL}`} className="btn">
+          <Mail size={18} aria-hidden="true" />
+          Send an email
+        </a>
+        <button type="button" className="btn-text" onClick={copyEmail}>
+          {copied ? <Check size={18} aria-hidden="true" /> : <Copy size={18} aria-hidden="true" />}
+          <span aria-live="polite">{copied ? "Copied" : "Copy the address"}</span>
+        </button>
       </div>
-
-      <Reveal delay={0.2}>
-        <div className="mt-8 border border-brand-border p-8 bg-brand-bg font-mono text-xs text-brand-muted">
-          <span className="text-brand-accent">{">"}</span> status: open to backend,
-          security, and infrastructure roles — response time typically under 48h.
-        </div>
-      </Reveal>
-    </div>
+      <ul className="contact__channels hero-fade" style={{ "--i": 2 } as CSSProperties}>
+        {CHANNELS.map((c) => (
+          <li key={c.label}>
+            <span className="muted">{c.label}</span>
+            <a className="go" data-external href={c.href} target="_blank" rel="noopener noreferrer">
+              {stripProtocol(c.href)}
+              <ArrowUpRight size={16} aria-hidden="true" />
+            </a>
+          </li>
+        ))}
+      </ul>
+    </FlockHero>
   );
 }

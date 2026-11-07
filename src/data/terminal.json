@@ -2,7 +2,7 @@
   "prompt": "swayam@sec:~",
   "typeSpeedMs": 40,
   "linePauseMs": 260,
-  "bootHint": "type a command below (try: about, skills, projects, contact)",
+  "bootHint": "type a command below (try: about, skills, projects, theme, contact)",
   "bootCommands": ["whoami", "help"],
   "helpHeader": "available commands:",
   "helpNameWidth": 12,
@@ -81,6 +81,11 @@
       "description": "open resume",
       "redirect": "/resume",
       "opening": "opening /resume ..."
+    },
+    {
+      "name": "theme",
+      "description": "change colours (theme <name>)",
+      "dynamic": "theme"
     },
     {
       "name": "clear",

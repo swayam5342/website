@@ -1,155 +1,174 @@
 import type { Metadata } from "next";
+import siteData from "@/src/data/site";
+import { Fragment } from "react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ArrowLeft, GithubIcon, Globe, ShieldCheck, AlertCircle, RefreshCw, Layers } from "lucide-react";
-import projectsData, { getProjectIcon } from "@/src/data/projects";
-import { IconBadge } from "@/src/components/IconBadge";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import projectsData from "@/src/data/projects";
+import { getShowcase } from "@/src/data/showcase";
+import { CaseFigure } from "@/src/components/work/CaseFigure";
+import { MorphTitle, ProjectLinks, vtFigure } from "@/src/components/work/CaseStudies";
+import { PageTransition } from "@/src/components/PageTransition";
 import type { Project } from "@/types";
 
 export function generateStaticParams() {
   return (projectsData as Project[]).map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const project = (projectsData as Project[]).find((p) => p.slug === slug);
-
   if (!project) return {};
 
+  const description = trimDescription(project.description);
   return {
     title: project.title,
-    description: project.description,
+    description,
     alternates: { canonical: `/projects/${project.slug}` },
     openGraph: {
+      images: [{ url: siteData.ogImage }],
       title: project.title,
-      description: project.description,
+      description,
       url: `/projects/${project.slug}`,
     },
   };
 }
 
-export default async function ProjectDetail({
-  params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+/** Search results show about 155 characters: cut at a word and mark the cut. */
+const trimDescription = (text: string, max = 155) => {
+  if (text.length <= max) return text;
+  const cut = text.slice(0, max - 1);
+  return `${cut.slice(0, cut.lastIndexOf(" ")).replace(/[,;:]$/, "")}…`;
+};
+
+/** The detail sections, in reading order, with plain headings. */
+const SECTIONS: { key: keyof NonNullable<Project["details"]>; heading: string }[] = [
+  { key: "architecture", heading: "How it is built" },
+  { key: "challenges", heading: "The hard part" },
+  { key: "security", heading: "Security" },
+  { key: "improvements", heading: "What comes next" },
+];
+
+const spotlight = (projectsData as Project[])
+  .filter((p) => typeof p.spotlight === "number")
+  .sort((a, b) => a.spotlight! - b.spotlight!);
+
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = (projectsData as Project[]).find((p) => p.slug === slug);
-
   if (!project) notFound();
 
-  return (
-    <div className="max-w-4xl mx-auto px-4 py-12">
-      <Link href="/projects" className="inline-flex items-center space-x-2 text-brand-muted hover:text-brand-accent transition-colors mb-8 group">
-        <ArrowLeft size={18} className="group-hover:-translate-x-1 transition-transform" />
-        <span>Back to Projects</span>
-      </Link>
-
-      <div className="mb-12">
-        <div className="flex flex-wrap gap-2 mb-4">
-          {project.tags.map(t => (
-            <Link
-              key={t}
-              href={`/projects?tag=${encodeURIComponent(t)}`}
-              title={`Show ${t} projects`}
-              className="text-xs font-mono uppercase px-3 py-1 rounded bg-brand-accent/10 border border-brand-accent/20 text-brand-accent transition-all hover:bg-brand-accent hover:text-brand-bg"
-            >
-              {t}
-            </Link>
-          ))}
-          {project.lang?.map(l => (
-            <Link
-              key={l}
-              href={`/projects?tag=${encodeURIComponent(l)}`}
-              title={`Show ${l} projects`}
-              className="text-xs font-mono px-3 py-1 rounded border border-brand-border text-brand-muted transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10"
-            >
-              {l}
-            </Link>
-          ))}
-        </div>
-        <div className="flex items-center gap-4 mb-4">
-          <IconBadge icon={getProjectIcon(project)} size={22} />
-          <h1 className="text-4xl md:text-5xl font-bold">{project.title}</h1>
-        </div>
-        <p className="text-xl text-brand-muted leading-relaxed">{project.description}</p>
-
-        <div className="flex items-center space-x-4 mt-8">
-          {project.github && (
-            <a href={project.github} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-brand-surface border border-white/10 px-5 py-2.5 rounded-lg font-bold hover:border-brand-accent/50 transition-all">
-              <GithubIcon size={18} />
-              <span>Repository</span>
-            </a>
-          )}
-          {project.demo && (
-            <a href={project.demo} target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 bg-brand-accent text-brand-bg px-5 py-2.5 rounded-lg font-bold hover:scale-[1.02] transition-all">
-              <Globe size={18} />
-              <span>Live System</span>
-            </a>
-          )}
-        </div>
-      </div>
-
-      <div className="space-y-12">
-        {project.details && (<>
-          <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <Layers className="text-brand-accent" />
-            <span>Architecture Overview</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.architecture}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <AlertCircle className="text-brand-accent" />
-            <span>Key Challenges</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.challenges}
-          </div>
-        </section>
-
-        <section className="relative overflow-hidden">
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <ShieldCheck className="text-brand-accent" />
-            <span>Security Considerations</span>
-          </h2>
-          <div className="p-6 bg-brand-accent/5 rounded-2xl border border-brand-accent/20 text-brand-muted leading-relaxed backdrop-blur-sm">
-            {project.details?.security}
-          </div>
-        </section>
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6 flex items-center space-x-3">
-            <RefreshCw className="text-brand-accent" />
-            <span>Future Improvements</span>
-          </h2>
-          <div className="p-6 bg-brand-surface rounded-2xl border border-white/5 text-brand-muted leading-relaxed">
-            {project.details?.improvements}
-          </div>
-        </section>
-        </>)
-        }
-
-        <section>
-          <h2 className="text-2xl font-bold mb-6">Technical Impact</h2>
-          <ul className="space-y-4">
-            {project.resume_points.map((point, i) => (
-              <li key={i} className="flex items-start space-x-3 text-brand-muted">
-                <span className="mt-1.5 w-1.5 h-1.5 rounded-full bg-brand-accent flex-shrink-0"></span>
-                <span>{point}</span>
-              </li>
-            ))}
-          </ul>
-        </section>
-      </div>
+  const show = getShowcase(project.slug);
+  const i = spotlight.findIndex((p) => p.slug === project.slug);
+  const next = i >= 0 ? spotlight[(i + 1) % spotlight.length] : undefined;
+  const extras = show?.also?.map((extra, n) => (
+    <div key={`extra-${n}`} className="study__extra" data-reveal>
+      <CaseFigure show={extra} repo={project.github} />
     </div>
+  ));
+
+  return (
+    <PageTransition>
+      <article className="frame study">
+        <p className="study__back">
+          <Link href="/projects" className="go" transitionTypes={["nav-back"]}>
+            <ArrowLeft size={16} aria-hidden="true" />
+            All projects
+          </Link>
+        </p>
+
+        <header className="study__head">
+          <h1 className="t-display study__title">
+            <MorphTitle slug={project.slug}>{project.title}</MorphTitle>
+          </h1>
+          <div className="study__intro">
+            <p className="t-lead">{project.description}</p>
+            <dl className="study__facts">
+              {project.lang && project.lang.length > 0 && (
+                <div>
+                  <dt>Built with</dt>
+                  <dd>
+                    {project.lang.map((l, n) => (
+                      <span key={l}>
+                        {n > 0 && ", "}
+                        <Link className="link" href={`/projects?tag=${encodeURIComponent(l)}`}>
+                          {l}
+                        </Link>
+                      </span>
+                    ))}
+                  </dd>
+                </div>
+              )}
+              <div>
+                <dt>Topics</dt>
+                <dd>
+                  {project.tags.map((t, n) => (
+                    <span key={t}>
+                      {n > 0 && ", "}
+                      <Link className="link" href={`/projects?tag=${encodeURIComponent(t)}`}>
+                        {t}
+                      </Link>
+                    </span>
+                  ))}
+                </dd>
+              </div>
+              {project.date && (
+                <div>
+                  <dt>When</dt>
+                  <dd>{project.date}</dd>
+                </div>
+              )}
+            </dl>
+            <ProjectLinks p={project} withCaseStudy={false} />
+          </div>
+        </header>
+
+        {show && (
+          <div className="study__figure">
+            <CaseFigure show={show} repo={project.github} priority quality={90} transitionName={vtFigure(project.slug)} />
+          </div>
+        )}
+
+        <div className="study__body">
+          {project.details &&
+            SECTIONS.map(({ key, heading }) => (
+              <Fragment key={key}>
+                <section className="study__section" data-reveal aria-labelledby={`s-${key}`}>
+                  <h2 id={`s-${key}`} className="t-h2">
+                    {heading}
+                  </h2>
+                  <p className="measure">{project.details![key]}</p>
+                </section>
+                {/* Extra figures sit with the architecture they show. */}
+                {key === "architecture" && extras}
+              </Fragment>
+            ))}
+          {!project.details && extras}
+
+          {project.resume_points.length > 0 && (
+            <section className="study__section" data-reveal aria-labelledby="s-did">
+              <h2 id="s-did" className="t-h2">
+                What I did
+              </h2>
+              <ul className="did measure">
+                {project.resume_points.map((point) => (
+                  <li key={point}>{point}</li>
+                ))}
+              </ul>
+            </section>
+          )}
+        </div>
+
+        {next && next.slug !== project.slug && (
+          <nav className="study__next" aria-label="Next case study">
+            <span className="muted">Next case study</span>
+            <Link href={`/projects/${next.slug}`} className="study__next-link" transitionTypes={["nav-forward"]}>
+              <MorphTitle slug={next.slug}>{next.title}</MorphTitle>
+              <ArrowRight size={28} aria-hidden="true" />
+            </Link>
+          </nav>
+        )}
+      </article>
+    </PageTransition>
   );
 }

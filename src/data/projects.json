@@ -33,6 +33,7 @@
       "tags": ["Backend", "AI", "SaaS"],
       "github": "https://github.com/swayam5342/plugfit_backend",
       "featured": true,
+      "spotlight": 2,
       "resume_points": [
         "Built a multi-tenant SaaS platform that acts as a quality layer for MCP servers, ingesting API specs and serving cleaned, improved endpoints.",
         "Architected a custom executor registry and MCP transport layer to serve cleaned specs as live, tenant-isolated MCP endpoints.",
@@ -81,6 +82,7 @@
       "tags": ["Cybersecurity", "Backend", "Linux", "Systems"],
       "github": "https://github.com/swayam5342/sandboxd",
       "featured": true,
+      "spotlight": 3,
       "resume_points": [
         "Built a secure sandboxing engine using Go and NsJail for isolated code execution.",
         "Implemented process isolation, filesystem restrictions, and resource limiting for untrusted programs.",
@@ -94,7 +96,7 @@
         "improvements": "Future improvements include seccomp filtering, microVM integration, and advanced runtime monitoring."
       },
       "date": "May 2026",
-      "lang": ["Go", "NsJail", "Docker", "Fiber"],
+      "lang": ["Go", "NsJail", "Docker", "chi"],
       "icon": "box"
     },
     {
@@ -154,6 +156,7 @@
       "tags": ["Cybersecurity", "Backend", "CLI", "DevOps"],
       "github": "https://github.com/swayam5342/vulnscan",
       "featured": true,
+      "spotlight": 5,
       "resume_points": [
         "Built a stdlib-only Go CLI that detects project ecosystems and parses Go, npm, and Python dependency manifests.",
         "Integrated the OSV.dev API for batch vulnerability queries and implemented a CVSS v3.1 base-score calculator from scratch.",
@@ -324,6 +327,7 @@
       "tags": ["Cybersecurity", "Systems", "CLI"],
       "github": "https://github.com/swayam5342/dnsr",
       "featured": true,
+      "spotlight": 4,
       "resume_points": [
         "Built an iterative DNS resolver in stdlib-only Go, hand-encoding the RFC 1035 wire format with name compression, EDNS(0), and 11 record types including DS, DNSKEY, and RRSIG.",
         "Implemented DNSSEC chain-of-trust validation from the IANA root KSKs through DS and DNSKEY to each answer's RRSIG, supporting RSA, ECDSA P-256/P-384, and Ed25519.",
@@ -380,6 +384,7 @@
       "github": "https://github.com/swayam5342/tributary",
       "demo": "https://tributary.swayam.li",
       "featured": true,
+      "spotlight": 1,
       "resume_points": [
         "Built a Go and PostgreSQL gateway that pools multiple Google Drive accounts behind one web app, with per-user upload routing (most space, round robin, priority order) taken under a Postgres advisory lock so concurrent uploads can't claim the same room or turn.",
         "Implemented resumable uploads that stream 8 MiB chunks through to Drive with flat memory use, resuming from the offset Drive reports and reserving space for unfinished uploads.",
@@ -390,10 +395,11 @@
         "architecture": "Go API server (chi, pgx, sqlc, river background jobs) on PostgreSQL with an OpenAPI contract, behind a Node web server that serves the React app and proxies the API on one origin. Each feature splits into handler, service and store, and Google Drive sits behind a provider interface with a shared conformance suite.",
         "challenges": "Keeping the database and Drive consistent when either can fail: a sync removes a record only after confirming that exact object is gone, permanent deletes remove the object first so they're safe to retry, and moves prove the copy before the record changes. Sharing files between accounts failed under the drive.file scope when tested on real Drive, so moves stream through the server.",
         "security": "OAuth tokens are sealed with AES-256-GCM under rotatable key IDs, and Drive access stays on the narrow drive.file scope. Sessions are hashed tokens in HttpOnly, Secure cookies with Origin checks, API keys are hashed and closed by default, and a leaked key can trash files but never delete them permanently.",
-        "improvements": "Future work includes arm64 Docker images and completing Google's consent screen verification, so linked accounts aren't limited to test users."
+        "improvements": "Future work includes completing Google's consent screen verification, so linked accounts aren't limited to test users."
       },
       "lang": [
         "Go",
+        "chi",
         "TypeScript",
         "React",
         "PostgreSQL",
@@ -403,6 +409,6 @@
       "icon": "cloud"
     }
   ],
-  "main_heading": "PROJECTS",
-  "sub_heading": "RESPOSITORIES AND TECHNICAL LOGS"
+  "main_heading": "Projects",
+  "sub_heading": "Repositories and technical write-ups"
 }

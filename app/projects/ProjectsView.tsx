@@ -1,191 +1,169 @@
 "use client";
 
-import { Suspense } from "react";
+import type React from "react";
+import { Suspense, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import { GithubIcon, ExternalLink, ChevronRight, X } from "lucide-react";
-import projectsData, { projectsMeta, getProjectIcon } from "@/src/data/projects";
+import { ArrowUpRight, X } from "lucide-react";
+import projectsData, { getProjectIcon } from "@/src/data/projects";
 import categories from "@/src/data/projectCategories";
 import { IconBadge } from "@/src/components/IconBadge";
+import { MorphTitle, hostOf } from "@/src/components/work/CaseStudies";
 import type { Project } from "@/types";
 
-function ProjectsContent() {
+const tagsOf = (p: Project) => [...p.tags, ...(p.lang ?? [])].map((t) => t.toLowerCase());
+
+/** Matches the old behaviour: "All" hides projects marked show:false; a tag shows every project carrying it. */
+const matches = (p: Project, filter: string) =>
+  filter === "All" ? p.show !== false : tagsOf(p).includes(filter.toLowerCase());
+
+interface ProjectsViewProps {
+  indexHeading: string;
+}
+
+interface IndexProps extends ProjectsViewProps {
+  filter: string;
+  setFilter: (tag: string) => void;
+  indexRef?: React.Ref<HTMLElement>;
+}
+
+function ProjectsContent({ indexHeading }: ProjectsViewProps) {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const filter = searchParams.get("tag") ?? "All";
+  const raw = searchParams.get("tag") ?? "All";
+  // Keep the canonical spelling of a known category whatever the URL's case.
+  const filter = categories.find((c) => c.toLowerCase() === raw.toLowerCase()) ?? raw;
+  const indexRef = useRef<HTMLElement>(null);
 
   const setFilter = (tag: string) => {
-    if (tag === "All") {
-      router.replace("/projects");
-    } else {
-      router.replace(`/projects?tag=${encodeURIComponent(tag)}`);
-    }
+    router.replace(tag === "All" ? "/projects" : `/projects?tag=${encodeURIComponent(tag)}`, { scroll: false });
   };
 
-  const isCategoryFilter = categories.some(
-    (c) => c.toLowerCase() === filter.toLowerCase()
-  );
+  // Arriving from a tag or skill link: bring the results into view.
+  useEffect(() => {
+    if (raw !== "All") indexRef.current?.scrollIntoView({ block: "start" });
+    // Only on first load, so later filter clicks do not jump the page.
+  }, []);
 
-  const filteredProjects = (projectsData as Project[]).filter((p) => {
-    if (filter === "All") return p.show !== false;
-    return [...p.tags, ...(p.lang ?? [])]
-      .map((tag) => tag.toLowerCase())
-      .includes(filter.toLowerCase());
-  });
+  // The case studies are rendered by the server above this list; a filter
+  // hides them (CSS on html[data-filtered]) so only the matches show.
+  useEffect(() => {
+    document.documentElement.toggleAttribute("data-filtered", filter !== "All");
+    return () => document.documentElement.removeAttribute("data-filtered");
+  }, [filter]);
+
+  return <ProjectIndex indexHeading={indexHeading} filter={filter} setFilter={setFilter} indexRef={indexRef} />;
+}
+
+/** The compact, filterable index. Pure: the server renders it unfiltered as the fallback. */
+function ProjectIndex({ indexHeading, filter, setFilter, indexRef }: IndexProps) {
+  const all = projectsData as Project[];
+  const filtered = all.filter((p) => matches(p, filter));
+  // With no filter, the index lists everything that is not already a case study above.
+  const indexed = filter === "All" ? filtered.filter((p) => typeof p.spotlight !== "number") : filtered;
+  const isCategory = categories.includes(filter);
+  const countFor = (c: string) => all.filter((p) => matches(p, c)).length;
 
   return (
-    <div className="max-w-7xl mx-auto px-4">
-      <header className="mb-12 flex flex-col md:flex-row md:items-end justify-between border-b border-brand-border pb-8">
-        <div>
-          <h1 className="text-4xl font-mono font-bold tracking-tighter uppercase">
-            {projectsMeta.main_heading}
-          </h1>
-          <p className="text-brand-muted mt-2 font-mono text-[10px] uppercase tracking-widest">
-            {projectsMeta.sub_heading}
+    <>
+      <section ref={indexRef} className="section" aria-labelledby="index-heading" style={{ scrollMarginTop: "5rem" }}>
+        <div className="index-head">
+          <h2 id="index-heading" className="t-h2">
+            {filter === "All" ? indexHeading : `Projects tagged ${filter}`}
+          </h2>
+          <p className="muted" aria-live="polite">
+            {filter === "All"
+              ? `${indexed.length} more, besides the ${all.filter((p) => typeof p.spotlight === "number").length} case studies above. The filters cover every project, including the small ones made for fun.`
+              : `${indexed.length} ${indexed.length === 1 ? "project" : "projects"}`}
           </p>
         </div>
 
-        <div className="mt-8 md:mt-0 flex flex-wrap gap-2 border border-brand-border p-1 bg-brand-surface overflow-x-auto">
-
-          {categories.map((cat) => (
+        <div className="filters" role="group" aria-label="Filter projects by topic">
+          {categories.map((c) => (
             <button
-              key={cat}
-              onClick={() => setFilter(cat)}
-               className={`px-3 py-1 md:px-4 md:py-1.5 font-mono text-[9px] uppercase whitespace-nowrap transition-all ${
-
-                filter === cat
-                  ? "bg-brand-accent text-brand-bg font-bold"
-                  : "text-brand-muted hover:text-brand-text"
-              }`}
+              key={c}
+              type="button"
+              className="chip"
+              aria-pressed={filter === c}
+              onClick={() => setFilter(c)}
             >
-              {cat}
+              {c}
+              <span className="chip__count tabular">{countFor(c)}</span>
             </button>
           ))}
+          {!isCategory && filter !== "All" && (
+            <button type="button" className="chip" aria-pressed onClick={() => setFilter("All")}>
+              {filter}
+              <X size={14} aria-hidden="true" />
+              <span className="sr-only">Clear the filter</span>
+            </button>
+          )}
         </div>
-      </header>
 
-      {/* Active tag filter (set by clicking a language/framework tag) */}
-      {filter !== "All" && !isCategoryFilter && (
-        <div className="mb-8 flex items-center gap-3 font-mono text-[10px] uppercase tracking-widest">
-          <span className="text-brand-muted">FILTER_ACTIVE:</span>
-          <button
-            onClick={() => setFilter("All")}
-            className="flex items-center gap-2 border border-brand-accent/50 bg-brand-accent/10 text-brand-accent px-3 py-1 hover:bg-brand-accent hover:text-brand-bg transition-all"
-          >
-            <span>{filter}</span>
-            <X size={10} />
-          </button>
-        </div>
-      )}
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        {filteredProjects.map((p) => (
-          <div
-            key={p.id}
-            className="group bg-brand-bg border border-brand-border p-12 relative flex flex-col hover:bg-brand-surface transition-colors"
-          >
-            <span className="absolute top-4 left-4 text-[9px] font-mono text-brand-muted border border-brand-border px-2 py-0.5 bg-brand-bg">
-  UID: {String(p.id).padStart(2, "0")}
-</span>
-            <div className="absolute top-4 right-4 font-mono text-[7px] opacity-10 uppercase tracking-[0.2em]">
-              Hash::SHA256
-            </div>
-
-            <div className="flex items-center space-x-4 mb-8">
-              <IconBadge icon={getProjectIcon(p)} />
-
-              <div>
-                {/* Title clickable to GitHub */}
-                {p.github ? (
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-2xl font-semibold font-mono hover:underline"
-                  >
-                    {p.title.toUpperCase()}
-                  </a>
-                ) : (
-                  <h3 className="text-2xl font-bold font-mono">{p.title}</h3>
+        <ul className="index">
+          {indexed.map((p) => (
+            <li key={p.slug} className="index__row">
+              <h3 className="index__title">
+                <IconBadge icon={getProjectIcon(p)} />
+                <Link href={`/projects/${p.slug}`} transitionTypes={["nav-forward"]}>
+                  {/* The case studies above stay mounted (hidden) under a filter and
+                      already own their titles' transition names: a name may only be
+                      mounted once, so only the other projects claim theirs here. */}
+                  {typeof p.spotlight === "number" ? p.title : <MorphTitle slug={p.slug}>{p.title}</MorphTitle>}
+                </Link>
+              </h3>
+              <div className="index__body">
+                <p>{p.description}</p>
+                {p.lang && p.lang.length > 0 && (
+                  <p className="index__tags">
+                    {p.lang.map((l) => (
+                      <button
+                        key={l}
+                        type="button"
+                        className="tag-link"
+                        onClick={() => setFilter(l)}
+                        aria-label={`Show projects using ${l}`}
+                      >
+                        {l}
+                      </button>
+                    ))}
+                  </p>
                 )}
-
-                <div className="flex flex-wrap gap-2 mt-2">
-                  {p.tags.map((t) => (
-                    <button
-                      key={t}
-                      onClick={() => setFilter(t)}
-                      className="text-[8px] font-mono bg-brand-text text-brand-bg border border-brand-text px-2 py-0.5 uppercase transition-all hover:bg-brand-accent hover:border-brand-accent cursor-pointer"
-                      title={`Show ${t} projects`}
-                    >
-                      {t}
-                    </button>
-                  ))}
-                </div>
               </div>
-            </div>
-
-            <p className="text-sm text-brand-muted leading-relaxed mb-6 flex-grow font-sans">
-              {p.description}
-            </p>
-
-            {/* Language / framework tags */}
-            {p.lang && p.lang.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-8">
-                {p.lang.map((l) => (
-                  <button
-                    key={l}
-                    onClick={() => setFilter(l)}
-                    className="text-[9px] font-mono text-brand-muted border border-brand-border px-2.5 py-1 transition-all hover:border-brand-accent/60 hover:text-brand-accent hover:bg-brand-accent/10 cursor-pointer"
-                    title={`Show ${l} projects`}
-                  >
-                    {l}
-                  </button>
-                ))}
-              </div>
-            )}
-
-            <div className="flex items-center justify-between border-t border-brand-border pt-8">
-              <Link
-                href={`/projects/${p.slug}`}
-                className="flex items-center text-[10px] font-mono text-brand-accent hover:underline tracking-widest"
-              >
-                [DEEP_INSPECT] <ChevronRight size={12} className="ml-1" />
-              </Link>
-
-              <div className="flex space-x-5 text-brand-muted">
-                {p.github && (
-                  <a
-                    href={p.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-brand-accent"
-                  >
-                    <GithubIcon size={20} />
-                  </a>
-                )}
+              <div className="index__links">
                 {p.demo && (
-                  <a
-                    href={p.demo}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-brand-accent"
-                  >
-                    <ExternalLink size={20} />
+                  <a href={p.demo} className="go t-small" data-external target="_blank" rel="noopener noreferrer" aria-label={`${p.title} at ${hostOf(p.demo)} (opens in a new tab)`}>
+                    {hostOf(p.demo)}
+                    <ArrowUpRight size={15} aria-hidden="true" />
+                  </a>
+                )}
+                {p.github && (
+                  <a href={p.github} className="go t-small" data-external target="_blank" rel="noopener noreferrer" aria-label={`${p.title} source on GitHub (opens in a new tab)`}>
+                    Source
+                    <ArrowUpRight size={15} aria-hidden="true" />
                   </a>
                 )}
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+            </li>
+          ))}
+        </ul>
+        {indexed.length === 0 && (
+          <p>
+            Nothing is tagged {filter} yet.{" "}
+            <button type="button" className="tag-link" onClick={() => setFilter("All")}>
+              Show everything
+            </button>
+          </p>
+        )}
+      </section>
+    </>
   );
 }
 
-export default function ProjectsView() {
+export default function ProjectsView(props: ProjectsViewProps) {
   return (
-    <Suspense fallback={null}>
-      <ProjectsContent />
+    <Suspense fallback={<ProjectIndex {...props} filter="All" setFilter={() => {}} />}>
+      <ProjectsContent {...props} />
     </Suspense>
   );
 }
